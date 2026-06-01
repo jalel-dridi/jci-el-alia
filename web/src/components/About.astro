@@ -1,0 +1,57 @@
+---
+/**
+ * About / Who We Are — two-column intro with a stat grid.
+ */
+import {t} from '../i18n/utils.js'
+const {settings, presidents, lang = 'en'} = Astro.props
+const presidentCount = new Set(presidents.map((p) => p.name)).size || presidents.length
+---
+
+<section id="about" class="py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div class="reveal">
+        <p class="text-jci-blue font-semibold text-sm uppercase tracking-wider mb-4" data-i18n="about.label">{t('about.label', lang)}</p>
+        <h2 class="text-3xl lg:text-4xl font-light text-jci-black leading-[1.3] mb-6" data-i18n="about.title">{t('about.title', lang)}</h2>
+        <p class="text-base text-jci-black/60 leading-[1.8] mb-6" data-i18n="about.p1">{t('about.p1', lang)}</p>
+        <p class="text-base text-jci-black/60 leading-[1.8] mb-8" data-i18n="about.p2">{t('about.p2', lang)}</p>
+        <div class="flex flex-wrap gap-4">
+          <div class="flex items-center gap-2 bg-jci-blue/5 rounded-full px-4 py-2">
+            <i class="fas fa-globe-africa text-jci-blue text-sm"></i>
+            <span class="text-sm font-medium text-jci-black/70" data-i18n="about.tag1">{t('about.tag1', lang)}</span>
+          </div>
+          <div class="flex items-center gap-2 bg-jci-teal/10 rounded-full px-4 py-2">
+            <i class="fas fa-map-marker-alt text-jci-teal text-sm"></i>
+            <span class="text-sm font-medium text-jci-black/70" data-i18n="about.tag2">{t('about.tag2', lang)}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative reveal reveal-delay-2">
+        <div class="rounded-3xl overflow-hidden mb-6 shadow-lg">
+          <img src="/images/about.jpg" alt="JCI El Alia members" width="1200" height="800" loading="lazy" class="w-full h-56 lg:h-64 object-cover" />
+        </div>
+        <div class="bg-gradient-to-br from-jci-blue/10 to-jci-teal/10 rounded-3xl p-8 lg:p-10">
+          <div class="grid grid-cols-2 gap-6">
+            <div class="bg-white rounded-2xl p-6 shadow-sm text-center">
+              <div class="text-3xl font-bold text-jci-blue">1989</div>
+              <div class="text-sm text-jci-black/50 mt-1" data-i18n="about.card1">{t('about.card1', lang)}</div>
+            </div>
+            <div class="bg-white rounded-2xl p-6 shadow-sm text-center">
+              <div class="text-3xl font-bold text-jci-navy">{presidentCount}</div>
+              <div class="text-sm text-jci-black/50 mt-1" data-i18n="about.card2">{t('about.card2', lang)}</div>
+            </div>
+            <div class="bg-white rounded-2xl p-6 shadow-sm text-center">
+              <div class="text-3xl font-bold text-jci-teal">5</div>
+              <div class="text-sm text-jci-black/50 mt-1" data-i18n="about.card3">{t('about.card3', lang)}</div>
+            </div>
+            <div class="bg-white rounded-2xl p-6 shadow-sm text-center">
+              <div class="text-3xl font-bold text-jci-yellow">22</div>
+              <div class="text-sm text-jci-black/50 mt-1" data-i18n="about.card4">{t('about.card4', lang)}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

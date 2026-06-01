@@ -1,0 +1,36 @@
+---
+/**
+ * Partners marquee — infinite scroll. Uses a logo image when present,
+ * otherwise a branded icon chip. The track is duplicated for a seamless loop.
+ */
+import {t} from '../i18n/utils.js'
+import {urlFor} from '../lib/sanity.js'
+
+const {partners, lang = 'en'} = Astro.props
+const iconColors = ['text-jci-navy', 'text-jci-blue', 'text-jci-teal', 'text-jci-yellow']
+---
+
+<section class="py-16 bg-gray-50 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <p class="text-center text-sm font-semibold text-jci-black/40 uppercase tracking-wider mb-10 reveal" data-i18n="partners.label">{t('partners.label', lang)}</p>
+  </div>
+  <div class="relative">
+    <div class="flex partners-track whitespace-nowrap">
+      {[0, 1].map(() => (
+        <div class="flex items-center gap-12 px-6">
+          {partners.map((p, i) => {
+            const logo = p.logo ? urlFor(p.logo).height(56).url() : null
+            return (
+              <div class="flex flex-col items-center gap-2 min-w-[140px]">
+                <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center overflow-hidden">
+                  {logo ? <img src={logo} alt={p.name} class="w-10 h-10 object-contain" /> : <i class={`fas ${p.icon || 'fa-handshake'} ${iconColors[i % 4]} text-xl`}></i>}
+                </div>
+                <span class="text-xs text-jci-black/50 text-center whitespace-normal">{p.name}</span>
+              </div>
+            )
+          })}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,95 @@
+---
+/**
+ * Base layout — <head>, fonts, global CSS, full SEO, and the page shell.
+ * `lang` / `dir` are set per-page; default English LTR.
+ */
+import '../styles/global.css'
+
+const {
+  title = 'JCI El Alia | Developing Leaders for a Changing World',
+  description = 'JCI El Alia - Developing Leaders for a Changing World in El Alia, Tunisia. Join our community of young active citizens aged 18-40.',
+  lang = 'en',
+  dir = 'ltr',
+  image = '/images/logo.png',
+} = Astro.props
+
+// Canonical + absolute OG image URL (falls back gracefully if `site` unset)
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://jcielalia.pages.dev').href
+const ogImage = new URL(image, Astro.site ?? 'https://jcielalia.pages.dev').href
+
+// Organization structured data for richer search results.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'NGO',
+  name: 'JCI El Alia',
+  alternateName: 'Jeune Chambre Internationale El Alia',
+  url: Astro.site?.href ?? 'https://jcielalia.pages.dev',
+  logo: ogImage,
+  foundingDate: '1989',
+  email: 'jcielalia@gmail.com',
+  telephone: '+216 20 382 274',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Avenue Habib Bourguiba',
+    addressLocality: 'El Alia',
+    postalCode: '7016',
+    addressRegion: 'Bizerte',
+    addressCountry: 'TN',
+  },
+  sameAs: [
+    'https://www.facebook.com/jcielalia',
+    'https://www.linkedin.com/in/jci-el-alia',
+  ],
+}
+---
+
+<!DOCTYPE html>
+<html lang={lang} dir={dir}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0097D7" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="JCI El Alia" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : lang === 'ar' ? 'ar_TN' : 'en_US'} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <title>{title}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Arvo:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+  </head>
+  <body class="bg-white text-jci-black antialiased">
+    <a href="#home" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-jci-blue focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
+      Skip to content
+    </a>
+    <slot />
+  </body>
+</html>

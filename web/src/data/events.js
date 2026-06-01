@@ -1,0 +1,216 @@
+/**
+ * Real events seeded from the chapter's Facebook export (titles, dates, and
+ * captions — all decoded from Facebook's mojibake). Each event has a real,
+ * curated photo gallery in /public/albums/<slug> built from the actual posts.
+ *
+ * Shape mirrors the Sanity `event` type, plus local fallbacks:
+ *   coverUrl / galleryUrls  -> used when no Sanity image is set.
+ */
+
+const album = (slug, n) => Array.from({length: n}, (_, i) => `/albums/${slug}/${i}.jpg`)
+
+export const events = [
+  {
+    slug: 'el-alia-champions-cup-2024',
+    year: 2024,
+    date: '2024-06-14',
+    category: 'community',
+    title: {en: 'El Alia Champions Cup', fr: 'El Alia Champions Cup', ar: 'كأس العالية للأندية'},
+    summary: {
+      en: 'A multi-day football tournament bringing local clubs and the whole community together.',
+      fr: 'Un tournoi de football sur plusieurs jours réunissant les clubs locaux et toute la communauté.',
+      ar: 'دورة كرة قدم على عدة أيام تجمع الأندية المحلية والمجتمع بأكمله.',
+    },
+    description: {
+      en: 'The El Alia Champions Cup turned the town into a celebration of sport and unity. Across an opening ceremony, multiple match days, and a closing ceremony, local teams competed in a spirit of fair play while families filled the stands. More than a tournament, it was a community gathering that showcased youth energy and JCI El Alia\u2019s ability to mobilize the whole town.',
+      fr: 'La El Alia Champions Cup a transformé la ville en une célébration du sport et de l\u2019unité. À travers une cérémonie d\u2019ouverture, plusieurs journées de matchs et une cérémonie de clôture, les équipes locales se sont affrontées dans un esprit de fair-play tandis que les familles remplissaient les gradins.',
+      ar: 'حوّلت كأس العالية للأندية المدينة إلى احتفال بالرياضة والوحدة. عبر حفل افتتاح وعدة أيام من المباريات وحفل ختام، تنافست الفرق المحلية بروح رياضية بينما امتلأت المدرجات بالعائلات. لم تكن مجرد دورة، بل تجمّعاً مجتمعياً أبرز طاقة الشباب.',
+    },
+    location: 'El Alia',
+    coverUrl: '/albums/champions-cup/0.jpg',
+    galleryUrls: album('champions-cup', 12),
+    featured: true,
+  },
+  {
+    slug: 'awards-ceremony-2023',
+    year: 2023,
+    date: '2023-12-23',
+    category: 'community',
+    title: {en: 'JCI El Alia Awards Ceremony 2023', fr: 'Cérémonie des Récompenses JCI El Alia 2023', ar: 'حفل توزيع جوائز الغرفة الفتية بالعالية 2023'},
+    summary: {
+      en: 'An evening celebrating the members, projects, and partners who made the year exceptional.',
+      fr: 'Une soirée célébrant les membres, projets et partenaires qui ont rendu l\u2019année exceptionnelle.',
+      ar: 'أمسية احتفاء بالأعضاء والمشاريع والشركاء الذين جعلوا العام استثنائياً.',
+    },
+    description: {
+      en: 'The annual Awards Ceremony brought the chapter together to honor its most remarkable members and milestones. Guests included JCI Tunisia national leaders and senators, recognizing outstanding new members, zonal debate champions, and members of the month. It was a night of gratitude that closed the year by celebrating the people behind every project.',
+      fr: 'La cérémonie annuelle des récompenses a réuni le chapitre pour honorer ses membres et ses réussites les plus remarquables, en présence de dirigeants nationaux et de sénateurs de JCI Tunisie.',
+      ar: 'جمع حفل الجوائز السنوي الغرفة لتكريم أبرز أعضائها وإنجازاتها، بحضور قادة وطنيين وأعضاء مجلس شيوخ من الغرفة الفتية التونسية، مع تكريم الأعضاء الجدد المتميزين وأبطال المناظرة.',
+    },
+    location: 'El Alia',
+    coverUrl: '/albums/awards-2023/0.jpg',
+    galleryUrls: album('awards-2023', 8),
+    featured: true,
+  },
+  {
+    slug: 'intalqa-2-2026',
+    year: 2026,
+    date: '2026-02-08',
+    category: 'entrepreneurship',
+    title: {en: 'Intalqa 2.0', fr: 'Intalqa 2.0', ar: 'إنطلاقة 2.0'},
+    summary: {
+      en: 'Second edition supporting local artisans and small businesses with training and a marketplace.',
+      fr: 'Deuxième édition soutenant les artisans et petites entreprises avec formations et marché.',
+      ar: 'النسخة الثانية لدعم الحرفيين والمشاريع الصغيرة بالتكوين ومعرض للبيع.',
+    },
+    description: {
+      en: 'Held over two days at the Maison des Associations El Alia, Intalqa 2.0 opened with a "Digital Marketing" training by Mohamed Saidane, followed by sessions from the local Employment Office on self-entrepreneur status and from Enda Tamweel on financing opportunities. Across both days, small business owners showcased and sold their products \u2014 turning training into real economic opportunity.',
+      fr: 'Sur deux jours à la Maison des Associations El Alia, Intalqa 2.0 a débuté par une formation « Marketing Digital » de Mohamed Saidane, suivie d\u2019interventions du Bureau de l\u2019Emploi sur le statut d\u2019auto-entrepreneur et d\u2019Enda Tamweel sur le financement. Les porteurs de projets ont exposé et vendu leurs produits.',
+      ar: 'على مدى يومين بدار الجمعيات بالعالية، افتُتِحت إنطلاقة 2.0 بتدريب «التسويق الرقمي» من تقديم محمد سعيدان، تلته مداخلات لمكتب الشغل حول قانون المبادر الذاتي ولأندى تمويل حول فرص التمويل. وعرض أصحاب المشاريع الصغرى منتوجاتهم وباعوها.',
+    },
+    location: 'Maison des Associations El Alia',
+    coverUrl: '/albums/intalqa-2-2026/0.jpg',
+    galleryUrls: album('intalqa-2-2026', 8),
+    featured: true,
+  },
+  {
+    slug: 'orient-up-4',
+    year: 2025,
+    date: '2025-07-12',
+    category: 'education',
+    title: {en: "Orient'Up 4.0", fr: "Orient'Up 4.0", ar: "Orient'Up 4.0"},
+    summary: {
+      en: 'The fourth edition of our flagship university orientation forum for baccalaureate students.',
+      fr: 'La quatrième édition de notre forum phare d\u2019orientation universitaire pour les bacheliers.',
+      ar: 'النسخة الرابعة من منتدانا الرائد للتوجيه الجامعي لتلاميذ البكالوريا.',
+    },
+    description: {
+      en: 'Orient\u2019Up 4.0 continued our longest-running flagship project, guiding new baccalaureate graduates through the maze of university choices. Through talks, booths, and one-on-one guidance, students explored specializations and universities to make informed decisions about their future.',
+      fr: 'Orient\u2019Up 4.0 a poursuivi notre projet phare le plus ancien, guidant les nouveaux bacheliers à travers les choix universitaires grâce à des conférences, des stands et un accompagnement personnalisé.',
+      ar: 'واصلت Orient\u2019Up 4.0 أعرق مشاريعنا الرائدة، مرشدةً خريجي البكالوريا الجدد عبر متاهة الخيارات الجامعية من خلال محاضرات وأجنحة وإرشاد فردي.',
+    },
+    location: 'El Alia',
+    coverUrl: '/albums/orient-up-4/0.jpg',
+    galleryUrls: album('orient-up-4', 8),
+  },
+  {
+    slug: 'innoventure-hackathon-2025',
+    year: 2025,
+    date: '2025-01-05',
+    category: 'entrepreneurship',
+    title: {en: 'InnoVenture Hackathon', fr: 'InnoVenture Hackathon', ar: 'هاكاثون إينوفنتشر'},
+    summary: {
+      en: 'A hackathon fostering innovation through coding challenges and entrepreneurship.',
+      fr: 'Un hackathon favorisant l\u2019innovation par des défis de programmation et l\u2019entrepreneuriat.',
+      ar: 'هاكاثون لتعزيز الابتكار عبر تحديات برمجية وريادة الأعمال.',
+    },
+    description: {
+      en: 'InnoVenture brought together young innovators for an intense weekend of problem-solving, coding challenges, and entrepreneurship workshops. Teams pitched ideas and built prototypes, turning creativity into concrete projects.',
+      fr: 'InnoVenture a réuni de jeunes innovateurs pour un week-end intense de résolution de problèmes, de défis de programmation et d\u2019ateliers d\u2019entrepreneuriat.',
+      ar: 'جمع إينوفنتشر المبتكرين الشباب في عطلة مكثفة من حل المشكلات والتحديات البرمجية وورشات ريادة الأعمال.',
+    },
+    location: 'El Alia',
+    coverUrl: '/albums/innoventure-hackathon-2025/0.jpg',
+    galleryUrls: album('innoventure-hackathon-2025', 8),
+  },
+  {
+    slug: 'rising-kids-2',
+    year: 2025,
+    date: '2025-09-19',
+    category: 'community',
+    title: {en: 'Rising Kids 2', fr: 'Rising Kids 2', ar: 'Rising Kids 2'},
+    summary: {
+      en: 'Second edition of our children\u2019s educational and developmental program.',
+      fr: 'Deuxième édition de notre programme éducatif et de développement pour enfants.',
+      ar: 'النسخة الثانية من برنامجنا التربوي والتنموي للأطفال.',
+    },
+    description: {
+      en: 'Rising Kids returned to the Maison des Jeunes El Alia with a program of educational games, creative activities, and developmental workshops designed to nurture confidence and curiosity in local children.',
+      fr: 'Rising Kids est revenu à la Maison des Jeunes El Alia avec un programme de jeux éducatifs, d\u2019activités créatives et d\u2019ateliers de développement pour cultiver la confiance et la curiosité des enfants.',
+      ar: 'عاد Rising Kids إلى دار الشباب بالعالية ببرنامج من الألعاب التربوية والأنشطة الإبداعية وورشات التنمية لتعزيز الثقة والفضول لدى أطفال المنطقة.',
+    },
+    location: 'Maison des Jeunes El Alia',
+    coverUrl: '/albums/rising-kids-2/0.jpg',
+    galleryUrls: album('rising-kids-2', 8),
+  },
+  {
+    slug: 'success-stories-619',
+    year: 2023,
+    date: '2023-07-08',
+    category: 'community',
+    title: {en: 'Success Stories 619', fr: 'Success Stories 619', ar: 'قصص النجاح 619'},
+    summary: {
+      en: 'Inspiring Tunisian achievers share their journeys with local youth.',
+      fr: 'Des Tunisiens inspirants partagent leur parcours avec la jeunesse locale.',
+      ar: 'شخصيات تونسية ملهمة تشارك مسيرتها مع شباب المنطقة.',
+    },
+    description: {
+      en: 'Success Stories 619 gathered inspiring Tunisian achievers to share their journeys, challenges, and lessons with an engaged local audience. Held at the municipal handball court in El Alia, the interactive format sparked honest conversations and motivated young people to pursue their own ambitions.',
+      fr: 'Success Stories 619 a réuni des Tunisiens inspirants pour partager leurs parcours, défis et leçons avec un public local engagé, au terrain municipal de handball d\u2019El Alia, dans un format interactif qui a motivé les jeunes.',
+      ar: 'جمع قصص النجاح 619 شخصيات تونسية ملهمة لمشاركة مسيرتها وتحدياتها ودروسها مع جمهور محلي متفاعل بالملعب البلدي لكرة اليد بالعالية، بصيغة تفاعلية حفّزت الشباب.',
+    },
+    location: 'El Alia',
+    coverUrl: '/albums/success-stories-619/0.jpg',
+    galleryUrls: album('success-stories-619', 8),
+  },
+  {
+    slug: 'bac-up-2025',
+    year: 2025,
+    date: '2025-04-13',
+    category: 'education',
+    title: {en: "Bac'Up", fr: "Bac'Up", ar: "Bac'Up"},
+    summary: {
+      en: 'Hands-on practical workshops helping baccalaureate students ace their applied exams.',
+      fr: 'Ateliers pratiques aidant les bacheliers à réussir leurs épreuves pratiques.',
+      ar: 'ورشات تطبيقية عملية تساعد تلاميذ البكالوريا على النجاح في امتحاناتهم التطبيقية.',
+    },
+    description: {
+      en: 'Bac\u2019Up gives baccalaureate students a practical edge before their applied (TP) exams. Led by specialists, the workshops walk students through real lab and practical scenarios, building the confidence and technique that make the difference on exam day.',
+      fr: 'Bac\u2019Up donne aux bacheliers un avantage pratique avant leurs épreuves de TP. Animés par des spécialistes, les ateliers font travailler les étudiants sur des scénarios pratiques réels.',
+      ar: 'يمنح Bac\u2019Up تلاميذ البكالوريا أفضلية عملية قبل امتحانات الأعمال التطبيقية. بإشراف مختصين، تأخذ الورشات التلاميذ عبر سيناريوهات مخبرية وتطبيقية حقيقية تبني الثقة والمهارة.',
+    },
+    location: 'El Alia',
+    coverUrl: '/albums/bac-up-2025/0.jpg',
+    galleryUrls: album('bac-up-2025', 8),
+  },
+  {
+    slug: 'reading-championship-2026',
+    year: 2026,
+    date: '2026-04-11',
+    category: 'education',
+    title: {en: 'Local Reading Championship', fr: 'Championnat Local de Lecture', ar: 'البطولة المحلية للمطالعة'},
+    summary: {
+      en: 'A friendly reading competition for primary school children, with the public library.',
+      fr: 'Un concours de lecture amical pour les écoliers, avec la bibliothèque publique.',
+      ar: 'مسابقة مطالعة ودّية لتلاميذ المرحلة الابتدائية، بالشراكة مع المكتبة العمومية.',
+    },
+    description: {
+      en: 'Organized with the El Alia Public Library and the Maison des Jeunes, the Local Reading Championship invited primary school children to discover the joy of reading. Books were handed out on the opening day, followed weeks later by a friendly assessment and an award ceremony for the winners \u2014 nurturing a love of reading from a young age.',
+      fr: 'Organisé avec la Bibliothèque Publique d\u2019El Alia et la Maison des Jeunes, le Championnat Local de Lecture a invité les écoliers à découvrir le plaisir de lire : distribution de livres, puis évaluation amicale et remise de prix aux gagnants.',
+      ar: 'بالشراكة مع المكتبة العمومية بالعالية ودار الشباب، دعت البطولة المحلية للمطالعة تلاميذ الابتدائي لاكتشاف متعة القراءة: توزيع الكتب في اليوم الأول، ثم اختبار ودّي وتكريم للفائزين \u2014 لغرس حب المطالعة منذ الصغر.',
+    },
+    location: 'El Alia Public Library',
+    coverUrl: '/albums/reading-championship-2026/0.jpg',
+    galleryUrls: album('reading-championship-2026', 8),
+  },
+  {
+    slug: 'chess-tournament-2025',
+    year: 2025,
+    date: '2025-03-08',
+    category: 'community',
+    title: {en: 'El Alia Chess Tournament', fr: 'Tournoi d\u2019Échecs El Alia', ar: 'دورة العالية للشطرنج'},
+    summary: {
+      en: 'A community chess tournament sharpening strategy and bringing players together.',
+      fr: 'Un tournoi d\u2019échecs communautaire alliant stratégie et convivialité.',
+      ar: 'دورة شطرنج مجتمعية تصقل التفكير الاستراتيجي وتجمع اللاعبين.',
+    },
+    description: {
+      en: 'The El Alia Chess Tournament gathered players of all levels for a day of strategy, focus, and friendly competition. Beyond the board, it created a space for young people to connect, think critically, and celebrate a game that rewards patience and planning.',
+      fr: 'Le Tournoi d\u2019Échecs El Alia a réuni des joueurs de tous niveaux pour une journée de stratégie, de concentration et de compétition conviviale, offrant aux jeunes un espace pour réfléchir et se rencontrer.',
+      ar: 'جمعت دورة العالية للشطرنج لاعبين من كل المستويات في يوم من الاستراتيجية والتركيز والتنافس الودّي، وأتاحت للشباب فضاءً للتفكير النقدي والتواصل.',
+    },
+    location: 'El Alia',
+    coverUrl: '/albums/chess-tournament-2025/0.jpg',
+    galleryUrls: album('chess-tournament-2025', 8),
+  },
+]

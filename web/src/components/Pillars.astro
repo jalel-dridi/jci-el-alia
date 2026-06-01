@@ -1,0 +1,38 @@
+---
+/**
+ * Core Pillars — the four JCI Areas of Opportunity, data-driven.
+ */
+import {t} from '../i18n/utils.js'
+import {pick} from '../lib/sanity.js'
+
+const {pillars, lang = 'en'} = Astro.props
+
+// Map brand color -> tailwind classes for icon chip
+const chip = {
+  'jci-blue': 'bg-jci-blue/10 text-jci-blue',
+  'jci-teal': 'bg-jci-teal/10 text-jci-teal',
+  'jci-navy': 'bg-jci-navy/10 text-jci-navy',
+  'jci-yellow': 'bg-jci-yellow/10 text-jci-yellow',
+}
+const delays = ['reveal-delay-1', 'reveal-delay-2', 'reveal-delay-3', 'reveal-delay-4']
+---
+
+<section class="py-24 lg:py-32 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <p class="text-jci-blue font-semibold text-sm uppercase tracking-wider mb-4" data-i18n="pillars.label">{t('pillars.label', lang)}</p>
+      <h2 class="text-3xl lg:text-4xl font-light text-jci-black" data-i18n="pillars.title">{t('pillars.title', lang)}</h2>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {pillars.map((p, i) => (
+        <div class={`card-hover bg-white rounded-2xl p-8 border border-gray-100 reveal ${delays[i % 4]}`}>
+          <div class={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 ${chip[p.color] || chip['jci-blue']}`}>
+            <i class={`fas ${p.icon || 'fa-star'} text-lg`}></i>
+          </div>
+          <h3 class="text-lg font-semibold text-jci-black mb-3" data-i18n={`pillar.${i}.title`}>{pick(p.title, lang)}</h3>
+          <p class="text-sm text-jci-black/60 leading-relaxed" data-i18n={`pillar.${i}.desc`}>{pick(p.description, lang)}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

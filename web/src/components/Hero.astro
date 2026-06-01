@@ -1,0 +1,79 @@
+---
+/**
+ * Hero — yearly theme badge, headline, subtitle, CTAs, and animated stat
+ * counters. Uses a real background photo (from CMS) with a dark/blue overlay
+ * when available, otherwise the brand gradient.
+ */
+import {t} from '../i18n/utils.js'
+import {urlFor} from '../lib/sanity.js'
+
+const {settings, lang = 'en'} = Astro.props
+// Use the Sanity hero image if set, else the curated local photo.
+const bgUrl = settings.heroBackground
+  ? urlFor(settings.heroBackground).width(1920).quality(70).url()
+  : '/images/hero-bg.jpg'
+---
+
+<section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+  {bgUrl ? (
+    <>
+      <img src={bgUrl} alt="" fetchpriority="high" class="absolute inset-0 w-full h-full object-cover" />
+      <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(19,15,45,0.88) 0%, rgba(31,71,137,0.75) 50%, rgba(0,151,215,0.6) 100%);"></div>
+    </>
+  ) : (
+    <div class="absolute inset-0 bg-gradient-to-br from-jci-black via-jci-navy to-jci-blue"></div>
+  )}
+
+  <!-- Decorative rings -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] border border-white/[0.06] rounded-full"></div>
+    <div class="absolute top-1/2 left-1/2 w-[900px] h-[900px] border border-white/[0.08] rounded-full" style="transform:translate(-50%,-50%) rotate(15deg)"></div>
+    <div class="absolute top-1/2 left-1/2 w-[600px] h-[600px] border border-white/[0.1] rounded-full" style="transform:translate(-50%,-50%) rotate(30deg)"></div>
+  </div>
+  <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-jci-teal/10 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute bottom-1/4 left-1/4 w-72 h-72 bg-jci-blue/20 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
+    <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-5 py-2.5 mb-8 backdrop-blur-sm">
+      <span class="w-2 h-2 bg-jci-teal rounded-full animate-pulse"></span>
+      <span class="text-white/90 text-sm font-medium">
+        <span data-i18n="site.theme">{t('site.theme', lang)}</span> · {settings.year}
+      </span>
+    </div>
+
+    <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-white leading-[1.2] mb-6" data-i18n="hero.title">
+      {t('hero.title', lang)}
+    </h1>
+    <p class="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto mb-10 font-light leading-[1.7]" data-i18n="hero.subtitle">
+      {t('hero.subtitle', lang)}
+    </p>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="#join" class="bg-jci-blue hover:bg-white hover:text-jci-blue text-white px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 shadow-lg shadow-jci-blue/30" data-i18n="hero.cta1">{t('hero.cta1', lang)}</a>
+      <a href="#about" class="bg-white/10 border border-white/30 hover:bg-white/20 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 backdrop-blur-sm" data-i18n="hero.cta2">{t('hero.cta2', lang)}</a>
+    </div>
+
+    <!-- Animated counters -->
+    <div class="mt-16 lg:mt-20 flex items-center justify-center gap-8 sm:gap-12 lg:gap-16">
+      <div class="text-center">
+        <div class="text-3xl lg:text-4xl font-bold text-white"><span class="counter" data-target={settings.yearsOfImpact}>0</span><span class="text-jci-teal">+</span></div>
+        <div class="text-xs sm:text-sm text-white/50 mt-1 uppercase tracking-wider" data-i18n="hero.stat1">{t('hero.stat1', lang)}</div>
+      </div>
+      <div class="w-px h-12 bg-white/20"></div>
+      <div class="text-center">
+        <div class="text-3xl lg:text-4xl font-bold text-white"><span class="counter" data-target={settings.activeMembers}>0</span></div>
+        <div class="text-xs sm:text-sm text-white/50 mt-1 uppercase tracking-wider" data-i18n="hero.stat2">{t('hero.stat2', lang)}</div>
+      </div>
+      <div class="w-px h-12 bg-white/20"></div>
+      <div class="text-center">
+        <div class="text-3xl lg:text-4xl font-bold text-white"><span class="counter" data-target={settings.projectsDelivered}>0</span><span class="text-jci-teal">+</span></div>
+        <div class="text-xs sm:text-sm text-white/50 mt-1 uppercase tracking-wider" data-i18n="hero.stat3">{t('hero.stat3', lang)}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+    <span class="text-white/50 text-xs uppercase tracking-widest" data-i18n="hero.scroll">{t('hero.scroll', lang)}</span>
+    <i class="fas fa-chevron-down text-white/60"></i>
+  </div>
+</section>

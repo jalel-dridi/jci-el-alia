@@ -1,0 +1,62 @@
+---
+/**
+ * Homepage — assembles all sections. Content comes from Sanity with a local
+ * seed fallback, so the site is complete whether or not the CMS is populated.
+ */
+import Base from '../layouts/Base.astro'
+import Navbar from '../components/Navbar.astro'
+import Hero from '../components/Hero.astro'
+import About from '../components/About.astro'
+import Legacy from '../components/Legacy.astro'
+import Pillars from '../components/Pillars.astro'
+import Impact from '../components/Impact.astro'
+import Achievements from '../components/Achievements.astro'
+import Testimonial from '../components/Testimonial.astro'
+import Work from '../components/Work.astro'
+import Team from '../components/Team.astro'
+import Join from '../components/Join.astro'
+import Partners from '../components/Partners.astro'
+import Footer from '../components/Footer.astro'
+import SiteScripts from '../components/SiteScripts.astro'
+
+import {
+  getSiteSettings, getPresidents, getProjects, getPillars, getPartners, getEvents, getBoardMembers,
+} from '../lib/queries.js'
+import * as seed from '../data/seed.js'
+import {events as seedEvents} from '../data/events.js'
+import {buildTranslations} from '../i18n/build.js'
+
+const settings = await getSiteSettings(seed.siteSettings)
+const presidents = await getPresidents(seed.presidents)
+const projects = await getProjects(seed.projects)
+const pillars = await getPillars(seed.pillars)
+const partners = await getPartners(seed.partners)
+const events = await getEvents(seedEvents)
+const board = await getBoardMembers(seed.board)
+const testimonial = seed.testimonial
+
+// Show the most recent board year that actually has members.
+const boardYear = board.length ? Math.max(...board.map((m) => m.year || 0)) : settings.year
+
+const translations = buildTranslations({settings, presidents, projects, pillars, testimonial, achievements: seed.achievements})
+const lang = 'en'
+---
+
+<Base lang={lang} dir="ltr">
+  <Navbar lang={lang} />
+  <main>
+    <Hero settings={settings} lang={lang} />
+    <About settings={settings} presidents={presidents} lang={lang} />
+    <Legacy presidents={presidents} lang={lang} />
+    <Pillars pillars={pillars} lang={lang} />
+    <Impact projects={projects} lang={lang} />
+    <Achievements achievements={seed.achievements} lang={lang} />
+    <Testimonial testimonial={testimonial} lang={lang} />
+    <Work events={events} lang={lang} />
+    <Team board={board} year={boardYear} lang={lang} />
+    <Join lang={lang} />
+    <Partners partners={partners} lang={lang} />
+  </main>
+  <Footer settings={settings} lang={lang} />
+  <SiteScripts translations={translations} />
+</Base>

@@ -1,0 +1,22 @@
+{
+  "name": "JCI El Alia",
+  "short_name": "JCI El Alia",
+  "description": "Developing Leaders for a Changing World in El Alia, Tunisia.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#130F2D",
+  "theme_color": "#0097D7",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

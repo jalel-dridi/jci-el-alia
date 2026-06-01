@@ -1,0 +1,26 @@
+{
+  "name": "jci-el-alia-web",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "JCI El Alia — public website (Astro + Sanity)",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check:i18n": "node scripts/check-i18n.mjs",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "@sanity/client": "^7.22.1",
+    "@sanity/image-url": "^2.1.1",
+    "@tailwindcss/postcss": "^4.3.0",
+    "astro": "^6.4.2",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^4.3.0"
+  },
+  "overrides": {
+    "vite": "^7"
+  }
+}

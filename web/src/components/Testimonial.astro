@@ -1,0 +1,29 @@
+---
+/**
+ * Testimonial / Quote — a legacy quote set in the brand quote typeface (Arvo).
+ * Ties into the "Honor The Legacy" theme.
+ */
+import {t} from '../i18n/utils.js'
+import {pick} from '../lib/sanity.js'
+
+const {testimonial, lang = 'en'} = Astro.props
+---
+
+<section class="py-24 lg:py-32 bg-gray-50">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+    <p class="text-jci-blue font-semibold text-sm uppercase tracking-wider mb-8" data-i18n="quote.label">{t('quote.label', lang)}</p>
+    <i class="fas fa-quote-left text-jci-teal/30 text-5xl mb-6"></i>
+    <blockquote class="font-arvo text-2xl sm:text-3xl text-jci-black leading-[1.5] mb-8" data-i18n="quote.text">
+      {pick(testimonial.quote, lang)}
+    </blockquote>
+    <div class="flex items-center justify-center gap-4">
+      <div class="w-12 h-12 rounded-full bg-jci-blue/10 flex items-center justify-center">
+        <i class="fas fa-user text-jci-blue"></i>
+      </div>
+      <div class="text-left rtl:text-right">
+        <div class="font-semibold text-jci-black">{testimonial.author}</div>
+        <div class="text-sm text-jci-black/50" data-i18n="quote.role">{pick(testimonial.role, lang)}</div>
+      </div>
+    </div>
+  </div>
+</section>

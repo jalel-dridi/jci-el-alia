@@ -1,0 +1,64 @@
+---
+/**
+ * Our Impact — flagship project cards. Uses a real photo when present,
+ * otherwise a branded gradient + icon placeholder (so it always looks good).
+ */
+import {t} from '../i18n/utils.js'
+import {pick, urlFor} from '../lib/sanity.js'
+
+const {projects, lang = 'en'} = Astro.props
+
+// Rotating gradient + badge palette for placeholder cards
+const gradients = [
+  'from-jci-blue to-jci-navy',
+  'from-jci-teal to-jci-blue',
+  'from-jci-navy to-jci-black',
+  'from-jci-yellow/80 to-jci-yellow',
+  'from-jci-blue/80 to-jci-teal',
+  'from-jci-teal/80 to-jci-navy',
+]
+const badges = [
+  'bg-jci-blue/10 text-jci-blue',
+  'bg-jci-yellow/10 text-jci-yellow',
+  'bg-jci-navy/10 text-jci-navy',
+  'bg-jci-teal/10 text-jci-teal',
+  'bg-jci-blue/10 text-jci-blue',
+  'bg-jci-navy/10 text-jci-navy',
+]
+---
+
+<section id="impact" class="py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <p class="text-jci-blue font-semibold text-sm uppercase tracking-wider mb-4" data-i18n="impact.label">{t('impact.label', lang)}</p>
+      <h2 class="text-3xl lg:text-4xl font-light text-jci-black" data-i18n="impact.title">{t('impact.title', lang)}</h2>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {projects.map((p, i) => {
+        const img = p.image ? urlFor(p.image).width(800).height(450).fit('crop').quality(70).url() : null
+        return (
+          <div class="card-hover group bg-white rounded-2xl overflow-hidden border border-gray-100 reveal">
+            {img ? (
+              <div class="h-48 overflow-hidden">
+                <img src={img} alt={pick(p.title, lang)} width="800" height="450" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              </div>
+            ) : (
+              <div class={`h-48 bg-gradient-to-br ${gradients[i % gradients.length]} flex items-center justify-center`}>
+                <i class={`fas ${p.icon || 'fa-star'} text-white/30 text-6xl group-hover:scale-110 transition-transform`}></i>
+              </div>
+            )}
+            <div class="p-6">
+              <span class={`inline-block text-xs font-semibold px-3 py-1 rounded-full mb-3 ${badges[i % badges.length]}`} data-i18n={`proj.${i}.cat`}>{pick(p.category, lang)}</span>
+              <h3 class="text-lg font-semibold text-jci-black mb-2" data-i18n={`proj.${i}.title`}>{pick(p.title, lang)}</h3>
+              <p class="text-sm text-jci-black/60 leading-relaxed mb-4" data-i18n={`proj.${i}.desc`}>{pick(p.description, lang)}</p>
+              <div class="flex items-center gap-2 text-jci-teal">
+                <i class="fas fa-chart-line text-sm"></i>
+                <span class="text-sm font-medium" data-i18n={`proj.${i}.metric`}>{pick(p.metric, lang)}</span>
+              </div>
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  </div>
+</section>

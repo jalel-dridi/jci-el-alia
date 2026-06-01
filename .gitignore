@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+web/dist/
+studio/dist/
+.astro/
+.sanity/
+
+# Env / secrets
+.env
+.env.local
+**/.env
+**/.env.local
+*.tmp
+.tok.tmp
+.writetok.tmp
+
+# Intermediate Facebook-parse outputs (regenerate via web/scripts/parse-fb-*.mjs)
+web/src/data/fb-posts.json
+web/src/data/fb-events.json
+web/src/data/fb-board-posts.txt
+
+# Logs / OS
+*.log
+.DS_Store
+Thumbs.db
+
+# Raw source material — large (1+ GB Facebook export, PDFs). Not deployed.
+# The curated, web-sized photos live in web/public/albums and ARE committed.
+content/social-media/
+content/annual-reports/*.pdf
+content/branding/*.pdf
+content/annual-reports/2025*.pdf

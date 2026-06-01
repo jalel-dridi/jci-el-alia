@@ -1,0 +1,35 @@
+---
+/**
+ * Achievements / Milestones — a compact highlight strip of real, verifiable
+ * chapter accomplishments. Adds credibility between Impact and Testimonial.
+ */
+import {t} from '../i18n/utils.js'
+import {pick} from '../lib/sanity.js'
+
+const {achievements, lang = 'en'} = Astro.props
+const delays = ['reveal-delay-1', 'reveal-delay-2', 'reveal-delay-3', 'reveal-delay-4']
+---
+
+<section class="py-24 lg:py-32 bg-jci-navy relative overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-0 left-1/4 w-72 h-72 bg-jci-teal/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-1/4 w-72 h-72 bg-jci-blue/20 rounded-full blur-3xl"></div>
+  </div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <p class="text-jci-teal font-semibold text-sm uppercase tracking-wider mb-4" data-i18n="ach.label">{t('ach.label', lang)}</p>
+      <h2 class="text-3xl lg:text-4xl font-light text-white" data-i18n="ach.title">{t('ach.title', lang)}</h2>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {achievements.map((a, i) => (
+        <div class={`bg-white/[0.06] border border-white/10 rounded-2xl p-6 reveal ${delays[i % 4]}`}>
+          <div class="w-12 h-12 bg-jci-yellow/15 rounded-xl flex items-center justify-center mb-4">
+            <i class={`fas ${a.icon} text-jci-yellow text-lg`}></i>
+          </div>
+          <div class="text-2xl font-bold text-white mb-1">{a.year}</div>
+          <p class="text-white/70 text-sm leading-relaxed" data-i18n={`ach.${i}`}>{pick(a.text, lang)}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

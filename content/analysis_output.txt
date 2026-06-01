@@ -1,0 +1,2291 @@
+﻿================================================================================
+PART 1: DEEP FACEBOOK POSTS ANALYSIS
+================================================================================
+
+Found 30 JSON files:
+  content/social-media/facebook\profile_information\profile_information\contacts_sync_settings.json
+  content/social-media/facebook\profile_information\profile_information\profile_information.json
+  content/social-media/facebook\profile_information\profile_information\profile_update_history.json
+  content/social-media/facebook\profile_information\profile_information\rising_fan_badges_you've_given.json
+  content/social-media/facebook\profile_information\profile_information\rising_fan_badges_you've_received.json
+  content/social-media/facebook\profile_information\profile_information\your_devices.json
+  content/social-media/facebook\this_profile's_activity_across_facebook\events\events.json
+  content/social-media/facebook\this_profile's_activity_across_facebook\events\events_you_hosted.json
+  content/social-media/facebook\this_profile's_activity_across_facebook\events\event_responses.json
+  content/social-media/facebook\this_profile's_activity_across_facebook\events\your_event_invitation_links.json
+  content/social-media/facebook\this_profile's_activity_across_facebook\posts\content_sharing_links_you_have_created.json
+  content/social-media/facebook\this_profile's_activity_across_facebook\posts\edits_you_made_to_posts.json
+  content/social-media/facebook\this_profile's_activity_across_facebook\posts\places_you_have_been_tagged_in.json
+  content/social-media/facebook\this_profile's_activity_across_facebook\posts\profile_posts_1.json
+  content/social-media/facebook\this_profile's_activity_across_facebook\posts\translated_posts.json
+  content/social-media/facebook\this_profile's_activity_across_facebook\posts\trash.json
+  content/social-media/facebook\this_profile's_activity_across_facebook\posts\uncategorized_photos.json
+  content/social-media/facebook\this_profile's_activity_across_facebook\posts\videos.json
+  content/social-media/facebook\this_profile's_activity_across_facebook\posts\video_collaboration_events.json
+  content/social-media/facebook\this_profile's_activity_across_facebook\posts\album\0.json
+
+Total posts/items loaded: 1560
+
+Sample post keys: ['media', 'label_values', 'fbid']
+Posts with text content: 911
+
+--- FIRST 5 POSTS (full structure) ---
+
+Post 1:
+{
+  "media": [],
+  "label_values": [
+    {
+      "label": "Phone ID",
+      "value": "42260406-75b5-4429-bbd9-ecc88eb5de44"
+    },
+    {
+      "label": "Indicates if syncing is on",
+      "value": "Default"
+    },
+    {
+      "label": "Creation time",
+      "timestamp_value": 1701243682
+    },
+    {
+      "label": "Updated time",
+      "timestamp_value": 1759774201
+    },
+    {
+      "label": "Last sync time",
+      "timestamp_value": 1701243682
+    },
+    {
+      "label": "Indicates if your device allows Facebook to read your contacts",
+      "value": "False"
+    }
+  ],
+  "fbid": "659424549680298"
+}
+...
+
+Post 2:
+{
+  "media": [],
+  "label_values": [
+    {
+      "label": "Phone ID",
+      "value": "48CB0098-B8FE-4999-96A4-11DAEABBBE88"
+    },
+    {
+      "label": "Indicates if syncing is on",
+      "value": "Default"
+    },
+    {
+      "label": "Creation time",
+      "timestamp_value": 1694886334
+    },
+    {
+      "label": "Updated time",
+      "timestamp_value": 1694886334
+    },
+    {
+      "label": "Last sync time",
+      "timestamp_value": 1694886334
+    },
+    {
+      "label": "Indicates if your device allows Facebook to read your contacts",
+      "value": "True"
+    }
+  ],
+  "fbid": "621587943463959"
+}
+...
+
+Post 3:
+{
+  "media": [],
+  "label_values": [
+    {
+      "label": "Phone ID",
+      "value": "9C9FBE1D-D65E-461A-8E5A-C039D323AD4E"
+    },
+    {
+      "label": "Indicates if syncing is on",
+      "value": "Default"
+    },
+    {
+      "label": "Creation time",
+      "timestamp_value": 1676747004
+    },
+    {
+      "label": "Updated time",
+      "timestamp_value": 1689532126
+    },
+    {
+      "label": "Last sync time",
+      "timestamp_value": 1676747004
+    },
+    {
+      "label": "Indicates if your device allows Facebook to read your contacts",
+      "value": "False"
+    }
+  ],
+  "fbid": "511458131143608"
+}
+...
+
+Post 4:
+{
+  "media": [],
+  "label_values": [
+    {
+      "label": "Phone ID",
+      "value": "e68b2bf6-ad9a-4de4-a40f-2cd0d88a1536"
+    },
+    {
+      "label": "Indicates if syncing is on",
+      "value": "Off"
+    },
+    {
+      "label": "Creation time",
+      "timestamp_value": 1672168674
+    },
+    {
+      "label": "Updated time",
+      "timestamp_value": 1673288512
+    },
+    {
+      "label": "Last sync time",
+      "timestamp_value": 1673288512
+    },
+    {
+      "label": "Indicates if your device allows Facebook to read your contacts",
+      "value": "True"
+    }
+  ],
+  "fbid": "476470087975746"
+}
+...
+
+Post 5:
+{
+  "media": [],
+  "label_values": [
+    {
+      "label": "Phone ID",
+      "value": "F7224D18-1D8A-4915-9B45-3661AA14F575"
+    },
+    {
+      "label": "Indicates if syncing is on",
+      "value": "Default"
+    },
+    {
+      "label": "Creation time",
+      "timestamp_value": 1664921545
+    },
+    {
+      "label": "Updated time",
+      "timestamp_value": 1664921545
+    },
+    {
+      "label": "Last sync time",
+      "timestamp_value": 1664921545
+    },
+    {
+      "label": "Indicates if your device allows Facebook to read your contacts",
+      "value": "True"
+    }
+  ],
+  "fbid": "413443984278357"
+}
+...
+
+
+
+================================================================================
+PART 2: KEY SECTIONS FROM IMPROVED PDF EXTRACTIONS
+================================================================================
+
+######################################################################
+# 2025 التقرير الأدبي_v2.txt (34896 chars)
+######################################################################
+
+--- PAGE 1 ===
+ﺮﻳﺮﻘﺘﻟا
+ﻲﺑدﻷا
+ﺔﻴﻟﺎﻌﻟﺎﺑ ﺔﻴﻤﻟﺎﻌﻟا ﺔﻴﺘﻔﻟا ﺔﻓﺮﻐﻟا
+2025
+[TABLE on page 1]
+ | ﺮﻳﺮﻘﺘﻟا
+ﻲﺑدﻷا
+ﺔﻴﻟﺎﻌﻟﺎﺑ ﺔﻴﻤﻟﺎﻌﻟا ﺔﻴﺘﻔﻟا ﺔﻓﺮﻐﻟا
+2025 | 
+ |  | 
+ |  | 
+ |  | 
+
+
+
+
+--- PAGE 2 ===
+سﺮﻬﻔﻟا
+.......................................... -1
+3
+ﺔﺴﻴﺋﺮﻟا ﺔﻤﻠﻛ
+4 ............................................ -2
+ﺔﻓﺮﻐﻟا ءﺎﻀﻋأ
+9 ....................... -3
+تاﺮﻫﺎﻈﺘﻟاو ﺔﻄﺸﻧﻷا
+18 .................................... -4
+ﺔﻴﻤﻨﺘﻟاو ﻦﻳﻮﻜﺘﻟا
+................................................. -5
+27
+تﺎﻛرﺎﺸﻤﻟا
+..................................... -6
+34
+ﺔﻴﻤﺳﺮﻟا ﺞﻣاﺮﺒﻟا
+2
+
+
+
+--- PAGE 3 ===
+ﺔﻤﻠﻛ
+ﺔﺴﻴﺋﺮﻟا
+ّ
+ﻦﺤﻧو ،ﺔﻴﻟﺎﻌﻟﺎﺑ ﺔﻴﻤﻟﺎﻌﻟا ﺔﻴﺘﻔﻟا ﺔﻓﺮﻐﻠﻟ ﺔﻴﻠﺤﻣ ﺔﺴﻴﺋﺮﻛ ﻲﻨﻓّﺮﺸﻳ
+ﺪﻴﻌﺘﺴﻧ ﻞﻣﺄﺗ ﺔﻈﺤﻟ ﻢﻜﻌﻣ ﻒﻗأ نأ ،مﺎﻌﻟا اﺬﻫ ﺔﺤﻔﺻ يﻮﻄﻧ
+.
+ً
+ﺪﻗ ﺎﻫ ﺖﺑﺎﺜﻟا مﺰﻌﻟاو بوؤﺪﻟا ﻞﻤﻌﻟﺎﺑ ﻼﻓﺎﺣ ارﺎﺴﻣ ﺎﻬﻴﻓ
+ﻊﻤﺘﺟاو ،دﺎﻬﺘﺟﻻﺎﺑ ﺖﻤَ ﺳِ وُ ،ﺔﻴﺋﺎﻨﺜﺘﺳا ﺔﻴﺑﺎﻴﻧ ةﺮﺘﻓ ﺖﻀﻣ
+ّ
+ﻲﺘﻟا ﻖﻳﺮﻔﻟا حور ﺎﻬﻟﻼﺧ ﺖﻠﺠﺗو ،ﺔﻳؤﺮﻟا ﻊﻣ راﺮﺻﻹا ﺎﻬﻴﻓ
+.
+ﺎﻨﻣﺪﻘﺗ ةرﺎﻨﻣو ﺎﻨﺗﺎﺣﺎﺠﻧ دﺎﻤﻋ ﺖﻧﺎﻛ
+،ﻢﻟﺎﻌﻤﻟا ﺢﺿاو رﺎﺴﻣ جﺎﻬﺘﻧا ﲆﻋ ﺔﻨﺴﻟا ﻊﻠﻄﻣ ﺬﻨﻣ ﺎﻨﺻﺮﺣ
+لﻼﺧ ﻦﻣ ،ﺔﻳﺮﺸﺒﻟا تاﺬﻟا و ﻊﻤﺘﺠﻤﻟا ﺔﻣﺪﺧ ﲆﻋ ﻲﻨﺒﻨﻳ
+ﺎﻴﻤﻟﺎﻋو ﺎﻴﻨﻃو ،ﺎﻴﻠﺤﻣ ﺎﻨﺘﻤﻈﻨﻣ رﻮﻀﺣ ﺰﻳﺰﻌﺗو ،ﺎﻨﺋﺎﻀﻋأ ﻦﻴﻜﻤﺗ
+.
+ﺎﻫﺎﻨﻬﺟاو ﺪﻘﻓ ،ﺔﻤّ ﺟ تﺎﻳﺪﺤﺗ ﺎﻨﻘﻳﺮﻃ ﺖﺿﺮﺘﻋا ﻦﺌﻟو ﺎﻀﻳأ
+.
+ﺪﻗو ةﺮﻤﺛ ﺪـﻬﺟ ﻞﻜﻟو ،سرد ةﺮﺜﻋ ﻞﻜﻟ نﺎﻜﻓ ،ﺔﻧوﺮﻣو ﺔﻘﺜﺑ
+ً
+ﻲﺘﻟا تﺎﻛاﺮﺸﻟا ﺖﺨﺳّ رو ،ﺎﺳﻮﻤﻠﻣ اﺮﺛأ ﺎﻨﻌﻳرﺎﺸﻣ تﺮﻤﺛأ
+ﻊﻨﺻو رﺎﻜﺘﺑﻻا ﲆﻋ ردﺎﻗو دﺎﺟ ﻞﻋﺎﻔﻛ ﺎﻨﺘﻤﻈﻨﻣ ﺔﻧﺎﻜﻣ ﺎﻫﺎﻧﺪﻘﻋ
+.
+ﺮﻴﻴﻐﺘﻟا
+ً
+ﺮﻳﻮﻄﺗ و ،ءﺎﻀﻋﻷا دﺪﻋ ﻲﻓ اﻮﻤﻧ ﺔﻨﺴﻟا هﺬﻫ تﺪﻬﺷ ﺎﻤﻛ
+ﻚﺳﺎﻤﺗو ﺔﺑﺮﺠﺘﻟا ﺞﻀﻧ ﺲﻜﻌﻳ ﺎﻤﺑ ،ﻞﻤﻌﻟا تﺎﻴﺠﻴﺗاﺮﺘﺳا
+.
+ماﺰﺘﻟﻻا ﺪﻬﻋ دﺪّ ﺠُﻧ ،ﺮﻳﺮﻘﺘﻟا اﺬﻫ ضﺮﻌﻧ ﻦﺤﻧو ،مﻮﻴﻟاو ﻖﻳﺮﻔﻟا
+ﻻ ﺔﻤﻳﺰﻋو ﻊﺳوأ حﻮﻤﻄﺑ ﺔﻠﺒﻘﻤﻟا ﺔﻨﺴﻟا ﻞﺒﻘﺘﺴﻧو ،ﻞﻤﻌﻟا ﻢﻴﻘﺑ
+.
+ﻦﻴﻠﺗ
+ةﺮﻴﺴﻣ ﻲﻓ ﻪﺘﻤﺼﺑ ﻊﺿو ﻮﻀﻋ ﻞﻛ ﱃإ ﺮﻜﺸﻟا ﺮﻓاﻮﺑ ﻪﺟﻮﺗأ
+:
+ﻲﺋﻼﻣز ةﺪﻳﺮﻔﻟا ﺔﻠﺣﺮﻟا هﺬﻫ ﻲﻓ ﻲﻧﻮﻘﻓار ﻦﻣ ﱃإ ،ﺔﻨﺴﻟا هﺬﻫ
+اوﺪﻬّ ﻣ ﻦﻳﺬﻟا ﻦﻴﻘﺑﺎﺴﻟا ﻲﺋﺎﺳؤر ﱃإ و ،يﺬﻴﻔﻨﺘﻟا ﺐﺘﻜﻤﻟا ﻲﻓ
+ﻞﻛ ﱃإو ،ﻢﻬﺘﻤﻜﺣ و ﻢﻬﺤﺼﻨﺑ ﺔﺳﻼﺳ ﺮﺜﻛأ هﻮﻠﻌﺟ و ﻖﻳﺮﻄﻟا
+ﻎﻠﺒﺗ نأ ﻲﻓ ﻢﻫﺎﺳ ﻦﻣ ﻞﻛ ﱃإو ،ﺎﻨﺘﻟﺎﺳﺮﺑ ﻦﻣآ ﻚﻳﺮﺷ
+.
+ﺔﻤﻈﻌﻟا و عﺎﻌﺷﻹا ﻦﻣ رﺪﻘﻟا اﺬﻫ ﺎﻨﺘﻤﻈﻨﻣ
+ً
+ﻮﺟﺮﻧ ىﺮﺧأ ﺢﺘﻔﻧو ،تاﺰﺠﻨﻤﻟﺎﺑٍﺮﺧاز مٍ ﺎﻋ ﺔﺤﻔﺻ يﻮﻄﻧ ،ﺎﻣﺎﺘﺧ
+ً ً
+ﻲﺑﺎﺠﻳﻻا ﺮﻴﻴﻐﺘﻟا ﺎﻬﻴﻓ ىﺮﻧ اﺮﻤﺛ ﻰﻨﻏأو ﺎﻗﺎﻓآ ﺐﺣرأ نﻮﻜﺗ نأ
+.
+ﻪﻘﻴﻘﺤﺗ ﱃإ ﺎﻨﻣرُ ﺎﻤﻟﺎﻄﻟ يﺬﻟا
+،ﺮﻳﺪﻘﺘﻟا ﺺﻟﺎﺧ ﻊﻣ
+ﺐﻴﺒﺤﻟا ﺔﻴﺠﻨﻣ
+2025 -
+ﺔﻴﻟﺎﻌﻟا ﺔﻓﺮﻏ ﺔﺴﻴﺋر
+3
+[TABLE on page 3]
+ |  | 
+ |  | ﺔﻤﻠﻛ
+ﺔﺴﻴﺋﺮﻟا
+ّ
+ﻦﺤﻧو ،ﺔﻴﻟﺎﻌﻟﺎﺑ ﺔﻴﻤﻟﺎﻌﻟا ﺔﻴﺘﻔﻟا ﺔﻓﺮﻐﻠﻟ ﺔﻴﻠﺤﻣ ﺔﺴﻴﺋﺮﻛ ﻲﻨﻓّﺮﺸﻳ
+ﺪﻴﻌﺘﺴﻧ ﻞﻣﺄﺗ ﺔﻈﺤﻟ ﻢﻜﻌﻣ ﻒﻗأ نأ ،مﺎﻌﻟا اﺬﻫ ﺔﺤﻔﺻ يﻮﻄﻧ
+.
+ً
+ﺪﻗ ﺎﻫ ﺖﺑﺎﺜﻟا مﺰﻌﻟاو بوؤﺪﻟا ﻞﻤﻌﻟﺎﺑ ﻼﻓﺎﺣ ارﺎﺴﻣ ﺎﻬﻴﻓ
+ﻊﻤﺘﺟاو ،دﺎﻬﺘﺟﻻﺎﺑ ﺖﻤَ ﺳِ وُ ،ﺔﻴﺋﺎﻨﺜﺘﺳا ﺔﻴﺑﺎﻴﻧ ةﺮﺘﻓ ﺖﻀﻣ
+ّ
+ﻲﺘﻟا ﻖﻳﺮﻔﻟا حور ﺎﻬﻟﻼﺧ ﺖﻠﺠﺗو ،ﺔﻳؤﺮﻟا ﻊﻣ راﺮﺻﻹا ﺎﻬﻴﻓ
+.
+ﺎﻨﻣﺪﻘﺗ ةرﺎﻨﻣو ﺎﻨﺗﺎﺣﺎﺠﻧ دﺎﻤﻋ ﺖﻧﺎﻛ
+،ﻢﻟﺎﻌﻤﻟا ﺢﺿاو رﺎﺴﻣ جﺎﻬﺘﻧا ﲆﻋ ﺔﻨﺴﻟا ﻊﻠﻄﻣ ﺬﻨﻣ ﺎﻨﺻﺮﺣ
+لﻼﺧ ﻦﻣ ،ﺔﻳﺮﺸﺒﻟا تاﺬﻟا و ﻊﻤﺘﺠﻤﻟا ﺔﻣﺪﺧ ﲆﻋ ﻲﻨﺒﻨﻳ
+ﺎﻴﻤﻟﺎﻋو ﺎﻴﻨﻃو ،ﺎﻴﻠﺤﻣ ﺎﻨﺘﻤﻈﻨﻣ رﻮﻀﺣ ﺰﻳﺰﻌﺗو ،ﺎﻨﺋﺎﻀﻋأ ﻦﻴﻜﻤﺗ
+.
+ﺎﻫﺎﻨﻬﺟاو ﺪﻘﻓ ،ﺔﻤّ ﺟ تﺎﻳﺪﺤﺗ ﺎﻨﻘﻳﺮﻃ ﺖﺿﺮﺘﻋا ﻦﺌﻟو ﺎﻀﻳأ
+.
+ﺪﻗو ةﺮﻤﺛ ﺪـﻬﺟ ﻞﻜﻟو ،سرد ةﺮﺜﻋ ﻞ
+
+--- PAGE 4 ===
+ﺔﻴﻟﺎﻌﻟا ﺔﻓﺮﻏ ءﺎﻀﻋأ
+47
+ﻮﻀﻋ
+16 10 21
+ﺐﻗاﺮﻣ ﺺﺑﺮﺘﻣ ﻲﺳﺎﺳأ
+22.85
+ﻂﺳﻮﺘﻣ
+:
+رﺎﻤﻋﻷا
+4
+
+
+
+--- PAGE 5 ===
+يﺬﻴﻔﻨﺘﻟا ﺐﺘﻜﻤﻟا
+ﺐﻴﺒﺤﻟا ﺔﻴﺠﻨﻣ
+ﺔﺴﻴﺋﺮﻟا
+ﺪﻋﺎﺴﻣ رﺎﻨﻣ ناﺪﻴﻌﺳ ﺪﻤﺤﻣ
+ﺔﻘﺑﺎﺴﻟا ﺔﺴﻴﺋﺮﻟا ﻲﻧﻮﻧﺎﻘﻟا رﺎﺸﺘﺴﻤﻟا
+ةﺮﺷﺎﺒﻤﻟا
+ﻲﻛﻮﻜﻟا ﺪﻴﺠﻤﻟا ﺪﺒﻋ ﺢﻣﺎﺳ ﺔﻨﻳﻮﻋ ﺪﻤﺤﻣ ﻎﻳزﺎﻣ ﺞﻳرأ ﺔﻳرﻮﺷ ﻦﻴﻣأ ﺪﻤﺤﻣ
+ﻒﻠﻜﻤﻟا ﺲﻴﺋﺮﻟا ﺐﺋﺎﻧ ﻒﻠﻜﻤﻟا ﺲﻴﺋﺮﻟا ﺐﺋﺎﻧ لﺎﻤﻟا ﺔﻨﻴﻣأ مﺎﻌﻟا ﺐﺗﺎﻜﻟا
+تﺎﻗﻼﻌﻟاو ﺞﻣاﺮﺒﻟﺎﺑ ﺔﻴﻤﻨﺘﻟاو ﻦﻳﻮﻜﺘﻟﺎﺑ
+ﺔﻴﺟرﺎﺨﻟا
+5
+[TABLE on page 5]
+يﺬﻴﻔﻨﺘﻟا ﺐﺘﻜﻤﻟا
+ﺐﻴﺒﺤﻟا ﺔﻴﺠﻨﻣ
+ﺔﺴﻴﺋﺮﻟا
+ﺪﻋﺎﺴﻣ رﺎﻨﻣ ناﺪﻴﻌﺳ ﺪﻤﺤﻣ
+ﺔﻘﺑﺎﺴﻟا ﺔﺴﻴﺋﺮﻟا ﻲﻧﻮﻧﺎﻘﻟا رﺎﺸﺘﺴﻤﻟا
+ةﺮﺷﺎﺒﻤﻟا
+ﻲﻛﻮﻜﻟا ﺪﻴﺠﻤﻟا ﺪﺒﻋ ﺢﻣﺎﺳ ﺔﻨﻳﻮﻋ ﺪﻤﺤﻣ ﻎﻳزﺎﻣ ﺞﻳرأ ﺔﻳرﻮﺷ ﻦﻴﻣأ ﺪﻤﺤﻣ
+ﻒﻠﻜﻤﻟا ﺲﻴﺋﺮﻟا ﺐﺋﺎﻧ ﻒﻠﻜﻤﻟا ﺲﻴﺋﺮﻟا ﺐﺋﺎﻧ لﺎﻤﻟا ﺔﻨﻴﻣأ مﺎﻌﻟا ﺐﺗﺎﻜﻟا
+تﺎﻗﻼﻌﻟاو ﺞﻣاﺮﺒﻟﺎﺑ ﺔﻴﻤﻨﺘﻟاو ﻦﻳﻮﻜﺘﻟﺎﺑ
+ﺔﻴﺟرﺎﺨﻟا
+5
+
+
+
+
+--- PAGE 6 ===
+نﻮﻴﺳﺎﺳﻷا ءﺎﻀﻋﻷا
+ﺪﻴﻌﺳ ﻪﻃ ﺔﻟﻮﻏﻮﺑ ﻢﻴﻠﺳ ﺔﻨﻳﻮﻋ ﻢﺜﻴﻫ ﻦﻴﺴﺣ ﻦﺑ ﻢﻴﻫاﺮﺑإ
+ﻖﺑﺎﺳ ﺲﻴﺋر ﻖﺑﺎﺳ ﺲﻴﺋر ﻖﺑﺎﺳ ﺲﻴﺋر ﻖﺑﺎﺳ ﺲﻴﺋر
+ﺐﻴﺒﺤﻟا رﻮﻧ
+ﺪﻴﻌﺳ ﺔﺒﻫ ﺐﻴﺒﺤﻟا ﺔﻨﻣآ ﻲﻧاﻮﻏﺰﻟا ﺔﻤﻴﻣأ ﺪﻋﺎﺴﻣ ﻰﻬﺘﻨﻣ
+ﺞﻣﺎﻧﺮﺑ ﺔﻟوﺆﺴﻣ
+ﺔﻴﻤﻨﺘﻟا ﺔﻟوﺆﺴﻣ مﻼﻋﻹا ﺔﻟوﺆﺴﻣ تﺎﺑﺎﺴﺣ ﺔﺒﻗاﺮﻣ تﺎﺑﺎﺴﺣ ﺔﺒﻗاﺮﻣ
+100%
+ﺔﻋﺎﺠﻧ
+يﺪﻳرﺪﻟا لﻼﺟ ﺪﻤﺤﻣ ﻲﺑﺮﻌﻟﺎﺑ ﺪﺟﺎﺳ ﺔﺸﻳﻮﻋ ﻦﺑ ﺔﻳآ ﺲﻴﻤﺧﻮﺑ ﺪﻨﺳ ﺪﻤﺤﻣ ﺔﻴﺑﺎﻃ ﻲﻠﻋ
+ﻲﺳﺎﺳأ ﻮﻀﻋ ﻲﺳﺎﺳأ ﻮﻀﻋ ﺞﻣﺎﻧﺮﺑ لوﺆﺴﻣ ﺞﻣﺎﻧﺮﺑ لوﺆﺴﻣ ﺞﻣﺎﻧﺮﺑ لوﺆﺴﻣ
+CYE / TOYP
+ﺰﺋاﻮﺠﻟا ﺔﺑﺎﻄﺨﻟا ﻦﻓو ﺮﻇﺎﻨﺘﻟا
+6
+[TABLE on page 6]
+نﻮﻴﺳﺎﺳﻷا ءﺎﻀﻋﻷا
+ﺪﻴﻌﺳ ﻪﻃ ﺔﻟﻮﻏﻮﺑ ﻢﻴﻠﺳ ﺔﻨﻳﻮﻋ ﻢﺜﻴﻫ ﻦﻴﺴﺣ ﻦﺑ ﻢﻴﻫاﺮﺑإ
+ﻖﺑﺎﺳ ﺲﻴﺋر ﻖﺑﺎﺳ ﺲﻴﺋر ﻖﺑﺎﺳ ﺲﻴﺋر ﻖﺑﺎﺳ ﺲﻴﺋر
+ﺐﻴﺒﺤﻟا رﻮﻧ
+ﺪﻴﻌﺳ ﺔﺒﻫ ﺐﻴﺒﺤﻟا ﺔﻨﻣآ ﻲﻧاﻮﻏﺰﻟا ﺔﻤﻴﻣأ ﺪﻋﺎﺴﻣ ﻰﻬﺘﻨﻣ
+ﺞﻣﺎﻧﺮﺑ ﺔﻟوﺆﺴﻣ
+ﺔﻴﻤﻨﺘﻟا ﺔﻟوﺆﺴﻣ مﻼﻋﻹا ﺔﻟوﺆﺴﻣ تﺎﺑﺎﺴﺣ ﺔﺒﻗاﺮﻣ تﺎﺑﺎﺴﺣ ﺔﺒﻗاﺮﻣ
+100%
+ﺔﻋﺎﺠﻧ
+يﺪﻳرﺪﻟا لﻼﺟ ﺪﻤﺤﻣ ﻲﺑﺮﻌﻟﺎﺑ ﺪﺟﺎﺳ ﺔﺸﻳﻮﻋ ﻦﺑ ﺔﻳآ ﺲﻴﻤﺧﻮﺑ ﺪﻨﺳ ﺪﻤﺤﻣ ﺔﻴﺑﺎﻃ ﻲﻠﻋ
+ﻲﺳﺎﺳأ ﻮﻀﻋ ﻲﺳﺎﺳأ ﻮﻀﻋ ﺞﻣﺎﻧﺮﺑ لوﺆﺴﻣ ﺞﻣﺎﻧﺮﺑ لوﺆﺴﻣ ﺞﻣﺎﻧﺮﺑ لوﺆﺴﻣ
+CYE / TOYP
+ﺰﺋاﻮﺠﻟا ﺔﺑﺎﻄﺨﻟا ﻦﻓو ﺮﻇﺎﻨﺘﻟا
+6
+
+
+
+
+--- PAGE 7 ===
+نﻮﺼﺑﺮﺘﻤﻟا ءﺎﻀﻋﻷا
+ﺶﻴﻠﺗ ﷲ ﺪﺒﻋ ﻦﻴﺴﺣ ﻦﺑ يدﺎﻫ ﺦﻴﺸﻟا ﻦﺑ ىﺮﺸﺑ ناﺪﻴﻌﺳ ﺮﺟﺎﻫ
+ﺮﻫﺎﻃ ﻦﺑ ءﺎﻤﺳأ ﺶﻴﻠﺗ ﻊﻳدو ﻲﻨﻳﺎﺴﺤﻟا دﺎﻬﻧ ﻲﺑﻮﺒﻘﻟا ءﺎﻴﺿ ﺪﻤﺤﻣ
+لﺎﺣﺮﻟا ﺮﺳﺎﻳ ﺐﻴﺒﺤﻟا ﻲﺑﻮﻨﻣ
+7
+[TABLE on page 7]
+نﻮﺼﺑﺮﺘﻤﻟا ءﺎﻀﻋﻷا
+ﺶﻴﻠﺗ ﷲ ﺪﺒﻋ ﻦﻴﺴﺣ ﻦﺑ يدﺎﻫ ﺦﻴﺸﻟا ﻦﺑ ىﺮﺸﺑ ناﺪﻴﻌﺳ ﺮﺟﺎﻫ
+ﺮﻫﺎﻃ ﻦﺑ ءﺎﻤﺳأ ﺶﻴﻠﺗ ﻊﻳدو ﻲﻨﻳﺎﺴﺤﻟا دﺎﻬﻧ ﻲﺑﻮﺒﻘﻟا ءﺎﻴﺿ ﺪﻤﺤﻣ
+لﺎﺣﺮﻟا ﺮﺳﺎﻳ ﺐﻴﺒﺤﻟا ﻲﺑﻮﻨﻣ
+7
+
+
+
+
+--- PAGE 8 ===
+نﻮﺒﻗاﺮﻤﻟا ءﺎﻀﻋﻷا
+ﺔﻴﺑﺎﻃ ﻦﻴﻤﺳﺎﻳ ﺔﻨﻳﻮﻋ ﺪﺠﻣ بﻮﻬﻴﻤﻟا ﺔﻴﻧار ﺐﻴﺒﺤﻟا ﻦﻴﺳﺎﻳ ﺪﻤﺣأ
+ﻲﻤﻧﺎﻐﻟا ةﺰﻳﺰﻋ ﻲﻨﻴﻠﺴﻟا دﺎﻌﺳ ﻦﻳﺮﺷﻮﻟا سرﺎﻓ ﻲﻋﺎﻨﻤﻟا ﺮﻤﻋ
+ﻲﻧاﻮﻏﺰﻟا ءﺎﻤﺳأ مﺎﻣﻹا ﻰﻘﺗ ﻦﻳﺮﺷﻮﻟا ةﺰﻤﺣ ﻢﻟﺎﺳ ﻦﺑ ﺔﺸﺋﺎﻋ
+ﺔﺸﻳﻮﻋ ﻦﺑ ﻦﻴﻟرﻮﻧ ﻲﻧاﺮﺛﻮﻟا ىﻮﻘﺗ ﺦﻳﻮﺷ ﻰﻴﺤﻳ ردﺎﻗ نﺎﺤﻳر
+8
+[TABLE on page 8]
+نﻮﺒﻗاﺮﻤﻟا ءﺎﻀﻋﻷا
+ﺔﻴﺑﺎﻃ ﻦﻴﻤﺳﺎﻳ ﺔﻨﻳﻮﻋ ﺪﺠﻣ بﻮﻬﻴﻤﻟا ﺔﻴﻧار ﺐﻴﺒﺤﻟا ﻦﻴﺳﺎﻳ ﺪﻤﺣأ
+ﻲﻤﻧﺎﻐﻟا ةﺰﻳﺰﻋ ﻲﻨﻴﻠﺴﻟا دﺎﻌﺳ ﻦﻳﺮﺷﻮﻟا سرﺎﻓ ﻲﻋﺎﻨﻤﻟا ﺮﻤﻋ
+ﻲﻧاﻮﻏﺰﻟا ءﺎﻤﺳأ مﺎﻣﻹا ﻰﻘﺗ ﻦﻳﺮﺷﻮﻟا ةﺰﻤﺣ ﻢﻟﺎﺳ ﻦﺑ ﺔﺸﺋﺎﻋ
+ﺔﺸﻳﻮﻋ ﻦﺑ ﻦﻴﻟرﻮﻧ ﻲﻧاﺮﺛﻮﻟا ىﻮﻘﺗ ﺦﻳﻮﺷ ﻰﻴﺤﻳ ردﺎﻗ نﺎﺤﻳر
+8
+
+
+
+
+--- PAGE 9 ===
+تاﺮﻫﺎﻈﺘﻟاو ﺔﻄﺸﻧﻷا
+8 11
+ةﺮﻫﺎﻈﺗ
+ةﺎﻋر
+عوﺮﺸﻣو
+7 ﻦﻣ ﺬﻴﻔﻨﺗ ﻢﺗ
+80%
+ﺞﻣﺎﻧﺮﺒﻟا
+ءﺎﻛﺮﺷ
+يﻮﻨﺴﻟا
+9
+تﻼﺧاﺪﻣ
+ﺔﻴﻋاذإ
+3 7
+تﺎﺴﻠﺟ تﺎﺴﻠﺟ
+ﺔﻣﺎﻋ ﺔﻳرود
+9
+
+
+
+--- PAGE 10 ===
+تاﺮﻫﺎﻈﺘﻟاو ﺔﻄﺸﻧﻷا
+ﱃوﻷا ﺔﻳروﺪﻟا ﺔﻣﺎﻌﻟا ﺔﺴﻠﺠﻟا
+2025 4 :
+ﻲﻔﻧﺎﺟ ﺦﻳرﺎﺘﻟا
+:
+ﺔﻴﻟﺎﻌﻟا بﺎﺒﺸﻟا راد نﺎﻜﻤﻟا
+دﺎﻤﺘﻋﺎﺑ ﺎﻨﻤﻗ ،ﱃوﻷا ﺔﻳروﺪﻟا ﺔﻣﺎﻌﻟا ﺔﺴﻠﺠﻟا لﻼﺧ
+،يﻮﻨﺴﻟا ﺞﻣﺎﻧﺮﺒﻟاو ،ﻲﻠﺧاﺪﻟا مﺎﻈﻨﻠﻟ ﺔﻴﺋﺎﻬﻨﻟا ﺔﻐﻴﺼﻟا
+.2025
+ﺔﺸﻗﺎﻨﻣ ﱃإ ﺎﻨﻗّﺮﻄﺗ ﺎﻤﻛ ﺔﻨﺳ ﺔﻴﻧاﺰﻴﻣو
+.
+ﺎﻫﺬﻴﻔﻨﺗ ﻞﺣاﺮﻣو ﺔﻣدﺎﻘﻟا ﺔﻄﺸﻧﻷا
+Innoventure Hackathon
+2025 2 1 :
+يﺮﻔﻴﻓ و ﺦﻳرﺎﺘﻟا
+:
+ﺔﻴﻟﺎﻌﻟا بﺎﺒﺸﻟا راد نﺎﻜﻤﻟا
+:
+ﺲﻴﻤﺧﻮﺑ ﺪﻨﺳ ﺪﻤﺤﻣ ﺮﻳﺪﻤﻟا
+" " "
+راد و ﺔﻴﻟﺎﻌﻟﺎﺑ ﻢﻠﻌﻟاو نﺎﺒﺸﻟا يدﺎﻧ ﻊﻣ ﺔﻛاﺮﺸﻟﺎﺑ
+Innoventure "
+ﻢﻴﻈﻨﺗ ﻢﺗ ، ﺔﻴﻟﺎﻌﻟا بﺎﺒﺸﻟا
+Hackathon
+ةدﺎﻳر ﲆﻋ تﺰﻛّ ر ةﺰﻴﻤﻣ ﺔﻴﻟﺎﻌﻓ
+ﻦﻋ ﺚﺤﺒﻟا لﻼﺧ ﻦﻣ ﻚﻟذو ،ﺔﻣاﺪﺘﺴﻤﻟا لﺎﻤﻋﻷا
+ﺔﻴﻤﻨﺘﻟا فاﺪﻫأ ﻢﻋﺪﺗ ةﺮﻜﺘﺒﻣ رﺎﻜﻓأو لﻮﻠﺣ
+.13 7 6
+و و فاﺪﻫﻷا اﺪً ﻳﺪﺤﺗو ،ﺔﻣاﺪﺘﺴﻤﻟا
+ﻦﻓ ﻲﻓ ﺔﻴﻨﻳﻮﻜﺗ تﺎﺷرﻮﺑ ﺔﻴﻟﺎﻌﻔﻟا ﺖﻘﻠﻄﻧا
+(UI/UX) (Pitching)
+، مﺪﺨﺘﺴﻤﻟا ﺔﺑﺮﺠﺗو ضﺮﻌﻟا
+ﺮﻳﻮﻄﺗ ﻲﻓ ﻢﻬﻬﻴﺟﻮﺗو ﻦﻴﻛرﺎﺸﻤﻟا ﺔﻘﻓاﺮﻤﻟ ﻚﻟذو
+.
+ﻢﻫرﺎﻜﻓأ
+مﺎﻣأ ﺎﻬﻌﻳرﺎﺸﻣ قﺮﻔﻟا ﺖﻣﺪّ ﻗ ،ﻲﻧﺎﺜﻟا مﻮﻴﻟا ﻲﻓ
+ﻢﺗ ﺚﻴﺣ ،ضﺮﻌﻟا تﺎﺴﻠﺟ لﻼﺧ ﻢﻴﻜﺤﺘﻟا ﺔﻨﺠﻟ
+قﺮﻔﻟا ﻦﻋ نﻼﻋﻹاو ،ﺔﺣﺮﺘﻘﻤﻟا لﻮﻠﺤﻟا ﻢﻴﻴﻘﺗ
+.
+ﺎﻬﺗارﺎﻜﺘﺑﺎﺑ تﺰﻴّ ﻤﺗ ﻲﺘﻟا ةﺰﺋﺎﻔﻟا
+ﻦﻣ ﺔﻳﺎﻋرو ﻢﻋﺪﺑ ةﺮﻫﺎﻈﺘﻟا هﺬﻫ تءﺎﺟ ﺪﻗو
+Coeur 9antra.tn Pearls Consulting
+و ، و ،
+.Fondant
+10
+[TABLE on page 10]
+تاﺮﻫﺎﻈﺘﻟاو ﺔﻄﺸﻧﻷا
+ﱃوﻷا ﺔﻳروﺪﻟا ﺔﻣﺎﻌﻟا ﺔﺴﻠﺠﻟا
+2025 4 :
+ﻲﻔﻧﺎﺟ ﺦﻳرﺎﺘﻟا
+:
+ﺔﻴﻟﺎﻌﻟا بﺎﺒﺸﻟا راد نﺎﻜﻤﻟا
+دﺎﻤﺘﻋﺎﺑ ﺎﻨﻤﻗ ،ﱃوﻷا ﺔﻳروﺪﻟا ﺔﻣﺎﻌﻟا ﺔﺴﻠﺠﻟا لﻼﺧ
+،يﻮﻨﺴﻟا ﺞﻣﺎﻧﺮﺒﻟاو ،ﻲﻠﺧاﺪﻟا مﺎﻈﻨﻠﻟ ﺔﻴﺋﺎﻬﻨﻟا ﺔﻐﻴﺼﻟا
+.2025
+ﺔﺸﻗﺎﻨﻣ ﱃإ ﺎﻨﻗّﺮﻄﺗ ﺎﻤﻛ ﺔﻨﺳ ﺔﻴﻧاﺰﻴﻣو
+.
+ﺎﻫﺬﻴﻔﻨﺗ ﻞﺣاﺮﻣو ﺔﻣدﺎﻘﻟا ﺔﻄﺸﻧﻷا
+Innoventure Hackathon
+2025 2 1 :
+يﺮﻔﻴﻓ و ﺦﻳرﺎﺘﻟا
+:
+ﺔﻴﻟﺎﻌﻟا بﺎﺒﺸﻟا راد نﺎﻜﻤﻟا
+:
+ﺲﻴﻤﺧﻮﺑ ﺪﻨﺳ ﺪﻤﺤﻣ ﺮﻳﺪﻤﻟا
+" " "
+راد و ﺔﻴﻟﺎﻌﻟﺎﺑ ﻢﻠﻌﻟاو نﺎﺒﺸﻟا يدﺎﻧ ﻊﻣ ﺔﻛاﺮﺸﻟﺎﺑ
+Innoventure "
+ﻢﻴﻈﻨﺗ ﻢﺗ ، ﺔﻴﻟﺎﻌﻟا بﺎﺒﺸﻟا
+Hackathon
+ةدﺎﻳر ﲆﻋ تﺰﻛّ ر ةﺰﻴﻤﻣ ﺔﻴﻟﺎﻌﻓ
+ﻦﻋ ﺚﺤﺒﻟا لﻼﺧ ﻦﻣ ﻚﻟذو ،ﺔﻣاﺪﺘﺴﻤﻟا لﺎﻤﻋﻷا
+ﺔﻴﻤﻨﺘﻟا فاﺪﻫأ ﻢﻋﺪﺗ ةﺮﻜﺘﺒﻣ رﺎﻜﻓأو لﻮﻠﺣ
+.13 7 6
+و و فاﺪﻫﻷا اﺪً ﻳﺪﺤﺗو ،ﺔﻣاﺪﺘﺴﻤﻟا
+ﻦﻓ ﻲﻓ ﺔﻴﻨﻳﻮﻜﺗ تﺎﺷرﻮﺑ ﺔﻴﻟﺎﻌﻔﻟا ﺖﻘﻠﻄﻧا
+(UI/UX) (Pitching)
+، مﺪﺨﺘﺴﻤﻟا ﺔﺑﺮﺠﺗو ضﺮﻌﻟا
+ﺮﻳﻮﻄﺗ ﻲﻓ ﻢﻬﻬﻴﺟﻮﺗو ﻦﻴﻛرﺎﺸﻤﻟا ﺔﻘﻓاﺮﻤﻟ ﻚﻟذو
+.
+ﻢﻫرﺎﻜﻓأ
+مﺎﻣأ ﺎﻬﻌﻳرﺎﺸﻣ قﺮﻔﻟا ﺖﻣﺪّ ﻗ ،ﻲﻧﺎﺜﻟا مﻮﻴﻟا ﻲﻓ
+ﻢﺗ ﺚﻴﺣ ،ضﺮﻌﻟا تﺎﺴﻠﺟ لﻼﺧ ﻢﻴﻜﺤﺘﻟا ﺔﻨﺠﻟ
+قﺮﻔﻟا ﻦﻋ نﻼﻋﻹاو ،ﺔﺣﺮﺘﻘﻤﻟا لﻮﻠﺤﻟا ﻢﻴﻴﻘﺗ
+.
+ﺎﻬﺗارﺎﻜﺘﺑﺎﺑ تﺰﻴّ ﻤﺗ ﻲﺘﻟا ةﺰﺋﺎﻔﻟا
+ﻦﻣ ﺔﻳﺎﻋرو ﻢﻋﺪﺑ ةﺮﻫﺎﻈﺘﻟا هﺬﻫ تءﺎﺟ ﺪﻗو
+Coeur 9antra.tn Pearls Consulting
+و ، و ،
+.Fo
+
+--- PAGE 11 ===
+تاﺮﻫﺎﻈﺘﻟاو ﺔﻄﺸﻧﻷا
+ﺔﻴﻤﻳدﺎﻛأو ﻊﻴﺑﺮﻟا تﺎﺴﻠﺟ
+ب ﻢﻴﻠﻗﻺﻟ ﺲﻴﺋﺮﻟا باﻮﻧ
+2025 16 15 :
+يﺮﻔﻴﻓ و ﺦﻳرﺎﺘﻟا
+:
+ترﺰﻨﺑ ﻢﻟﺎﺳ يﺪﻴﺳ قﺪﻨﻓ نﺎﻜﻤﻟا
+:
+يﺪﻳرﺪﻟا لﻼﺟ ﺪﻤﺤﻣ ﺮﻳﺪﻤﻟا
+"
+ﺔﻴﻤﻳدﺎﻛأ و ﻊﻴﺑﺮﻟا تﺎﺴﻠﺟ ﺔﻴﻟﺎﻌﻟا ﺔﻓﺮﻏ ﺖﻓﺎﻀﺘﺳا
+2025
+، ﺔﻨﺴﻟ ب ﻢﻴﻠﻗﻺﻟ ﺲﻴﺋﺮﻟا باﻮﻧ
+ءﺎﺳؤﺮﻟا باﻮﻨﻟ ﺔﻴﻨﻳﻮﻜﺗ تﺎﺷرو ﺞﻣﺎﻧﺮﺒﻟا ﻞﻤﺷ
+ﱃإ ﺔﻓﺎﺿإ ،ﻢﻴﻜﺤﺘﻟا نﺎﺠﻟ ءﺎﻀﻋﻷ ﺎﺒً ﻳرﺪﺗو ،ﻦﻴﻴﻠﺤﻤﻟا
+،ﺔﻴﺘﻔﻟا ﺔﻓﺮﻐﻠﻟ ﺔﻴﻤﺳﺮﻟا ﺞﻣاﺮﺒﻟا لﻮﺣ ﺔﻴﻣﻼﻋإ تﺎﺴﻠﺟ
+.
+ﻖﻳﺮﻔﻟا حور ءﺎﻨﺒﻟ طﺎﺸﻧ ﺐﻧﺎﺟ ﱃإ
+ﻦﻳﻮﻜﺘﻠﻟ ﺔﻴﻤﻴﻠﻗﻹا ةﺮﺋاﺪﻠﻟ ﱃوﻷا ﺔﺴﻠﺠﻟا ﺪﻘﻋ ﻢﺗ ﺎﻤﻛ
+.2025
+ﺔﻨﺴﻟ ﻦﻳﻮﻜﺘﻟا ﺔﻴﺠﻴﺗاﺮﺘﺳا ﻊﺿﻮﻟ
+"
+ﺎﻣ ضرﻷا هﺬﻫ ﲆﻋ ناﻮﻨﻌﺑ ةوﺪﻧ ةﺮﻫﺎﻈﺘﻟا ﺖﻠﻠﺨﺗو
+"
+ﻮﻀﻋو ﺔّﻳدﻮﺑ ﺰﻳﺰﻋ ﺪﻤﺤﻣ ﺎﻬﻣﺪّ ﻗ ، ةﺎﻴﺤﻟا ﻖﺤﺘﺴﻳ
+لﻮﺣ ترﻮﺤﻤﺗو ،يداوﺬﻟا ﺐﻴﻜِ ﺷ خﻮﻴﺸﻟا ﺲﻠﺠﻣ
+.
+ﻪﺿرﺄﺑ ﻪﻃﺎﺒﺗرا ﺔﻴﻤﻫأو ﻲﻨﻴﻄﺴﻠﻔﻟا ﺐﻌﺸﻟا ﺦﻳرﺎﺗ
+فﺮﻐﻟا ءﺎﺳؤﺮﻟ ﺔﻴﻤﻴﻠﻗإ ﺔﺴﻠﺟ لوأ دﺎﻘﻌﻧﺎﺑ ءﺎﻘﻠﻟا ﻢﺘﺘُ ﺧاو
+ﺔﻳاﺪﺑ ﺬﻨﻣ تازﺎﺠﻧﻹا زﺮﺑأ ضاﺮﻌﺘﺳا ﻢﺗ ﺚﻴﺣ ،ﺔﻴﻠﺤﻤﻟا
+ﺞﻣﺎﻧﺮﺒﻟا ﻦﻤﺿ ﺔﻣدﺎﻘﻟا تﺎﻄﺤﻤﻟا ﺔﺸﻗﺎﻨﻣو ،ﺔﻨﺴﻟا
+.
+يﻮﻨﺴﻟا
+11
+[TABLE on page 11]
+تاﺮﻫﺎﻈﺘﻟاو ﺔﻄﺸﻧﻷا
+ﺔﻴﻤﻳدﺎﻛأو ﻊﻴﺑﺮﻟا تﺎﺴﻠﺟ
+ب ﻢﻴﻠﻗﻺﻟ ﺲﻴﺋﺮﻟا باﻮﻧ
+2025 16 15 :
+يﺮﻔﻴﻓ و ﺦﻳرﺎﺘﻟا
+:
+ترﺰﻨﺑ ﻢﻟﺎﺳ يﺪﻴﺳ قﺪﻨﻓ نﺎﻜﻤﻟا
+:
+يﺪﻳرﺪﻟا لﻼﺟ ﺪﻤﺤﻣ ﺮﻳﺪﻤﻟا
+"
+ﺔﻴﻤﻳدﺎﻛأ و ﻊﻴﺑﺮﻟا تﺎﺴﻠﺟ ﺔﻴﻟﺎﻌﻟا ﺔﻓﺮﻏ ﺖﻓﺎﻀﺘﺳا
+2025
+، ﺔﻨﺴﻟ ب ﻢﻴﻠﻗﻺﻟ ﺲﻴﺋﺮﻟا باﻮﻧ
+ءﺎﺳؤﺮﻟا باﻮﻨﻟ ﺔﻴﻨﻳﻮﻜﺗ تﺎﺷرو ﺞﻣﺎﻧﺮﺒﻟا ﻞﻤﺷ
+ﱃإ ﺔﻓﺎﺿإ ،ﻢﻴﻜﺤﺘﻟا نﺎﺠﻟ ءﺎﻀﻋﻷ ﺎﺒً ﻳرﺪﺗو ،ﻦﻴﻴﻠﺤﻤﻟا
+،ﺔﻴﺘﻔﻟا ﺔﻓﺮﻐﻠﻟ ﺔﻴﻤﺳﺮﻟا ﺞﻣاﺮﺒﻟا لﻮﺣ ﺔﻴﻣﻼﻋإ تﺎﺴﻠﺟ
+.
+ﻖﻳﺮﻔﻟا حور ءﺎﻨﺒﻟ طﺎﺸﻧ ﺐﻧﺎﺟ ﱃإ
+ﻦﻳﻮﻜﺘﻠﻟ ﺔﻴﻤﻴﻠﻗﻹا ةﺮﺋاﺪﻠﻟ ﱃوﻷا ﺔﺴﻠﺠﻟا ﺪﻘﻋ ﻢﺗ ﺎﻤﻛ
+.2025
+ﺔﻨﺴﻟ ﻦﻳﻮﻜﺘﻟا ﺔﻴﺠﻴﺗاﺮﺘﺳا ﻊﺿﻮﻟ
+"
+ﺎﻣ ضرﻷا هﺬﻫ ﲆﻋ ناﻮﻨﻌﺑ ةوﺪﻧ ةﺮﻫﺎﻈﺘﻟا ﺖﻠﻠﺨﺗو
+"
+ﻮﻀﻋو ﺔّﻳدﻮﺑ ﺰﻳﺰﻋ ﺪﻤﺤﻣ ﺎﻬﻣﺪّ ﻗ ، ةﺎﻴﺤﻟا ﻖﺤﺘﺴﻳ
+لﻮﺣ ترﻮﺤﻤﺗو ،يداوﺬﻟا ﺐﻴﻜِ ﺷ خﻮﻴﺸﻟا ﺲﻠﺠﻣ
+.
+ﻪﺿرﺄﺑ ﻪﻃﺎﺒﺗرا ﺔﻴﻤﻫأو ﻲﻨﻴﻄﺴﻠﻔﻟا ﺐﻌﺸﻟا ﺦﻳرﺎﺗ
+فﺮﻐﻟا ءﺎﺳؤﺮﻟ ﺔﻴﻤﻴﻠﻗإ ﺔﺴﻠﺟ لوأ دﺎﻘﻌﻧﺎﺑ ءﺎﻘﻠﻟا ﻢﺘﺘُ ﺧاو
+ﺔﻳاﺪﺑ ﺬﻨﻣ تازﺎﺠﻧﻹا زﺮﺑأ ضاﺮﻌﺘﺳا ﻢﺗ ﺚﻴﺣ ،ﺔﻴﻠﺤﻤﻟا
+ﺞﻣﺎﻧﺮﺒﻟا ﻦﻤﺿ ﺔﻣدﺎﻘﻟا تﺎﻄﺤﻤﻟا ﺔﺸﻗﺎﻨﻣو ،ﺔﻨﺴﻟا
+.
+يﻮﻨﺴﻟا
+11
+
+
+
+
+######################################################################
+# Rapport Moral 2019_v2.txt (43300 chars)
+######################################################################
+
+--- PAGE 1 ===
+Rapport Moral
+2019
+[TABLE on page 1]
+Rapport Moral
+2019
+
+
+
+
+
+--- PAGE 2 ===
+Sommaire
+I. Bureau Exécutif
+II. Les Conseillers
+III. Les Activités Selon les Axes :
+(cid:0) Impacter
+(cid:0) Motiver
+(cid:0) Connecter
+(cid:0) Collaborer
+(cid:0) Investir
+IV. Les Formations
+[TABLE on page 2]
+Sommaire
+I. Bureau Exécutif
+II. Les Conseillers
+III. Les Activités Selon les Axes :
+(cid:0) Impacter
+(cid:0) Motiver
+(cid:0) Connecter
+(cid:0) Collaborer
+(cid:0) Investir
+IV. Les Formations
+
+
+[TABLE on page 2]
+I. Bureau Exécutif | 
+ | I. Bureau Exécutif
+
+
+
+
+--- PAGE 3 ===
+Le Bureau
+Exécutif
+•Le Président
+•CHOURIA Hedy
+•Conseiller Juridique : GUINOUBI Ahmed
+•Trésorier
+•ZAYED
+•Iyed
+•VPPRE
+•BEN HASSINE
+•Brahim
+•VPFD
+•AOUINA
+•Haithem
+•Secrétaire Général
+•BOUGHOULA
+•Slim
+[TABLE on page 3]
+Le Bureau
+Exécutif
+•Le Président
+•CHOURIA Hedy
+•Conseiller Juridique : GUINOUBI Ahmed
+•Trésorier
+•ZAYED
+•Iyed
+•VPPRE
+•BEN HASSINE
+•Brahim
+•VPFD
+•AOUINA
+•Haithem
+•Secrétaire Général
+•BOUGHOULA
+•Slim
+
+
+[TABLE on page 4]
+
+
+
+[TABLE on page 4]
+ |  |  | 
+ |  |  | 
+ |  |  | 
+
+[TABLE on page 4]
+
+
+
+
+
+
+--- PAGE 5 ===
+Les Conseillers
+•Oussama
+Commissaires aux Comptes Rahal
+•Emna
+Chakroun
+•Conseiller JCI Junior :
+Abdelhamid Chakroun
+•Conseiller 100% Efficacité :
+Les Conseillers
+Amal Namouchi
+•Conseiller Protocole : Taha Said
+•Conseiller Media et Marketing :
+Louay Ben Hassine
+•Conseiller Sponsoring :
+Mohamed Hedi Nebli
+[TABLE on page 5]
+Les Conseillers
+•Oussama
+Commissaires aux Comptes Rahal
+•Emna
+Chakroun
+•Conseiller JCI Junior :
+Abdelhamid Chakroun
+•Conseiller 100% Efficacité :
+Les Conseillers
+Amal Namouchi
+•Conseiller Protocole : Taha Said
+•Conseiller Media et Marketing :
+Louay Ben Hassine
+•Conseiller Sponsoring :
+Mohamed Hedi Nebli
+
+
+[TABLE on page 5]
+ |  | 
+
+
+
+
+--- PAGE 6 ===
+Les Conseillers
+[TABLE on page 6]
+Les Conseillers
+
+
+
+
+
+--- PAGE 7 ===
+Les Activités
+Impacter :
+EDUC’UP
+Educ’Up était un forum concernant Nombre de Participants : 240
+l’orientation secondaire et l’orientation Invités : * Député du ANRP
+universitaire qui a eu lieu du 21 au 24 mars * Gouverneur de Bizerte
+2019 à la salle des fêtes L’opéra El Alia. * Le Délégué d’El Alia
+Ce forum a connu la présence de plusieurs * Le Maire d’El Alia et des
+spécialistes d’haut calibre dans le domaine Membres du Conseil Municipal
+éducatif, représentants des deux ambassades, * VPE de la Zone B
+des représentants d’AIESEC et des universités * VPN Assignée
+privée internationales en Tunisie .
+[TABLE on page 7]
+Les Activités
+Impacter :
+EDUC’UP
+Educ’Up était un forum concernant Nombre de Participants : 240
+l’orientation secondaire et l’orientation Invités : * Député du ANRP
+universitaire qui a eu lieu du 21 au 24 mars * Gouverneur de Bizerte
+2019 à la salle des fêtes L’opéra El Alia. * Le Délégué d’El Alia
+Ce forum a connu la présence de plusieurs * Le Maire d’El Alia et des
+spécialistes d’haut calibre dans le domaine Membres du Conseil Municipal
+éducatif, représentants des deux ambassades, * VPE de la Zone B
+des représentants d’AIESEC et des universités * VPN Assignée
+privée internationales en Tunisie .
+
+
+[TABLE on page 7]
+ |  | 
+ | EDUC’UP | 
+ |  | 
+
+[TABLE on page 8]
+
+
+
+[TABLE on page 8]
+ |  |  | 
+ |  |  | 
+
+[TABLE on page 8]
+
+
+
+
+
+
+--- PAGE 9 ===
+Journée de Sensibilisation Contre
+la Drogue :
+Le 25 Juin 2019, JCI El-Alia a organisé
+une campagne de sensibilisation au
+centre de la ville d’El-Alia contre
+l’utilisation de la drogue avec la
+présence du psychologue Mme. Najet
+Benrhouma. La campagne a connu la
+participation d’une dizaine des jeunes.
+[TABLE on page 9]
+Journée de Sensibilisation Contre
+la Drogue :
+Le 25 Juin 2019, JCI El-Alia a organisé
+une campagne de sensibilisation au
+centre de la ville d’El-Alia contre
+l’utilisation de la drogue avec la
+présence du psychologue Mme. Najet
+Benrhouma. La campagne a connu la
+participation d’une dizaine des jeunes.
+
+
+[TABLE on page 9]
+Journée de Sensibilisation Contre | 
+ | 
+
+[TABLE on page 9]
+la Drogue :
+
+
+
+
+
+--- PAGE 10 ===
+La finale du Championnat
+National du Cyclisme de la
+Tunisie :
+En partenariat avec la fédération nationale
+du cyclisme et les différentes composantes
+de la société civile d’El-Alia , notre OLM a
+participé à l’organisation du déroulement
+réussi de cette finale . Cet évènement a
+connu la présence d’une cinquantaines de
+cyclistes de toute la Tunisie . En plus, Mr.
+GOUIDER Mohamed le gouverneur de
+Bizerte était présent sur le lieu. Un
+évènement bien réussi sur tout les niveaux.
+Cet événement a eu lieu le 30 Juin 2019.
+[TABLE on page 10]
+La finale du Championnat
+National du Cyclisme de la
+Tunisie :
+En partenariat avec la fédération nationale
+du cyclisme et les différentes composantes
+de la société civile d’El-Alia , notre OLM a
+participé à l’organisation du déroulement
+réussi de cette finale . Cet évènement a
+connu la présence d’une cinquantaines de
+cyclistes de toute la Tunisie . En plus, Mr.
+GOUIDER Mohamed le gouverneur de
+Bizerte était présent sur le lieu. Un
+évènement bien réussi sur tout les niveaux.
+Cet événement a eu lieu le 30 Juin 2019.
+
+
+[TABLE on page 10]
+ | La finale du Championnat |  | 
+ |  |  | 
+National du Cyclisme de la |  |  | 
+ |  |  | 
+
+[TABLE on page 10]
+Tunisie :
+
+
+
+
+
+--- PAGE 11 ===
+Trail Rose:
+En partenariat avec ACJS , JCI El-Alia et JCI
+Durant cet évènement, notre OLM a signé un
+El-Alia Junior ont organisé une journée de
+contrat de partenariat avec ACJS .
+sensiblisation contre le cancer du sein le 27
+Le nombre des patientes était très important
+Octobre 2019 . L’évènement a commencé
+d’environ 110 femmes de toutes catégories
+avec une marche 100% féminine . Vers la fin
+d’âge ce qui nous a permis de toucher une
+de cette marche, les médecins ont
+large portion des citoyennes de notre ville .
+commencé les consultations du dépistage
+Ceci était notre objectif.
+gratuites pour les participantes. De plus, les
+enfants ont eu leurs propres stands avec de
+l’animation gratuites.
+[TABLE on page 11]
+Trail Rose:
+En partenariat avec ACJS , JCI El-Alia et JCI
+Durant cet évènement, notre OLM a signé un
+El-Alia Junior ont organisé une journée de
+contrat de partenariat avec ACJS .
+sensiblisation contre le cancer du sein le 27
+Le nombre des patientes était très important
+Octobre 2019 . L’évènement a commencé
+d’environ 110 femmes de toutes catégories
+avec une marche 100% féminine . Vers la fin
+d’âge ce qui nous a permis de toucher une
+de cette marche, les médecins ont
+large portion des citoyennes de notre ville .
+commencé les consultations du dépistage
+Ceci était notre objectif.
+gratuites pour les participantes. De plus, les
+enfants ont eu leurs propres stands avec de
+l’animation gratuites.
+
+
+[TABLE on page 11]
+Trail Rose:
+
+
+[TABLE on page 12]
+
+
+
+[TABLE on page 12]
+ |  |  | 
+ |  |  | 
+ |  |  | 
+
+
+
+
+--- PAGE 13 ===
+Forum StartUp 2.0:
+Cette édition a été organisé à ISG
+Bizerte le 30 Octobre 2019 . L’
+évènement a connu la présence de 3 Partenaires :
+«Success Stories » des jeunes
+ISG Bizerte, Université de
+entrepreneurs et représentant d’un
+Carthage , Healthstrum et
+co-working space qui ont partagé
+Bizerte 2050.
+avec nos étudiant(e)s leurs
+expériences sur un panel interactif de
+Nombre de Participants :
+presque 4 heures. Ce forum a connu
+120 Etudiant(e)s .
+la présence du staff de l’institut qui
+ont montré la volonté de coopérer
+avec notre OLM.
+[TABLE on page 13]
+Forum StartUp 2.0:
+Cette édition a été organisé à ISG
+Bizerte le 30 Octobre 2019 . L’
+évènement a connu la présence de 3 Partenaires :
+«Success Stories » des jeunes
+ISG Bizerte, Université de
+entrepreneurs et représentant d’un
+Carthage , Healthstrum et
+co-working space qui ont partagé
+Bizerte 2050.
+avec nos étudiant(e)s leurs
+expériences sur un panel interactif de
+Nombre de Participants :
+presque 4 heures. Ce forum a connu
+120 Etudiant(e)s .
+la présence du staff de l’institut qui
+ont montré la volonté de coopérer
+avec notre OLM.
+
+
+[TABLE on page 13]
+Forum StartUp 2.0:
+
+
+[TABLE on page 13]
+Partenaires :
+
+
+[TABLE on page 13]
+Nombre de Participants : | 
+ | 
+
+[TABLE on page 14]
+
+
+
+[TABLE on page 14]
+ |  |  |  | 
+ |  |  |  | 
+ |  |  |  | 
+
+
+
+
+--- PAGE 15 ===
+Peace Is Possible:
+Dans le cadre de la campagne
+internationale de la JCI « Peace
+is Possible », JCI El-Alia a lancé
+le 17 Novembre 2019 avec la
+présence du Past Président
+Mondial notre Cher Sénateur
+BAROUNI Moncef et notre
+Past-Président LAARIBI Tarek la
+réalisation d’un tableau
+décoratif au centre de notre
+ville qui comporte le credo de
+la JCI et le slogan de cette
+campagne.
+[TABLE on page 15]
+Peace Is Possible:
+Dans le cadre de la campagne
+internationale de la JCI « Peace
+is Possible », JCI El-Alia a lancé
+le 17 Novembre 2019 avec la
+présence du Past Président
+Mondial notre Cher Sénateur
+BAROUNI Moncef et notre
+Past-Président LAARIBI Tarek la
+réalisation d’un tableau
+décoratif au centre de notre
+ville qui comporte le credo de
+la JCI et le slogan de cette
+campagne.
+
+
+[TABLE on page 15]
+Peace Is Possible:
+
+
+[TABLE on page 15]
+ | 
+
+
+
+
+######################################################################
+# Rapport Moral 2022_v2.txt (46166 chars)
+######################################################################
+
+--- PAGE 1 ===
+" EITHER FIND A WAY,
+OR MAKE ONE. "
+Bureau exécutif 2022 - JCI EL Alia
+[TABLE on page 1]
+" EITHER FIND A WAY,
+OR MAKE ONE. "
+Bureau exécutif 2022 - JCI EL Alia
+
+
+
+
+
+--- PAGE 2 ===
+Contactez-nous
+JCI El Alia
+@jcielalia
+jcielalia@gmail.com
+LinkedIn/jcielalia
+La Jeune Chambre Internationale (JCI) est une
+fédération mondiale de 200.000 jeunes
+professionnels et entrepreneurs, âgés de 18 à 40
+ans, répartis en près de 5.000 communautés
+dans plus de 100 pays à travers le monde.
+Rapport Moral - 1 - JCI EL ALIA 2022
+
+
+
+--- PAGE 3 ===
+Jeune Chambre Internationale El Alia
+" EITHER FIND A WAY, OR MAKE ONE. "
+Rapport Moral - 2 - JCI EL ALIA 2022
+
+
+
+--- PAGE 4 ===
+"Either find a way, or make one."
+SOMMAIRE
+Introduction
+Mot du Président
+Vision et Philosophie
+Qui sommes-nous ?
+JCI El Alia en 2022
+Nos Projets
+Nos Formations
+Nos Activités de Développement
+Média & Communication
+Participations
+Partenaires Stratégiques & Sponsors
+Réalisations
+Concours de débat et art oratoire
+Programme CYE
+Programme TOYP
+Les Assises d'Automne de la zone B 2022
+Bibliothèque Digitale JCI El Alia 2022
+Commission de Planification
+Formateurs
+Remerciements
+Rapport Moral - 3 - JCI EL ALIA 2022
+
+
+
+--- PAGE 5 ===
+"Either find a way, or make one."
+Rapport Moral - 4 - JCI EL ALIA 2022
+
+
+
+--- PAGE 6 ===
+Introduction
+MOT DU PRÉSIDENT DE LA JEUNE
+CHAMBRE INTERNATIONALE EL ALIA 2022
+"Au nom de Dieu très gracieux, très miséricordieux.
+Notre périple a commencé lorsque notre OLM est revenue à
+la vie et nous a ramenés à la vie. Je me souviens encore de
+l’excitation sur les visages de mes camarades Jaycees à
+l’époque. Le jour où nous sommes devenus partie de quelque
+chose de plus grande que nous.
+Notre périple a été confronté à plusieurs défis et obstacles.
+Parfois financières, parfois culturelles et sociales, parfois
+internes, parfois externes, parfois organisationnelles, parfois
+opérationnelles. La vie a jeté des pierres sur notre chemin.
+Notre périple a changé beaucoup de nous, surtout pour le
+mieux. Il nous a réunis, nous la jeunesse d’El Alia. Il nous a
+réunis et rassemblés pour toujours. Cela nous a rendus
+célèbres de sorte que les autorités, les familles, les
+propriétaires d’entreprises et les dirigeants communautaires
+nous respectent.
+Notre périple a donné naissance à des leaders, à des
+serviteurs de la communauté, à des gens qui donnent sans
+cesse .
+J’ai beaucoup parlé du périple, mais pas du "quoi". Il s’agit de
+notre périple vers un impact positif, vers la propagation de
+l’espoir, vers un monde meilleur pour cette ville et ce pays,
+pour que les jeunes soient confrontés à des défis et croient,
+contre toute attente, que nous pouvons apporter un
+changement.
+Que le périple continue, jusqu’à la fin des temps.
+Vive El Alia, vive la JCI, vive le périple. "
+Haitham Aouina
+JCI El Alia 2022 President
+Rapport Moral - 5 - JCI EL ALIA 2022
+[TABLE on page 6]
+Introduction
+MOT DU PRÉSIDENT DE LA JEUNE
+CHAMBRE INTERNATIONALE EL ALIA 2022
+"Au nom de Dieu très gracieux, très miséricordieux.
+Notre périple a commencé lorsque notre OLM est revenue à
+la vie et nous a ramenés à la vie. Je me souviens encore de
+l’excitation sur les visages de mes camarades Jaycees à
+l’époque. Le jour où nous sommes devenus partie de quelque
+chose de plus grande que nous.
+Notre périple a été confr
+
+--- PAGE 7 ===
+Introduction
+N
+O
+Être l’entité la plus remarquable et la plus
+I
+S percutante au sein d'El Alia et de la JCIT.
+I
+V
+E
+I
+H " On trouvera un moyen, ou on en fera un! "
+P
+O
+- Améliorer la situation économique à El Alia.
+S
+- Assurer la croissance, l’expansion et la durabilité de JCI El
+O
+Alia.
+L
+I - Maintenir et améliorer notre " status quo ".
+H
+P
+Rapport Moral - 6 - JCI EL ALIA 2022
+[TABLE on page 7]
+ | Introduction
+ | N
+O
+Être l’entité la plus remarquable et la plus
+I
+S percutante au sein d'El Alia et de la JCIT.
+I
+V
+E
+I
+H " On trouvera un moyen, ou on en fera un! "
+P
+O
+- Améliorer la situation économique à El Alia.
+S
+- Assurer la croissance, l’expansion et la durabilité de JCI El
+O
+Alia.
+L
+I - Maintenir et améliorer notre " status quo ".
+H
+P
+ | Rapport Moral - 6 - JCI EL ALIA 2022
+
+
+
+
+--- PAGE 8 ===
+Introduction
+L'Organisation Locale Membre (OLM) d’El Alia
+qui a fait sa réactivation le 12 mai 2018 n’a cessé,
+tout au long de ces quatre années, de diversifier les
+champs d’actions.
+Notre OLM est une famille qui compte aujourd’hui
+près de 30 membres.
+Elle organise des cycles de formations pour les
+jeunes, des actions humanitaires, manifestations
+nationales et internationales .
+Nous espérons que nous donnons aux jeunes la
+chance et les habilitons à conduire un changement
+positif dans ce monde.
+QUI SOMMES-NOUS ?
+Rapport Moral - 7 - JCI EL ALIA 2022
+[TABLE on page 8]
+Introduction
+L'Organisation Locale Membre (OLM) d’El Alia
+qui a fait sa réactivation le 12 mai 2018 n’a cessé,
+tout au long de ces quatre années, de diversifier les
+champs d’actions.
+Notre OLM est une famille qui compte aujourd’hui
+près de 30 membres.
+Elle organise des cycles de formations pour les
+jeunes, des actions humanitaires, manifestations
+nationales et internationales .
+Nous espérons que nous donnons aux jeunes la
+chance et les habilitons à conduire un changement
+positif dans ce monde.
+QUI SOMMES-NOUS ?
+Rapport Moral - 7 - JCI EL ALIA 2022
+
+
+
+
+--- PAGE 9 ===
+Introduction
+PRÉSIDENT
+PAST PRÉSIDENT IMMÉDIAT
+CONSEILLER JURIDIQUE
+S ECRÉTAIRE GÉNÉRA L
+MANDAT 2022
+VICE-PRÉSIDENT TRÉSORIER VICE-PRÉSIDENT
+PROGRAMME ET FORMATION ET
+RELATIONS EXTERNE S DÉVELOPPEMENT
+Rapport Moral - 8 - JCI EL ALIA 2022
+[TABLE on page 9]
+Introduction
+PRÉSIDENT
+PAST PRÉSIDENT IMMÉDIAT
+S ECRÉTAIRE GÉNÉRA L
+CONSEILLER JURIDIQUE
+MANDAT 2022
+VICE-PRÉSIDENT TRÉSORIER VICE-PRÉSIDENT
+PROGRAMME ET FORMATION ET
+RELATIONS EXTERNE S DÉVELOPPEMENT
+Rapport Moral - 8 - JCI EL ALIA 2022
+
+
+
+
+--- PAGE 10 ===
+Introduction
+PROGRAMMES OFFICIELS MARKETING SPONSORIN G
+THÈME NATIONAL
+MANDAT 2022
+DÉVELOPPEMENT RÉCOMPENSES
+MÉDIA
+Rapport Moral - 9 - JCI EL ALIA 2022
+[TABLE on page 10]
+Introduction
+PROGRAMMES OFFICIELS MARKETING SPONSORIN G
+THÈME NATIONAL
+MANDAT 2022
+DÉVELOPPEMENT RÉCOMPENSES
+MÉDIA
+Rapport Moral - 9 - JCI EL ALIA 2022
+
+
+
+
+--- PAGE 11 ===
+Introduction
+MANDAT 2022
+MEMBRE TITULAIRE MEMBRE TITULAIRE
+Rapport Moral - 10 - JCI EL ALIA 2022
+[TABLE on page 11]
+Introduction | 
+ | MANDAT 2022
+MEMBRE TITULAIRE MEMBRE TITULAIRE
+Rapport Moral - 10 - JCI EL ALIA 2022 | 
+ | 
+
+
+
+
+######################################################################
+# Rapport Moral 2023_v2.txt (60963 chars)
+######################################################################
+
+--- PAGE 2 ===
+RAPPORT MORAL 2023
+JCI El Alia
+[TABLE on page 2]
+
+
+
+[TABLE on page 2]
+
+
+
+
+
+
+--- PAGE 3 ===
+Sommaire
+1. Présentation de l’OLM
+2. Mot du Président 2023
+3. 2023 en quelques chiffres
+4. Rapport d’activités 2023
+5. Rapport de formation 2023
+6. Réalisations
+[TABLE on page 3]
+Sommaire
+1. Présentation de l’OLM
+2. Mot du Président 2023
+3. 2023 en quelques chiffres
+4. Rapport d’activités 2023
+5. Rapport de formation 2023
+6. Réalisations |  | 
+ |  | 
+
+[TABLE on page 3]
+ |  | 
+
+[TABLE on page 3]
+
+
+
+
+
+
+--- PAGE 4 ===
+Présentation de l’OLM
+[TABLE on page 4]
+Présentation de l’OLM |  |  |  |  |  | 
+ |  |  |  |  |  | 
+ |  |  |  |  |  | 
+
+[TABLE on page 4]
+
+
+
+
+[TABLE on page 4]
+
+
+
+
+
+
+
+--- PAGE 5 ===
+Bureau Exécutif 2023
+Haitham Aouina Brahim Ben Hassine Arij Mazigh
+PPI 2023 Président 2023 Conseillère J. 2023
+Eya Ben Hassine Med Amine Chouria Hejer Saidane Mongia Lahbib
+SG 2023 VPPRE 2023 Trésorière 2023 VPFD 2023
+[TABLE on page 5]
+
+
+
+[TABLE on page 5]
+
+
+
+
+
+
+--- PAGE 6 ===
+Commissaires
+aux comptes
+Manar Msaad Mohamed Saidane
+Commissaires
+Membres
+aux comptes et d’équipe Média
+2023
+Conseillers 2023
+Tayssir Chouikh Hiba Said Ali Tabia
+Membres
+d’équipe
+Programmes
+Officiels 2023
+Oumaima Zaghouani Emna Lahbib Manoubi Lahbib
+[TABLE on page 6]
+Commissaires
+aux comptes
+Manar Msaad Mohamed Saidane
+Commissaires
+Membres
+aux comptes et d’équipe Média
+2023
+Conseillers 2023
+Tayssir Chouikh Hiba Said Ali Tabia
+Membres
+d’équipe
+Programmes
+Officiels 2023
+Oumaima Zaghouani Emna Lahbib Manoubi Lahbib |  | 
+ |  | 
+
+[TABLE on page 6]
+ |  | 
+
+[TABLE on page 6]
+
+
+
+
+
+
+--- PAGE 7 ===
+Membres 2023
+Slim Boughoula Taha Said Mariem Brahem Asma Ben Taher
+Past 2021 Past 2020
+Bochra Ben Cheikh Amine Fkaier Nada Najjar Jalel Dridi
+[TABLE on page 7]
+
+
+
+[TABLE on page 7]
+
+
+
+
+
+
+--- PAGE 8 ===
+Membres Stagiaires 2023
+Mohamed Aouina Hedi Ben Hassine Montaha Msaad Maissa Zaghouani Nour Touffehi
+Eya Ben Aouicha Dhie Saidane Med Sanad Boukhmis Abdallah Tlich Majd Aouina
+[TABLE on page 8]
+
+
+
+[TABLE on page 8]
+
+
+
+
+
+
+--- PAGE 9 ===
+Membres Stagiaires 2023
+Saged Belarbi Dhia Kaboubi Sarra Ben Hassine Abdelmajid Kouki Saif Kachout
+Shaima Hseini Wadie Tlich Zaineb Nawali Ala Limem
+[TABLE on page 9]
+
+
+
+[TABLE on page 9]
+
+
+
+
+
+
+--- PAGE 10 ===
+Mot du Président 2023
+[TABLE on page 10]
+Mot du Président 2023 |  |  |  |  |  | 
+ |  |  |  |  |  | 
+ |  |  |  |  |  | 
+
+[TABLE on page 10]
+
+
+
+
+[TABLE on page 10]
+
+
+
+
+
+
+
+--- PAGE 11 ===
+Mesdames et Messieurs, chers membres de notre communauté,
+C'est avec un profond honneur que je prends mes fonctions en tant
+que président nouvellement élu de JCI El Alia, notre OLM basée sur le
+volontariat. Au cœur d'El Alia, nous sommes une force pour le bien,
+unis par la compassion et un engagement partagé envers un impact
+positif.
+Je tiens à exprimer ma gratitude sincère à chaque membre dévoué
+qui constitue le socle de JCI El Alia. Ensemble, nous avons le pouvoir
+de relever les défis uniques de notre ville, en célébrant notre diversité
+et en tissant une toile de changement positif.
+[TABLE on page 11]
+Mesdames et Messieurs, chers membres de notre communauté,
+C'est avec un profond honneur que je prends mes fonctions en tant
+que président nouvellement élu de JCI El Alia, notre OLM basée sur le
+volontariat. Au cœur d'El Alia, nous sommes une force pour le bien,
+unis par la compassion et un engagement partagé envers un impact
+positif.
+Je tiens à exprimer ma gratitude sincère à chaque membre dévoué
+qui constitue le socle de JCI El Alia. Ensemble, nous avons le pouvoir
+de relever les défis uniques de notre ville, en célébrant notre diversité
+et en tissant une toile de changement positif. |  | 
+ |  | 
+
+[TABLE on page 11]
+ |  | 
+
+[TABLE on page 11]
+
+
+
+
+
+
+--- PAGE 12 ===
+Cette année, JCI El Alia se concentrera sur des initiatives
+impactantes, du soutien à l'éducation à la promotion des entreprises
+locales. J'invite chacun d'entre vous à être des ambassadeurs de
+l'espoir, inspirant d'autres à El Alia à se joindre à notre voyage vers
+un avenir plus lumineux.
+En conclusion, écoutons les paroles de Margaret Mead : "N'ayez
+jamais de doute qu'un petit groupe de citoyens réfléchis et engagés
+peut changer le monde." Nous sommes ce petit groupe, et dans
+l'unité, nous serons le catalyseur d'un changement transformateur à
+El Alia.
+Merci, et avançons avec espoir, unité et un engagement partagé pour
+avoir un impact durable sur notre communauté bien-aimée.
+Brahim Ben Hassine
+Président JCI El Alia 2023
+[TABLE on page 12]
+Cette année, JCI El Alia se concentrera sur des initiatives
+impactantes, du soutien à l'éducation à la promotion des entreprises
+locales. J'invite chacun d'entre vous à être des ambassadeurs de
+l'espoir, inspirant d'autres à El Alia à se joindre à notre voyage vers
+un avenir plus lumineux.
+En conclusion, écoutons les paroles de Margaret Mead : "N'ayez
+jamais de doute qu'un petit groupe de citoyens réfléchis et engagés
+peut changer le monde." Nous sommes ce petit groupe, et dans
+l'unité, nous serons le catalyseur d'un changement transformateur à
+El Alia.
+Merci, et avançons avec espoir, unité et un engagement partagé pour
+avoir un impact durable sur notre communauté bien-aimée.
+Brahim Ben Hassine
+Président JCI El Alia 2023 |  | 
+ |  | 
+
+[TABLE on page 12]
+ |  | 
+
+[TABLE on page 12]
+
+
+
+
+
+
+######################################################################
+# Rapport Moral 2024_v2.txt (45336 chars)
+######################################################################
+
+--- PAGE 1 ===
+Rapport Moral
+OLM El Alia
+2024
+1
+[TABLE on page 1]
+Rapport Moral
+OLM El Alia
+2024
+1 | 
+ | 1
+
+[TABLE on page 1]
+
+2024
+
+
+
+
+--- PAGE 2 ===
+Sommaire
+1. Présentation de JCI El Alia
+2. Mot de la Présidente de JCI El Alia 2024
+3. JCI El Alia en chiffres
+4. Rapport d’activité 2024
+5. Rapport de Formation 2024
+6. Réalisations JCI El Alia 2024
+2
+[TABLE on page 2]
+
+Sommaire
+
+
+
+
+
+--- PAGE 3 ===
+3
+
+
+
+--- PAGE 4 ===
+4
+
+
+
+--- PAGE 5 ===
+5
+
+
+
+--- PAGE 6 ===
+6
+
+
+
+--- PAGE 7 ===
+7
+
+
+
+--- PAGE 8 ===
+Mot de la présidente 2024
+8
+[TABLE on page 8]
+Mot de la présidente 2024
+8 | 
+ | 8
+
+
+
+
+--- PAGE 9 ===
+Mot de la présidente 2024
+Chers membres de la Jeune Chambre Internationale El Alia,
+Je suis profondément honorée de commencer cette année en tant que présidente de
+notre merveilleuse organisation.
+Dès le début, j’ai cru en un principe simple mais puissant : Lead with heart, serve with
+purpose. Cela signifie que chaque action, chaque décision, chaque projet doit naître
+de notre passion collective et de notre engagement sincère à servir notre
+communauté. Combiner le cœur et le but, c'est notre force, et je crois fermement que
+c'est avec cet équilibre que nous pourrons accomplir de grandes choses ensemble.
+2024 sera une année de travail intense, mais aussi d'opportunités incroyables.
+Je nous promets une année où chacun de nous pourra se réaliser pleinement, où
+nous encourageons l'esprit d'équipe et où nous nous soutiendrons mutuellement. Le
+travail d'équipe est notre clé pour réussir et atteindre nos objectifs ambitieux. Chaque
+membre de cette organisation est essentiel à notre succès collectif, et c’est grâce à
+notre solidarité et à notre détermination que nous créerons un impact positif dans
+notre société.
+9
+[TABLE on page 9]
+Mot de la présidente 2024
+Chers membres de la Jeune Chambre Internationale El Alia,
+Je suis profondément honorée de commencer cette année en tant que présidente de
+notre merveilleuse organisation.
+Dès le début, j’ai cru en un principe simple mais puissant : Lead with heart, serve with
+purpose. Cela signifie que chaque action, chaque décision, chaque projet doit naître
+de notre passion collective et de notre engagement sincère à servir notre
+communauté. Combiner le cœur et le but, c'est notre force, et je crois fermement que
+c'est avec cet équilibre que nous pourrons accomplir de grandes choses ensemble.
+2024 sera une année de travail intense, mais aussi d'opportunités incroyables.
+Je nous promets une année où chacun de nous pourra se réaliser pleinement, où
+nous encourageons l'esprit d'équipe et où nous nous soutiendrons mutuellement. Le
+
+
+--- PAGE 10 ===
+Mot de la présidente 2024
+Je suis confiante que, main dans la main, nous allons marquer cette année de
+notre empreinte, en travaillant avec cœur et en servant notre communauté avec
+un but commun.
+Je vous remercie d’avance pour votre engagement, et je suis impatiente de
+partager avec vous tout ce que nous allons accomplir ensemble.
+Avec enthousiasme et détermination,
+Manar Msaad
+Présidente 2024, JCI El Alia
+10
+[TABLE on page 10]
+ |  |  |  |  |  |  |  | 
+ |  |  |  | Mot de la présidente 2024 |  |  |  | 
+ | Je suis c
+notre em
+un but co
+Je vous r
+partager
+Avec ent
+Manar M
+Présiden |  |  |  |  |  |  | 
+ |  |  |  |  |  | Je suis c
+notre em
+un but co
+Je vous r | onfiante que, main dans la main, nous allons marquer cette année de
+preinte, en travaillant avec cœur et en servant notre communauté avec
+mmun.
+emercie d’avance pour votre engagement, et je suis impatiente de
+avec vous tout ce que nous allons accomplir ensemble.
+housiasme et détermination,
+saad
+te 2024, JCI El Alia | 
+ |  |  |  |  |  | partager | avec vous tout ce que nous allons accomplir ensemble. | 
+ |  |  |  |  |  | Avec ent
+Manar M
+Présiden |  | 
+ |  |  |  |  |  |  |  | 10
+
+
+
+
+--- PAGE 11 ===
+JCI El Alia en chiffres
+14 Nombre des formations / workshops 35 Nombre des membres
+4 Nombre des Team Buildings 16 Nombre des collaborateurs
+4 Nombre des membres recrutés 8 Nombre des réunions/AGP
+4 Nombre de Forum 1 Nombre de Passage Radio
+11
+[TABLE on page 11]
+14 | Nombre des formations / workshops
+
+[TABLE on page 11]
+35 | Nombre des membres
+
+[TABLE on page 11]
+4 | Nombre des Team Buildings
+
+[TABLE on page 11]
+16 | Nombre des collaborateurs
+
+[TABLE on page 11]
+4 | Nombre des membres recrutés
+
+[TABLE on page 11]
+8 | Nombre des réunions/AGP
+
+[TABLE on page 11]
+4 | Nombre de Forum
+
+[TABLE on page 11]
+1 | Nombre de Passage Radio
+
+
+
+
+######################################################################
+# Rapport moral 2021_v2.txt (25464 chars)
+######################################################################
+
+--- PAGE 1 ===
+Assemblée Générale de
+Programmes et de Passation
+Rapport moral
+2021
+[TABLE on page 1]
+
+Rapport moral
+2021
+
+
+
+
+--- PAGE 2 ===
+Sommaire :
+I. Bureau Exécutif
+II. Les Activités Selon l’axe
+Les programmes officiels
+III. Les Formations
+
+
+
+--- PAGE 3 ===
+PPI
+Conseillère juridique
+Président
+Taha Said
+Khaoula Ben Hassine
+Slim Boughoula
+Secrétaire générale Trésorier VPPRE VPFD
+Mongia Lahbib Haitham Aouina Manar Msaad Mariem Brahem
+[TABLE on page 3]
+
+PPI
+Taha Said
+
+[TABLE on page 3]
+ |  | 
+ | Président
+Slim Boughoula | 
+ |  | 
+
+[TABLE on page 3]
+ |  |  | 
+ |  |  | 
+ | VPFD
+Mariem Brahem |  | 
+ |  |  | 
+
+[TABLE on page 3]
+
+
+
+[TABLE on page 3]
+Secrétaire générale
+Mongia Lahbib
+
+
+[TABLE on page 3]
+
+Trésorier
+Haitham Aouina
+
+
+[TABLE on page 3]
+
+VPPRE
+Manar Msaad
+
+
+
+
+
+--- PAGE 4 ===
+2021 en quelques chiffres:
+➔ 21 Actions
+➔ 19 Formations
+➔ 4 Activités de développement
+➔ 1 Une convention de jumelage
+➔ 3 Conventions de partenariat
+➔ 13 Partenaires
+➔ 5 Interventions Radio
+[TABLE on page 4]
+➔ 21 Actions
+➔ 19 Formations
+
+[TABLE on page 4]
+➔ 13 Partenaires
+➔ 5 Interventions Radio
+
+
+
+
+--- PAGE 5 ===
+Les actions
+
+
+
+--- PAGE 6 ===
+10
+4
+24 8 3
+[TABLE on page 6]
+10
+
+
+[TABLE on page 6]
+4
+
+
+[TABLE on page 6]
+8
+
+
+[TABLE on page 6]
+3
+
+
+[TABLE on page 6]
+24
+
+
+
+
+
+--- PAGE 8 ===
+كﺮﯿﻏ حﺮﻔﺗ كﺮﯿﺨﺑ
+Date: Le 09 Mai 2021
+Lieu : Complexe de l’enfance El Alia
+Directeur: Hiba Said
+Description :
+L’action était en partenariat avec le Complexe
+de l'Enfance d'El Alia et consistait à faire un
+collecte de dons pour acheter les vêtements
+d’El Aid aux 25 enfants fréquentant au
+complexe.
+
+
+
+--- PAGE 9 ===
+“Say Her Name”
+Date: Le 12 Mai 2021
+Lieu : En ligne
+Directeur: Bureau exécutif
+Description :
+Une campagne de sensibilisation à travers les
+réseaux sociaux contre la violence domestique
+faite aux femmes.
+La vidéo a fait un impact et a connu un véritable
+succès en touchant un grand nombre de
+personnes parmi eux des membres du parlement,
+des militantes, des actrices et des féministes.
+
+
+
+--- PAGE 10 ===
+“El Bac”
+Date:
+16 Juin 2021
+El Alia
+Lieu:
+Directeur: Bureau exécutif
+Description :
+JCI El Alia, en partenariat avec club
+JPE, a organisé une réception pour les
+bacheliers durant le 1er jour du
+concours.
+
+
+
+--- PAGE 11 ===
+“ةوﺪﻏ ﻚﺣور ﻲﻤﺣا و مﻮﯿﻟا ﺪَﯿﻗ”
+Date: 04-05-06,15-16 Juillet 2021
+El Alia/ Hriza/ Sidi Ali Chbeb/
+Lieu:
+Khitmine
+Directeur: Mohamed Amine Chouria
+Description :
+En partenariat avec CRT El Alia et l’ADCK,
+nous avons organisé une campagne de
+sensibilisation pour encourager les
+citoyens à inscrire sur la plateforme EVAX.
+Nous avons fait inscrire au total 447
+personnes.
+
+
+
+--- PAGE 12 ===
+ددﺟﺗﯾ لدﺑﺗﯾ كﯾﺗﺳﻼﺑ”
+Date:
+A partir du 22 Juillet 2021
+El Alia
+Lieu:
+Directeur: Jamel Dkhil
+Description :
+Les membres de la JCI El Alia ont
+pris l’initiative de collecter des
+bouteilles de plastique et les vendre à
+une usine de recyclage.
+
+
+
+######################################################################
+# Rapport-moral-2020_v2.txt (77683 chars)
+######################################################################
+
+--- PAGE 1 ===
+Jeune Chambre Économique Tunisie
+OLM El Alia
+UPGRADE THE MOVEMENT
+Rapport Moral
+JCI El Alia
+Septembre 2020
+[TABLE on page 1]
+Jeune Chambre Économique Tunisie
+OLM El Alia
+UPGRADE THE MOVEMENT |  |  |  | 
+Rappor
+JCI E
+Septem |  |  | t Moral
+l Alia
+bre 2020 | 
+Ra
+J
+Sep |  |  |  | oral
+a
+020
+ | Ra
+J
+Sep | ppor
+CI E
+tem | t M
+l Ali
+bre 2 | oral
+a
+020
+ |  |  |  | 
+
+
+
+
+--- PAGE 2 ===
+Jeune Chambre Économique Tunisie OLM El Alia
+UPGRADE THE MOVEMENT
+Sommaire
+I. Bureau Exécutif
+II. Les Conseillers
+III. Les Activités Selon l’ordre chronologique
+IV. Les Formations
+[TABLE on page 2]
+
+Jeune Chambre Économique Tunisie OLM El Alia
+UPGRADE THE MOVEMENT
+Sommaire
+I. Bureau Exécutif
+II. Les Conseillers
+III. Les Activités Selon l’ordre chronologique
+IV. Les Formations
+
+
+
+
+--- PAGE 3 ===
+Jeune Chambre Économique Tunisie OLM El Alia
+UPGRADE THE MOVEMENT
+Bureau Exécutif
+[TABLE on page 3]
+
+Jeune Chambre Économique Tunisie OLM El Alia
+UPGRADE THE MOVEMENT
+Bureau Exécutif
+
+
+
+
+--- PAGE 4 ===
+Jeune Chambre Économique Tunisie OLM El Alia
+UPGRADE THE MOVEMENT
+Les conseillers
+[TABLE on page 4]
+
+Jeune Chambre Économique Tunisie OLM El Alia
+UPGRADE THE MOVEMENT
+Les conseillers
+
+
+
+
+--- PAGE 5 ===
+Jeune Chambre Économique Tunisie OLM El Alia
+UPGRADE THE MOVEMENT
+Les commissaires aux comptes
+[TABLE on page 5]
+
+Jeune Chambre Économique Tunisie OLM El Alia
+UPGRADE THE MOVEMENT
+Les commissaires aux comptes
+
+
+
+
+--- PAGE 6 ===
+Jeune Chambre Économique Tunisie OLM El Alia
+UPGRADE THE MOVEMENT
+Nos partenaires
+ﻲﻧﮭﻣﻟا نﯾوﻛﺗﻟا زﻛرﻣ ﺔﻟوﻔطﻟا بﻛرﻣ
+ﺔﯾﻟﺎﻌﻟﺎﺑ ﻲﺣﻼﻔﻟا ﺔﯾﻟﺎﻌﻟﺎﺑ
+[TABLE on page 6]
+
+Jeune Chambre Économique Tunisie OLM El Alia
+UPGRADE THE MOVEMENT
+Nos partenaires
+ﻲﻧﮭﻣﻟا نﯾوﻛﺗﻟا زﻛرﻣ ﺔﻟوﻔطﻟا بﻛرﻣ
+ﺔﯾﻟﺎﻌﻟﺎﺑ ﻲﺣﻼﻔﻟا ﺔﯾﻟﺎﻌﻟﺎﺑ
+
+
+
+
+--- PAGE 7 ===
+Jeune Chambre Économique Tunisie OLM El Alia
+UPGRADE THE MOVEMENT
+JCI will enable communities to achieve sustainable
+impact.
+Le 14 Janvier 2020
+l’inauguration d’une station pour les louages
+en partenariat avec municipalité el Alia, et ce
+dans le cadre de la passation entre le
+président de notre OLM au titre de l’année
+2019 Hedy CHOURIA, et le président de
+notre OLM pour l’année 2020 Taha SAID.
+Durant cet petite cérémonie les autorités
+locales étaient présentes pour nous soutenir.
+[TABLE on page 7]
+
+Jeune Chambre Économique Tunisie OLM El Alia
+UPGRADE THE MOVEMENT
+JCI will enable communities to achieve sustainable
+impact.
+Le 14 Janvier 2020
+l’inauguration d’une station pour les louages
+en partenariat avec municipalité el Alia, et ce
+dans le cadre de la passation entre le
+président de notre OLM au titre de l’année
+2019 Hedy CHOURIA, et le président de
+notre OLM pour l’année 2020 Taha SAID.
+Durant cet petite cérémonie les autorités
+locales étaient présentes pour nous soutenir.
+
+
+
+
+--- PAGE 8 ===
+JJeeuunnee CChhaammbbrree ÉÉccoonnoommiiqquuee TTuunniissiiee OLM El Alia
+UUPPGGRRAADDEE TTHHEE MMOOVVEEMMEENNTT
+JCI will create an environment in which people are
+motivated toward positive change.
+Le 18 Janvier 2020
+JCI EL-ALIA a tenu son Assemblée
+Générale de Programmes et de Passation
+le 18 Janvier 2020 à la maison des jeunes
+El Alia. Cet assemblée a connu l'adoption
+du rapport moral et rapport financier pour
+l'an de 2019 ainsi que le programme et
+budget prévisionnel pour 2020. De plus,
+il y a eu le serment du nouveau Président
+2020 SAID Taha et son bureau composé
+de : *Past-Président Immédiat
+CHOURIA Hedi.*Secrétaire Générale
+BOUZOUITA ASSALA * Trésorier BEN
+HASSINE Ibrahim * VPFD TERZI
+Emna * VPPRE BOUGHOULA Slim *
+Conseiller Juridique ZAYED Iyed.
+[TABLE on page 8]
+
+JJeeuunnee CChhaammbbrree ÉÉccoonnoommiiqquuee TTuunniissiiee OLM El Alia
+UUPPGGRRAADDEE TTHHEE MMOOVVEEMMEENNTT
+JCI will create an environment in which people are
+motivated toward positive change.
+Le 18 Janvier 2020
+JCI EL-ALIA a tenu son Assemblée
+Générale de Programmes et de Passation
+le 18 Janvier 2020 à la maison des jeunes
+El Alia. Cet assemblée a connu l'adoption
+du rapport moral et rapport financier pour
+l'an de 2019 ainsi que le programme et
+budget prévisionnel pour 2020. De plus,
+il y a eu le serment du nouveau Président
+2020 SAID Taha et son bureau composé
+de : *Past-Président Immédiat
+CHOURIA Hedi.*Secrétaire Générale
+BOUZOUITA ASSALA * Trésorier BEN
+HASSINE Ibrahim * VPFD TERZI
+Emna * VPPRE BOUGHOULA Slim *
+Conseiller Juridique ZAYED Iyed.
+
+[TABLE on page 8]
+JJeeuunnee CChhaammbbrree ÉÉccoonnoommiiqquuee TTuunniissiiee OLM El Alia
+UUPPGGRRAADDEE TTHHEE MMOOVVEEMMEENNTT | 
+
+
+
+
+--- PAGE 9 ===
+JJeeuunnee CChhaammbbrree ÉÉccoonnoommiiqquuee TTuunniissiiee OLM El Alia
+UUPPGGRRAADDEE TTHHEE MMOOVVEEMMEENNTT
+JCI will create an environment in which people are
+motivated toward positive change.
+Le 18 Janvier 2020
+Le nouveau président a désigné
+les conseillers du mandat 2020.
+Cet assemblée cérémoniale a
+connu la présence du VPE Zone
+B Alayet Safouen, VPN Assigné
+Abdellatif Nesrine, Secrétaire
+Générale Nationale Talbi Fidaa,
+Directeur National Bouzouita
+Mahmoud, OLM Menzel
+Abderahmen, OLM Bizerte,
+OLM Ras jbal et OLM Metline.
+[TABLE on page 9]
+
+JJeeuunnee CChhaammbbrree ÉÉccoonnoommiiqquuee TTuunniissiiee OLM El Alia
+UUPPGGRRAADDEE TTHHEE MMOOVVEEMMEENNTT
+JCI will create an environment in which people are
+motivated toward positive change.
+Le 18 Janvier 2020
+Le nouveau président a désigné
+les conseillers du mandat 2020.
+Cet assemblée cérémoniale a
+connu la présence du VPE Zone
+B Alayet Safouen, VPN Assigné
+Abdellatif Nesrine, Secrétaire
+Générale Nationale Talbi Fidaa,
+Directeur National Bouzouita
+Mahmoud, OLM Menzel
+Abderahmen, OLM Bizerte,
+OLM Ras jbal et OLM Metline.
+
+[TABLE on page 9]
+JJeeuunnee CChhaammbbrree ÉÉccoonnoommiiqquuee TTuunniissiiee OLM El Alia
+UUPPGGRRAADDEE TTHHEE MMOOVVEEMMEENNTT | 
+
+
+
+
+--- PAGE 10 ===
+JJeeuunnee CChhaammbbrree ÉÉccoonnoommiiqquuee TTuunniissiiee OLM El Alia
+UUPPGGRRAADDEE TTHHEE MMOOVVEEMMEENNTT
+JCI will create an environment in which people are
+motivated toward positive change.
+Le 18 Janvier 2020
+Notre AGPP qui a eu lieu le 18
+Janvier 2020 à Maison des Jeunes
+El-Alia à connu en plus des
+protocoles de la Passation, la
+signature du jumelage tant attendu
+entre OLM EL-ALIA et OLM
+MANZEL ABDERAHMEN sous le
+témoin de notre cher VPE Alayet
+Safouen.
+[TABLE on page 10]
+
+JJeeuunnee CChhaammbbrree ÉÉccoonnoommiiqquuee TTuunniissiiee OLM El Alia
+UUPPGGRRAADDEE TTHHEE MMOOVVEEMMEENNTT
+JCI will create an environment in which people are
+motivated toward positive change.
+Le 18 Janvier 2020
+Notre AGPP qui a eu lieu le 18
+Janvier 2020 à Maison des Jeunes
+El-Alia à connu en plus des
+protocoles de la Passation, la
+signature du jumelage tant attendu
+entre OLM EL-ALIA et OLM
+MANZEL ABDERAHMEN sous le
+témoin de notre cher VPE Alayet
+Safouen.
+
+[TABLE on page 10]
+JJeeuunnee CChhaammbbrree ÉÉccoonnoommiiqquuee TTuunniissiiee OLM El Alia
+UUPPGGRRAADDEE TTHHEE MMOOVVEEMMEENNTT | 
+
+
+
+
+--- PAGE 11 ===
+Jeune Chambre Économique Tunisie OLM El Alia
+UPGRADE THE MOUVEMENT
+JCI will connect people, their communities and the global
+society.
+Le 19, 25 et 26 Janvier 2020
+Dans le cadre du renforcement de ses relations avec les autres OLM de la zone, notre OLM a eu l’honneur de participer à:
+•AGPP ras jebel qui a eu lieu le 19 janvier à son municipalité ou notre OLM a été chaleureusement accueillie.
+•AGPP Metline qui a eu lieu le 19 janvier son municipalité.
+•AGPP Bizerte qui a lieu le 25 janvier à la salle des fêtes Rekax.
+•AGPP JCI Zarzouna qui a lieu le 26 janvier à la gouvernorat de Bizerte.
+•AGPP JCI Menzel Abd Rahmen qui a eu lieux le 26 janvier à Vita Top Bizerte.
+[TABLE on page 11]
+
+Jeune Chambre Économique Tunisie OLM El Alia
+UPGRADE THE MOUVEMENT
+JCI will connect people, their communities and the global
+society.
+Le 19, 25 et 26 Janvier 2020
+Dans le cadre du renforcement de ses relations avec les autres OLM de la zone, notre OLM a eu l’honneur de participer à:
+•AGPP ras jebel qui a eu lieu le 19 janvier à son municipalité ou notre OLM a été chaleureusement accueillie.
+•AGPP Metline qui a eu lieu le 19 janvier son municipalité.
+•AGPP Bizerte qui a lieu le 25 janvier à la salle des fêtes Rekax.
+•AGPP JCI Zarzouna qui a lieu le 26 janvier à la gouvernorat de Bizerte.
+•AGPP JCI Menzel Abd Rahmen qui a eu lieux le 26 janvier à Vita Top Bizerte.
+
+
+

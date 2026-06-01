@@ -1,0 +1,89 @@
+---
+/**
+ * Events archive — a standalone page listing every event grouped by year,
+ * with links to each album. Complements the homepage "Our Work" section.
+ */
+import Base from '../../layouts/Base.astro'
+import Navbar from '../../components/Navbar.astro'
+import Footer from '../../components/Footer.astro'
+import SiteScripts from '../../components/SiteScripts.astro'
+import {getEvents, getSiteSettings, getPresidents, getProjects, getPillars} from '../../lib/queries.js'
+import * as seed from '../../data/seed.js'
+import {events as seedEvents} from '../../data/events.js'
+import {buildTranslations} from '../../i18n/build.js'
+import {pick, eventCover, eventGallery} from '../../lib/sanity.js'
+import {t} from '../../i18n/utils.js'
+
+const events = await getEvents(seedEvents)
+const settings = await getSiteSettings(seed.siteSettings)
+const presidents = await getPresidents(seed.presidents)
+const projects = await getProjects(seed.projects)
+const pillars = await getPillars(seed.pillars)
+const translations = buildTranslations({settings, presidents, projects, pillars, testimonial: seed.testimonial})
+const lang = 'en'
+
+const byYear = {}
+for (const ev of events) {
+  const y = ev.year || (ev.date ? new Date(ev.date).getFullYear() : 0)
+  ;(byYear[y] ||= []).push(ev)
+}
+const years = Object.keys(byYear).map(Number).sort((a, b) => b - a)
+---
+
+<Base lang={lang} dir="ltr" title="Our Work | JCI El Alia">
+  <Navbar lang={lang} />
+  <main class="pt-28 lg:pt-36 pb-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <p class="text-jci-blue font-semibold text-sm uppercase tracking-wider mb-4" data-i18n="work.label">{t('work.label', lang)}</p>
+        <h1 class="text-4xl lg:text-5xl font-light text-jci-black mb-4" data-i18n="work.title">{t('work.title', lang)}</h1>
+        <p class="text-jci-black/50 max-w-2xl mx-auto" data-i18n="work.intro">{t('work.intro', lang)}</p>
+      </div>
+
+      {events.length === 0 ? (
+        <div class="text-center py-16 border-2 border-dashed border-gray-200 rounded-3xl">
+          <i class="fas fa-images text-gray-300 text-5xl mb-4"></i>
+          <p class="text-jci-black/40">Events and photo albums will appear here once added in the dashboard.</p>
+        </div>
+      ) : (
+        years.map((year) => (
+          <div class="mb-16">
+            <div class="flex items-center gap-4 mb-8">
+              <span class="text-2xl font-bold text-jci-blue">{year}</span>
+              <div class="flex-1 h-px bg-gray-200"></div>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {byYear[year].map((ev) => {
+                const cover = eventCover(ev, 800, 500)
+                const count = eventGallery(ev).length
+                return (
+                  <a href={`/events/${ev.slug}`} class="card-hover group bg-white rounded-2xl overflow-hidden border border-gray-100 block">
+                    <div class="h-52 overflow-hidden bg-gray-100 relative">
+                      {cover && <img src={cover} alt={pick(ev.title, lang)} width="800" height="500" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />}
+                      {count > 0 && (
+                        <span class="absolute top-3 right-3 rtl:right-auto rtl:left-3 bg-jci-black/70 text-white text-xs font-medium px-2.5 py-1 rounded-full backdrop-blur-sm">
+                          <i class="fas fa-camera mr-1"></i>{count} <span data-i18n="work.photos">{t('work.photos', lang)}</span>
+                        </span>
+                      )}
+                    </div>
+                    <div class="p-6">
+                      <span class="inline-block bg-jci-blue/10 text-jci-blue text-xs font-semibold px-3 py-1 rounded-full mb-3 capitalize">{ev.category}</span>
+                      <h3 class="text-lg font-semibold text-jci-black mb-2">{pick(ev.title, lang)}</h3>
+                      <p class="text-sm text-jci-black/60 leading-relaxed mb-4 line-clamp-2">{pick(ev.summary, lang)}</p>
+                      <span class="inline-flex items-center gap-2 text-jci-teal text-sm font-medium">
+                        <span data-i18n="work.viewalbum">{t('work.viewalbum', lang)}</span>
+                        <i class="fas fa-arrow-right rtl:rotate-180 group-hover:translate-x-1 transition-transform"></i>
+                      </span>
+                    </div>
+                  </a>
+                )
+              })}
+            </div>
+          </div>
+        ))
+      )}
+    </div>
+  </main>
+  <Footer settings={settings} lang={lang} />
+  <SiteScripts translations={translations} />
+</Base>

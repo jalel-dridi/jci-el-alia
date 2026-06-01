@@ -1,0 +1,54 @@
+---
+/**
+ * Footer — chapter info, quick links, social/contact. Data-driven contact.
+ */
+import {t} from '../i18n/utils.js'
+const {settings, lang = 'en'} = Astro.props
+const year = new Date().getFullYear()
+---
+
+<footer class="bg-jci-black text-white pt-16 pb-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-3 gap-12 mb-12">
+      <div>
+        <img src="/images/logo.png" alt="JCI El Alia" class="h-14 w-auto mb-4 brightness-0 invert" />
+        <p class="text-white/50 text-sm leading-relaxed mb-4" data-i18n="footer.desc">{t('footer.desc', lang)}</p>
+        <div class="flex items-center gap-2 text-white/40 text-sm">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>{settings.address}</span>
+        </div>
+      </div>
+      <div>
+        <h4 class="font-semibold text-white mb-4" data-i18n="footer.links">{t('footer.links', lang)}</h4>
+        <ul class="space-y-3">
+          <li><a href="#home" class="text-white/50 hover:text-jci-teal text-sm transition-colors" data-i18n="nav.home">{t('nav.home', lang)}</a></li>
+          <li><a href="#about" class="text-white/50 hover:text-jci-teal text-sm transition-colors" data-i18n="nav.about">{t('nav.about', lang)}</a></li>
+          <li><a href="#legacy" class="text-white/50 hover:text-jci-teal text-sm transition-colors" data-i18n="nav.legacy">{t('nav.legacy', lang)}</a></li>
+          <li><a href="#impact" class="text-white/50 hover:text-jci-teal text-sm transition-colors" data-i18n="nav.impact">{t('nav.impact', lang)}</a></li>
+          <li><a href="#work" class="text-white/50 hover:text-jci-teal text-sm transition-colors" data-i18n="nav.work">{t('nav.work', lang)}</a></li>
+          <li><a href="https://jci.cc" target="_blank" rel="noopener" class="text-white/50 hover:text-jci-teal text-sm transition-colors">JCI International</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold text-white mb-4" data-i18n="footer.connect">{t('footer.connect', lang)}</h4>
+        <div class="flex items-center gap-4 mb-6">
+          {settings.facebook && <a href={settings.facebook} target="_blank" rel="noopener" aria-label="Facebook" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-jci-blue transition-colors"><i class="fab fa-facebook-f text-white text-sm"></i></a>}
+          {settings.instagram && <a href={settings.instagram} target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-jci-blue transition-colors"><i class="fab fa-instagram text-white text-sm"></i></a>}
+          {settings.linkedin && <a href={settings.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-jci-blue transition-colors"><i class="fab fa-linkedin-in text-white text-sm"></i></a>}
+        </div>
+        <div class="space-y-2 text-sm text-white/50">
+          {settings.email && <div class="flex items-center gap-2"><i class="fas fa-envelope text-xs"></i><span>{settings.email}</span></div>}
+          {settings.phone && <div class="flex items-center gap-2"><i class="fas fa-phone text-xs"></i><span>{settings.phone}</span></div>}
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-white/30 text-sm">&copy; {year} JCI El Alia. All rights reserved.</p>
+      <p class="text-white/30 text-sm" data-i18n="footer.affiliation">{t('footer.affiliation', lang)}</p>
+    </div>
+  </div>
+</footer>
+
+<button id="back-to-top" aria-label="Back to top" class="fixed bottom-6 right-6 rtl:right-auto rtl:left-6 z-40 w-12 h-12 bg-jci-blue text-white rounded-full shadow-lg flex items-center justify-center hover:bg-jci-navy transition-colors">
+  <i class="fas fa-arrow-up text-sm"></i>
+</button>

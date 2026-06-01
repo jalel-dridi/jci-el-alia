@@ -1,0 +1,132 @@
+@import 'tailwindcss';
+
+/*
+ * Tailwind v4 theme — brand tokens carried over 1:1 from the original
+ * index.html so the design stays identical. Colors become utilities like
+ * `text-jci-blue`, `bg-jci-navy`, fonts become `font-jakarta` etc.
+ */
+@theme {
+  --color-jci-blue: #0097d7;
+  --color-jci-black: #130f2d;
+  --color-jci-navy: #1f4789;
+  --color-jci-teal: #57bcbc;
+  --color-jci-yellow: #efc40f;
+
+  --font-jakarta: 'Plus Jakarta Sans', sans-serif;
+  --font-arabic: 'Noto Sans Arabic', sans-serif;
+  --font-arvo: 'Arvo', serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: var(--font-jakarta);
+}
+[dir='rtl'] body {
+  font-family: var(--font-arabic);
+}
+
+/* Navbar blur */
+.nav-blur {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Card hover lift */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 151, 215, 0.12);
+}
+
+/* Section scroll offset for sticky navbar */
+section[id] {
+  scroll-margin-top: 80px;
+}
+
+/* Active nav link */
+.nav-link.active {
+  color: #0097d7;
+}
+
+/* Scroll reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* Page load fade-in */
+@keyframes page-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body.page-loaded {
+  animation: page-fade-in 0.6s ease;
+}
+
+/* Back to top */
+#back-to-top {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Partners marquee */
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.partners-track {
+  animation: scroll-left 30s linear infinite;
+}
+.partners-track:hover {
+  animation-play-state: paused;
+}
+[dir='rtl'] .partners-track {
+  animation-direction: reverse;
+}
+
+/*
+ * Accessibility — respect users who prefer reduced motion.
+ * Disables scroll animations, marquee, page fade, and smooth scrolling.
+ * (The counter script also checks this and jumps straight to final values.)
+ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .partners-track {
+    animation: none !important;
+  }
+  body.page-loaded {
+    animation: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

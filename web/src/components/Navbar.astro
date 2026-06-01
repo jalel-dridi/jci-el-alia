@@ -1,0 +1,61 @@
+---
+/**
+ * Sticky navbar with blur, smooth-scroll links, animated language switcher,
+ * and a polished mobile menu. Text uses data-i18n keys swapped client-side.
+ */
+import {t} from '../i18n/utils.js'
+const lang = 'en'
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 nav-blur bg-white/80 border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 lg:h-20">
+      <a href="#home" class="flex items-center">
+        <img src="/images/logo.png" alt="JCI El Alia" class="h-12 lg:h-14 w-auto" />
+      </a>
+
+      <!-- Desktop links -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#home" class="nav-link text-sm font-medium text-jci-black/70 hover:text-jci-blue transition-colors" data-i18n="nav.home">{t('nav.home', lang)}</a>
+        <a href="#about" class="nav-link text-sm font-medium text-jci-black/70 hover:text-jci-blue transition-colors" data-i18n="nav.about">{t('nav.about', lang)}</a>
+        <a href="#legacy" class="nav-link text-sm font-medium text-jci-black/70 hover:text-jci-blue transition-colors" data-i18n="nav.legacy">{t('nav.legacy', lang)}</a>
+        <a href="#impact" class="nav-link text-sm font-medium text-jci-black/70 hover:text-jci-blue transition-colors" data-i18n="nav.impact">{t('nav.impact', lang)}</a>
+        <a href="#work" class="nav-link text-sm font-medium text-jci-black/70 hover:text-jci-blue transition-colors" data-i18n="nav.work">{t('nav.work', lang)}</a>
+        <a href="#team" class="nav-link text-sm font-medium text-jci-black/70 hover:text-jci-blue transition-colors" data-i18n="nav.team">{t('nav.team', lang)}</a>
+        <a href="#join" class="nav-link text-sm font-medium text-jci-black/70 hover:text-jci-blue transition-colors" data-i18n="nav.join">{t('nav.join', lang)}</a>
+      </div>
+
+      <div class="hidden md:flex items-center gap-4">
+        <div class="lang-switch flex items-center gap-1 bg-gray-100 rounded-full p-1">
+          <button data-lang="en" class="lang-btn active px-3 py-1 text-xs font-semibold rounded-full transition-all duration-300">EN</button>
+          <button data-lang="fr" class="lang-btn px-3 py-1 text-xs font-semibold rounded-full transition-all duration-300 text-jci-black/60 hover:text-jci-black">FR</button>
+          <button data-lang="ar" class="lang-btn px-3 py-1 text-xs font-semibold rounded-full transition-all duration-300 text-jci-black/60 hover:text-jci-black">AR</button>
+        </div>
+        <a href="#join" class="bg-jci-blue text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-jci-navy transition-colors" data-i18n="nav.cta">{t('nav.cta', lang)}</a>
+      </div>
+
+      <button id="mobile-menu-btn" aria-label="Menu" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
+        <i class="fas fa-bars text-xl text-jci-black"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu (animated max-height) -->
+  <div id="mobile-menu" class="md:hidden overflow-hidden max-h-0 transition-[max-height] duration-500 ease-in-out bg-white border-t border-gray-100">
+    <div class="px-4 py-4 space-y-1">
+      <a href="#home" class="block py-2.5 text-sm font-medium text-jci-black/70 hover:text-jci-blue transition-colors" data-i18n="nav.home">{t('nav.home', lang)}</a>
+      <a href="#about" class="block py-2.5 text-sm font-medium text-jci-black/70 hover:text-jci-blue transition-colors" data-i18n="nav.about">{t('nav.about', lang)}</a>
+      <a href="#legacy" class="block py-2.5 text-sm font-medium text-jci-black/70 hover:text-jci-blue transition-colors" data-i18n="nav.legacy">{t('nav.legacy', lang)}</a>
+      <a href="#impact" class="block py-2.5 text-sm font-medium text-jci-black/70 hover:text-jci-blue transition-colors" data-i18n="nav.impact">{t('nav.impact', lang)}</a>
+      <a href="#work" class="block py-2.5 text-sm font-medium text-jci-black/70 hover:text-jci-blue transition-colors" data-i18n="nav.work">{t('nav.work', lang)}</a>
+      <a href="#team" class="block py-2.5 text-sm font-medium text-jci-black/70 hover:text-jci-blue transition-colors" data-i18n="nav.team">{t('nav.team', lang)}</a>
+      <a href="#join" class="block py-2.5 text-sm font-medium text-jci-black/70 hover:text-jci-blue transition-colors" data-i18n="nav.join">{t('nav.join', lang)}</a>
+      <div class="lang-switch flex items-center gap-2 pt-3">
+        <button data-lang="en" class="lang-btn active px-3 py-1.5 text-xs font-semibold rounded-full transition-all duration-300">EN</button>
+        <button data-lang="fr" class="lang-btn px-3 py-1.5 text-xs font-semibold rounded-full transition-all duration-300 text-jci-black/60">FR</button>
+        <button data-lang="ar" class="lang-btn px-3 py-1.5 text-xs font-semibold rounded-full transition-all duration-300 text-jci-black/60">AR</button>
+      </div>
+      <a href="#join" class="block bg-jci-blue text-white text-center px-5 py-2.5 rounded-full text-sm font-semibold mt-3" data-i18n="nav.cta">{t('nav.cta', lang)}</a>
+    </div>
+  </div>
+</nav>

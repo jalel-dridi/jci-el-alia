@@ -1,0 +1,52 @@
+---
+/**
+ * Our Team — the current board, shown only when board members exist for the
+ * site's current year. Headshots when present, branded initials otherwise.
+ */
+import {t} from '../i18n/utils.js'
+import {pick, urlFor} from '../lib/sanity.js'
+
+const {board = [], year, lang = 'en'} = Astro.props
+const current = board.filter((m) => !year || m.year === year).sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+
+function initials(name) {
+  return name.split(/\s+/).slice(0, 2).map((w) => w[0] || '').join('').toUpperCase()
+}
+// Full class strings (Tailwind can't see dynamically built names).
+const accents = [
+  'text-jci-blue bg-jci-blue/10',
+  'text-jci-teal bg-jci-teal/10',
+  'text-jci-navy bg-jci-navy/10',
+  'text-jci-yellow bg-jci-yellow/10',
+]
+---
+
+{current.length > 0 && (
+  <section id="team" class="py-24 lg:py-32 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <p class="text-jci-blue font-semibold text-sm uppercase tracking-wider mb-4" data-i18n="team.label">{t('team.label', lang)}</p>
+        <h2 class="text-3xl lg:text-4xl font-light text-jci-black" data-i18n="team.title">{t('team.title', lang)}</h2>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+        {current.map((m, i) => {
+          const photo = m.photo ? urlFor(m.photo).width(400).height(400).fit('crop').url() : null
+          const accent = accents[i % accents.length]
+          return (
+            <div class="card-hover bg-white rounded-2xl p-6 border border-gray-100 text-center reveal">
+              {photo ? (
+                <img src={photo} alt={m.name} width="400" height="400" loading="lazy" class="w-24 h-24 rounded-full object-cover mx-auto mb-4" />
+              ) : (
+                <div class={`w-24 h-24 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl font-bold ${accent}`}>
+                  {initials(m.name)}
+                </div>
+              )}
+              <h3 class="font-semibold text-jci-black">{m.name}</h3>
+              <p class="text-sm text-jci-black/50 mt-1">{pick(m.role, lang)}</p>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  </section>
+)}

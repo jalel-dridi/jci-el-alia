@@ -1,0 +1,70 @@
+---
+/**
+ * Legacy Timeline — the "Honor The Legacy" centerpiece. A vertical timeline of
+ * every president since the 1989 revival, with their mandate slogan. The
+ * current (2026) president is highlighted. Photos used when present.
+ */
+import {t} from '../i18n/utils.js'
+import {pick, urlFor} from '../lib/sanity.js'
+
+const {presidents, lang = 'en'} = Astro.props
+const ordered = [...presidents].sort((a, b) => a.year - b.year)
+---
+
+<section id="legacy" class="py-24 lg:py-32 bg-jci-black relative overflow-hidden">
+  <!-- subtle backdrop rings -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute -top-40 -right-40 w-[500px] h-[500px] border border-white/[0.04] rounded-full"></div>
+    <div class="absolute -bottom-40 -left-40 w-[500px] h-[500px] border border-white/[0.04] rounded-full"></div>
+  </div>
+
+  <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <p class="text-jci-teal font-semibold text-sm uppercase tracking-wider mb-4" data-i18n="legacy.label">{t('legacy.label', lang)}</p>
+      <h2 class="text-3xl lg:text-4xl font-light text-white mb-4" data-i18n="legacy.title">{t('legacy.title', lang)}</h2>
+      <p class="text-white/50 max-w-2xl mx-auto leading-[1.7]" data-i18n="legacy.intro">{t('legacy.intro', lang)}</p>
+    </div>
+
+    <div class="relative">
+      <!-- vertical line -->
+      <div class="absolute left-4 sm:left-1/2 sm:-translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-jci-teal/60 via-jci-blue/40 to-jci-yellow/60"></div>
+
+      <div class="space-y-8">
+        {ordered.map((p, i) => {
+          const isCurrent = p.current || p.year === 2026
+          const side = i % 2 === 0
+          const photo = p.photo ? urlFor(p.photo).width(120).height(120).fit('crop').url() : null
+          return (
+            <div class={`relative flex items-center gap-6 pl-12 sm:pl-0 reveal ${side ? 'sm:flex-row' : 'sm:flex-row-reverse'}`}>
+              <!-- node -->
+              <div class={`absolute left-4 sm:left-1/2 sm:-translate-x-1/2 w-4 h-4 rounded-full border-2 ${isCurrent ? 'bg-jci-yellow border-jci-yellow shadow-lg shadow-jci-yellow/40' : 'bg-jci-black border-jci-teal'}`}></div>
+              <!-- card -->
+              <div class="sm:w-1/2 w-full">
+                <div class={`rounded-2xl p-5 border ${isCurrent ? 'bg-gradient-to-br from-jci-blue/20 to-jci-teal/10 border-jci-yellow/40' : 'bg-white/[0.04] border-white/10'} ${side ? 'sm:mr-8' : 'sm:ml-8'}`}>
+                  <div class="flex items-center gap-4">
+                    {photo ? (
+                      <img src={photo} alt={p.name} width="120" height="120" loading="lazy" class="w-12 h-12 rounded-full object-cover flex-shrink-0" />
+                    ) : (
+                      <div class={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${isCurrent ? 'bg-jci-yellow/20 text-jci-yellow' : 'bg-jci-teal/15 text-jci-teal'}`}>
+                        <i class="fas fa-user text-base"></i>
+                      </div>
+                    )}
+                    <div class="min-w-0">
+                      <div class="flex items-center gap-2">
+                        <span class={`text-lg font-bold ${isCurrent ? 'text-jci-yellow' : 'text-jci-teal'}`}>{p.year}</span>
+                        {isCurrent && <span class="text-[10px] uppercase tracking-wider bg-jci-yellow text-jci-black font-bold px-2 py-0.5 rounded-full">2026</span>}
+                      </div>
+                      <h3 class="text-white font-semibold truncate">{p.name}</h3>
+                    </div>
+                  </div>
+                  <p class="text-white/60 text-sm mt-3 italic font-arvo" data-i18n={`pres.${p.year}.slogan`}>“{pick(p.slogan, lang)}”</p>
+                </div>
+              </div>
+              <div class="hidden sm:block sm:w-1/2"></div>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  </div>
+</section>

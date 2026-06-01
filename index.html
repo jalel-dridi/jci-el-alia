@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="JCI El Alia - Developing Leaders for a Changing World in El Alia, Tunisia. Join our community of young active citizens aged 18-40.">
+    <meta property="og:title" content="JCI El Alia - Developing Leaders for a Changing World">
+    <meta property="og:description" content="Join JCI El Alia, a community of young leaders creating positive change in El Alia, Bizerte, Tunisia since 1989.">
+    <meta property="og:type" content="website">
+    <title>JCI El Alia | Developing Leaders for a Changing World</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Arvo:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'jci-blue': '#0097D7',
+                        'jci-black': '#130F2D',
+                        'jci-navy': '#1F4789',
+                        'jci-teal': '#57BCBC',
+                        'jci-yellow': '#EFC40F',
+                    },
+                    fontFamily: {
+                        'jakarta': ['"Plus Jakarta Sans"', 'sans-serif'],
+                        'arabic': ['"Noto Sans Arabic"', 'sans-serif'],
+                        'arvo': ['Arvo', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        [dir="rtl"] body { font-family: 'Noto Sans Arabic', sans-serif; }
+        .nav-blur { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .hero-overlay { background: linear-gradient(135deg, rgba(19,15,45,0.85) 0%, rgba(0,151,215,0.6) 100%); }
+        .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,151,215,0.12); }
+        .lang-btn.active { background-color: #0097D7; color: white; }
+        section[id] { scroll-margin-top: 80px; }
+
+        /* Active nav link */
+        .nav-link.active { color: #0097D7; }
+
+        /* Scroll animations */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* Back to top button */
+        #back-to-top { opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        #back-to-top.visible { opacity: 1; pointer-events: auto; }
+
+        /* Partners marquee */
+        @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .partners-track { animation: scroll-left 30s linear infinite; }
+        .partners-track:hover { animation-play-state: paused; }
+    </style>
+</head>
+<body class="bg-white text-jci-black antialiased">
+
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur bg-white/80 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 lg:h-20">
+                <a href="#" class="flex items-center">
+                    <img src="content/images/El Alia.png" alt="JCI El Alia" class="h-12 lg:h-14 w-auto">
+                </a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#home" class="nav-link text-sm font-medium text-jci-black/70 hover:text-jci-blue transition-colors" data-i18n="nav.home">Home</a>
+                    <a href="#about" class="nav-link text-sm font-medium text-jci-black/70 hover:text-jci-blue transition-colors" data-i18n="nav.about">Who We Are</a>
+                    <a href="#impact" class="nav-link text-sm font-medium text-jci-black/70 hover:text-jci-blue transition-colors" data-i18n="nav.impact">Our Impact</a>
+                    <a href="#join" class="nav-link text-sm font-medium text-jci-black/70 hover:text-jci-blue transition-colors" data-i18n="nav.join">Join Us</a>
+                </div>
+                <div class="hidden md:flex items-center gap-4">
+                    <div class="flex items-center gap-1 bg-gray-100 rounded-full p-1">
+                        <button onclick="setLang('en')" class="lang-btn active px-3 py-1 text-xs font-semibold rounded-full transition-all">EN</button>
+                        <button onclick="setLang('fr')" class="lang-btn px-3 py-1 text-xs font-semibold rounded-full transition-all text-jci-black/60 hover:text-jci-black">FR</button>
+                        <button onclick="setLang('ar')" class="lang-btn px-3 py-1 text-xs font-semibold rounded-full transition-all text-jci-black/60 hover:text-jci-black">AR</button>
+                    </div>
+                    <a href="#join" class="bg-jci-blue text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-jci-navy transition-colors" data-i18n="nav.cta">Become a Member</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                    <i class="fas fa-bars text-xl text-jci-black"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 pb-4">
+            <div class="px-4 pt-4 space-y-3">
+                <a href="#home" class="block py-2 text-sm font-medium text-jci-black/70" data-i18n="nav.home">Home</a>
+                <a href="#about" class="block py-2 text-sm font-medium text-jci-black/70" data-i18n="nav.about">Who We Are</a>
+                <a href="#impact" class="block py-2 text-sm font-medium text-jci-black/70" data-i18n="nav.impact">Our Impact</a>
+                <a href="#join" class="block py-2 text-sm font-medium text-jci-black/70" data-i18n="nav.join">Join Us</a>
+                <div class="flex items-center gap-2 pt-2">
+                    <button onclick="setLang('en')" class="lang-btn active px-3 py-1.5 text-xs font-semibold rounded-full">EN</button>
+                    <button onclick="setLang('fr')" class="lang-btn px-3 py-1.5 text-xs font-semibold rounded-full text-jci-black/60">FR</button>
+                    <button onclick="setLang('ar')" class="lang-btn px-3 py-1.5 text-xs font-semibold rounded-full text-jci-black/60">AR</button>
+                </div>
+                <a href="#join" class="block bg-jci-blue text-white text-center px-5 py-2.5 rounded-full text-sm font-semibold" data-i18n="nav.cta">Become a Member</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-jci-black via-jci-navy to-jci-blue"></div>
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] border border-white/[0.06] rounded-full"></div>
+            <div class="absolute top-1/2 left-1/2 w-[900px] h-[900px] border border-white/[0.08] rounded-full" style="transform:translate(-50%,-50%) rotate(15deg)"></div>
+            <div class="absolute top-1/2 left-1/2 w-[600px] h-[600px] border border-white/[0.1] rounded-full" style="transform:translate(-50%,-50%) rotate(30deg)"></div>
+            <div class="absolute top-1/2 left-1/2 w-[300px] h-[300px] border border-white/[0.12] rounded-full" style="transform:translate(-50%,-50%) rotate(45deg)"></div>
+        </div>
+        <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-jci-teal/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-1/4 left-1/4 w-72 h-72 bg-jci-blue/20 rounded-full blur-3xl"></div>
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
+            <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-5 py-2.5 mb-8 backdrop-blur-sm">
+                <span class="w-2 h-2 bg-jci-teal rounded-full animate-pulse"></span>
+                <span class="text-white/90 text-sm font-medium" data-i18n="hero.badge">Since 1989 · El Alia, Tunisia</span>
+            </div>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-white leading-[1.2] mb-6">
+                <span data-i18n="hero.title1">Developing Leaders</span><br>
+                <span class="font-semibold text-jci-teal" data-i18n="hero.title2">for a Changing World</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto mb-10 font-light leading-[1.7]" data-i18n="hero.subtitle">JCI El Alia empowers young citizens aged 18-40 to create positive change through leadership, action, and international cooperation.</p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#join" class="bg-jci-blue hover:bg-white hover:text-jci-blue text-white px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 shadow-lg shadow-jci-blue/30" data-i18n="hero.cta1">Become an Active Citizen</a>
+                <a href="#about" class="bg-white/10 border border-white/30 hover:bg-white/20 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 backdrop-blur-sm" data-i18n="hero.cta2">Discover Our Story</a>
+            </div>
+            <div class="mt-16 lg:mt-20 flex items-center justify-center gap-8 sm:gap-12 lg:gap-16">
+                <div class="text-center">
+                    <div class="text-3xl lg:text-4xl font-bold text-white">36<span class="text-jci-teal">+</span></div>
+                    <div class="text-xs sm:text-sm text-white/50 mt-1 uppercase tracking-wider" data-i18n="hero.stat1">Years of Impact</div>
+                </div>
+                <div class="w-px h-12 bg-white/20"></div>
+                <div class="text-center">
+                    <div class="text-3xl lg:text-4xl font-bold text-white">47</div>
+                    <div class="text-xs sm:text-sm text-white/50 mt-1 uppercase tracking-wider" data-i18n="hero.stat2">Active Members</div>
+                </div>
+                <div class="w-px h-12 bg-white/20"></div>
+                <div class="text-center">
+                    <div class="text-3xl lg:text-4xl font-bold text-white">50<span class="text-jci-teal">+</span></div>
+                    <div class="text-xs sm:text-sm text-white/50 mt-1 uppercase tracking-wider" data-i18n="hero.stat3">Projects Delivered</div>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+            <span class="text-white/50 text-xs uppercase tracking-widest">Scroll</span>
+            <i class="fas fa-chevron-down text-white/60"></i>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="py-24 lg:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <p class="text-jci-blue font-semibold text-sm uppercase tracking-wider mb-4" data-i18n="about.label">Who We Are</p>
+                    <h2 class="text-3xl lg:text-4xl font-light text-jci-black leading-[1.3] mb-6" data-i18n="about.title">A legacy of youth leadership in <span class="font-semibold">El Alia</span></h2>
+                    <p class="text-base text-jci-black/60 leading-[1.8] mb-6" data-i18n="about.p1">Founded in 1989, JCI El Alia is part of JCI Tunisia's network of 113 local chapters. We bring the global JCI mission to the heart of Bizerte Governorate, developing young leaders who drive lasting impact.</p>
+                    <p class="text-base text-jci-black/60 leading-[1.8] mb-8" data-i18n="about.p2">Our members are students, professionals, and entrepreneurs united by a shared belief: that active citizenship transforms communities. From environmental action to entrepreneurship, we create opportunities for growth.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex items-center gap-2 bg-jci-blue/5 rounded-full px-4 py-2">
+                            <i class="fas fa-globe-africa text-jci-blue text-sm"></i>
+                            <span class="text-sm font-medium text-jci-black/70" data-i18n="about.tag1">Part of JCI International</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-jci-teal/10 rounded-full px-4 py-2">
+                            <i class="fas fa-map-marker-alt text-jci-teal text-sm"></i>
+                            <span class="text-sm font-medium text-jci-black/70" data-i18n="about.tag2">Zone B, Bizerte</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative reveal reveal-delay-2">
+                    <div class="bg-gradient-to-br from-jci-blue/10 to-jci-teal/10 rounded-3xl p-8 lg:p-10">
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="bg-white rounded-2xl p-6 shadow-sm text-center">
+                                <div class="text-3xl font-bold text-jci-blue">1989</div>
+                                <div class="text-sm text-jci-black/50 mt-1" data-i18n="about.card1">Founded</div>
+                            </div>
+                            <div class="bg-white rounded-2xl p-6 shadow-sm text-center">
+                                <div class="text-3xl font-bold text-jci-navy">9</div>
+                                <div class="text-sm text-jci-black/50 mt-1" data-i18n="about.card2">Presidents</div>
+                            </div>
+                            <div class="bg-white rounded-2xl p-6 shadow-sm text-center">
+                                <div class="text-3xl font-bold text-jci-teal">5</div>
+                                <div class="text-sm text-jci-black/50 mt-1" data-i18n="about.card3">Twin Chapters</div>
+                            </div>
+                            <div class="bg-white rounded-2xl p-6 shadow-sm text-center">
+                                <div class="text-3xl font-bold text-jci-yellow">22</div>
+                                <div class="text-sm text-jci-black/50 mt-1" data-i18n="about.card4">Avg. Age</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PILLARS -->
+    <section class="py-24 lg:py-32 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <p class="text-jci-blue font-semibold text-sm uppercase tracking-wider mb-4" data-i18n="pillars.label">Areas of Opportunity</p>
+                <h2 class="text-3xl lg:text-4xl font-light text-jci-black" data-i18n="pillars.title">Four pillars of <span class="font-semibold">positive change</span></h2>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Pillar 1 -->
+                <div class="card-hover bg-white rounded-2xl p-8 border border-gray-100 reveal reveal-delay-1">
+                    <div class="w-12 h-12 bg-jci-blue/10 rounded-xl flex items-center justify-center mb-5">
+                        <i class="fas fa-user-graduate text-jci-blue text-lg"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-jci-black mb-3" data-i18n="pillars.t1">Individual Development</h3>
+                    <p class="text-sm text-jci-black/60 leading-relaxed" data-i18n="pillars.d1">Build confidence, communication, and leadership skills through hands-on training programs.</p>
+                </div>
+                <!-- Pillar 2 -->
+                <div class="card-hover bg-white rounded-2xl p-8 border border-gray-100 reveal reveal-delay-2">
+                    <div class="w-12 h-12 bg-jci-teal/10 rounded-xl flex items-center justify-center mb-5">
+                        <i class="fas fa-hands-helping text-jci-teal text-lg"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-jci-black mb-3" data-i18n="pillars.t2">Community Impact</h3>
+                    <p class="text-sm text-jci-black/60 leading-relaxed" data-i18n="pillars.d2">Drive meaningful change through environmental, health, and educational initiatives in El Alia.</p>
+                </div>
+                <!-- Pillar 3 -->
+                <div class="card-hover bg-white rounded-2xl p-8 border border-gray-100 reveal reveal-delay-3">
+                    <div class="w-12 h-12 bg-jci-navy/10 rounded-xl flex items-center justify-center mb-5">
+                        <i class="fas fa-globe text-jci-navy text-lg"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-jci-black mb-3" data-i18n="pillars.t3">International Cooperation</h3>
+                    <p class="text-sm text-jci-black/60 leading-relaxed" data-i18n="pillars.d3">Connect with chapters worldwide through twinning programs and cultural exchanges.</p>
+                </div>
+                <!-- Pillar 4 -->
+                <div class="card-hover bg-white rounded-2xl p-8 border border-gray-100 reveal reveal-delay-4">
+                    <div class="w-12 h-12 bg-jci-yellow/10 rounded-xl flex items-center justify-center mb-5">
+                        <i class="fas fa-lightbulb text-jci-yellow text-lg"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-jci-black mb-3" data-i18n="pillars.t4">Business & Entrepreneurship</h3>
+                    <p class="text-sm text-jci-black/60 leading-relaxed" data-i18n="pillars.d4">Support local youth entrepreneurship through workshops, hackathons, and mentoring.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS / IMPACT -->
+    <section id="impact" class="py-24 lg:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <p class="text-jci-blue font-semibold text-sm uppercase tracking-wider mb-4" data-i18n="impact.label">Our Impact</p>
+                <h2 class="text-3xl lg:text-4xl font-light text-jci-black" data-i18n="impact.title">Projects that <span class="font-semibold">make a difference</span></h2>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="card-hover group bg-white rounded-2xl overflow-hidden border border-gray-100">
+                    <div class="h-48 bg-gradient-to-br from-jci-blue to-jci-navy flex items-center justify-center">
+                        <i class="fas fa-compass text-white/30 text-6xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block bg-jci-blue/10 text-jci-blue text-xs font-semibold px-3 py-1 rounded-full mb-3" data-i18n="impact.cat1">Education</span>
+                        <h3 class="text-lg font-semibold text-jci-black mb-2">Orient'Up</h3>
+                        <p class="text-sm text-jci-black/60 leading-relaxed mb-4" data-i18n="impact.p1">Annual university orientation forum helping baccalaureate students choose their academic path. 4 editions, 240+ participants.</p>
+                        <div class="flex items-center gap-2 text-jci-teal">
+                            <i class="fas fa-users text-sm"></i>
+                            <span class="text-sm font-medium">240+ participants</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="card-hover group bg-white rounded-2xl overflow-hidden border border-gray-100">
+                    <div class="h-48 bg-gradient-to-br from-jci-teal to-jci-blue flex items-center justify-center">
+                        <i class="fas fa-store text-white/30 text-6xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block bg-jci-yellow/10 text-jci-yellow text-xs font-semibold px-3 py-1 rounded-full mb-3" data-i18n="impact.cat2">Entrepreneurship</span>
+                        <h3 class="text-lg font-semibold text-jci-black mb-2 font-arabic">Intalqa / &#1573;&#1606;&#1591;&#1604;&#1575;&#1602;&#1577;</h3>
+                        <p class="text-sm text-jci-black/60 leading-relaxed mb-4" data-i18n="impact.p2">Supporting small business owners and artisans through training workshops and a marketplace exhibition for local products.</p>
+                        <div class="flex items-center gap-2 text-jci-teal">
+                            <i class="fas fa-rocket text-sm"></i>
+                            <span class="text-sm font-medium">2 editions</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="card-hover group bg-white rounded-2xl overflow-hidden border border-gray-100">
+                    <div class="h-48 bg-gradient-to-br from-jci-navy to-jci-black flex items-center justify-center">
+                        <i class="fas fa-laptop-code text-white/30 text-6xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block bg-jci-navy/10 text-jci-navy text-xs font-semibold px-3 py-1 rounded-full mb-3" data-i18n="impact.cat3">Innovation</span>
+                        <h3 class="text-lg font-semibold text-jci-black mb-2">InnoVenture Hackathon</h3>
+                        <p class="text-sm text-jci-black/60 leading-relaxed mb-4" data-i18n="impact.p3">A hackathon fostering innovation with coding challenges, entrepreneurship workshops, and team competitions.</p>
+                        <div class="flex items-center gap-2 text-jci-teal">
+                            <i class="fas fa-code text-sm"></i>
+                            <span class="text-sm font-medium">2025</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 4 -->
+                <div class="card-hover group bg-white rounded-2xl overflow-hidden border border-gray-100">
+                    <div class="h-48 bg-gradient-to-br from-jci-yellow/80 to-jci-yellow flex items-center justify-center">
+                        <i class="fas fa-futbol text-white/30 text-6xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block bg-jci-teal/10 text-jci-teal text-xs font-semibold px-3 py-1 rounded-full mb-3" data-i18n="impact.cat4">Community</span>
+                        <h3 class="text-lg font-semibold text-jci-black mb-2">El Alia Champions Cup</h3>
+                        <p class="text-sm text-jci-black/60 leading-relaxed mb-4" data-i18n="impact.p4">Multi-day sports tournament for local clubs, bringing the community together through football and handball.</p>
+                        <div class="flex items-center gap-2 text-jci-teal">
+                            <i class="fas fa-trophy text-sm"></i>
+                            <span class="text-sm font-medium">Annual event</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 5 -->
+                <div class="card-hover group bg-white rounded-2xl overflow-hidden border border-gray-100">
+                    <div class="h-48 bg-gradient-to-br from-jci-blue/80 to-jci-teal flex items-center justify-center">
+                        <i class="fas fa-book-reader text-white/30 text-6xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block bg-jci-blue/10 text-jci-blue text-xs font-semibold px-3 py-1 rounded-full mb-3" data-i18n="impact.cat5">Education</span>
+                        <h3 class="text-lg font-semibold text-jci-black mb-2">Bac'Up</h3>
+                        <p class="text-sm text-jci-black/60 leading-relaxed mb-4" data-i18n="impact.p5">Practical training program for baccalaureate students, improving their applied exam performance through specialist workshops.</p>
+                        <div class="flex items-center gap-2 text-jci-teal">
+                            <i class="fas fa-graduation-cap text-sm"></i>
+                            <span class="text-sm font-medium">Recurring</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 6 -->
+                <div class="card-hover group bg-white rounded-2xl overflow-hidden border border-gray-100">
+                    <div class="h-48 bg-gradient-to-br from-jci-teal/80 to-jci-navy flex items-center justify-center">
+                        <i class="fas fa-microphone-alt text-white/30 text-6xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block bg-jci-navy/10 text-jci-navy text-xs font-semibold px-3 py-1 rounded-full mb-3" data-i18n="impact.cat6">Leadership</span>
+                        <h3 class="text-lg font-semibold text-jci-black mb-2">Voice Masters</h3>
+                        <p class="text-sm text-jci-black/60 leading-relaxed mb-4" data-i18n="impact.p6">Debate and public speaking forum in collaboration with 5 neighboring chapters, preparing members for championships.</p>
+                        <div class="flex items-center gap-2 text-jci-teal">
+                            <i class="fas fa-handshake text-sm"></i>
+                            <span class="text-sm font-medium">6 chapters</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JOIN US -->
+    <section id="join" class="py-24 lg:py-32 bg-gradient-to-br from-jci-black via-jci-navy to-jci-blue relative overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-0 right-0 w-[600px] h-[600px] border border-white/[0.05] rounded-full -translate-y-1/2 translate-x-1/3"></div>
+            <div class="absolute bottom-0 left-0 w-[400px] h-[400px] border border-white/[0.05] rounded-full translate-y-1/2 -translate-x-1/3"></div>
+        </div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <p class="text-jci-teal font-semibold text-sm uppercase tracking-wider mb-4" data-i18n="join.label">Join Us</p>
+                    <h2 class="text-3xl lg:text-4xl font-light text-white leading-[1.3] mb-6" data-i18n="join.title">Ready to become a <span class="font-semibold text-jci-teal">young leader</span>?</h2>
+                    <p class="text-base text-white/60 leading-[1.8] mb-8" data-i18n="join.desc">If you're between 18 and 40 years old and want to develop your skills, serve your community, and connect with a global network, JCI El Alia is your place.</p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 bg-jci-teal/20 rounded-full flex items-center justify-center flex-shrink-0"><i class="fas fa-check text-jci-teal text-xs"></i></div>
+                            <span class="text-white/80 text-sm" data-i18n="join.b1">Free leadership and professional training</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 bg-jci-teal/20 rounded-full flex items-center justify-center flex-shrink-0"><i class="fas fa-check text-jci-teal text-xs"></i></div>
+                            <span class="text-white/80 text-sm" data-i18n="join.b2">Access to a network of 200,000+ members worldwide</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 bg-jci-teal/20 rounded-full flex items-center justify-center flex-shrink-0"><i class="fas fa-check text-jci-teal text-xs"></i></div>
+                            <span class="text-white/80 text-sm" data-i18n="join.b3">Opportunities to lead real community projects</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 bg-jci-teal/20 rounded-full flex items-center justify-center flex-shrink-0"><i class="fas fa-check text-jci-teal text-xs"></i></div>
+                            <span class="text-white/80 text-sm" data-i18n="join.b4">International conferences and cultural exchanges</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Form -->
+                <div class="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20">
+                    <h3 class="text-xl font-semibold text-white mb-6" data-i18n="join.formtitle">Express Your Interest</h3>
+                    <form action="https://formspree.io/f/YOUR_ID" method="POST" class="space-y-4">
+                        <div>
+                            <input type="text" name="name" placeholder="Full Name" required class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/40 text-sm focus:outline-none focus:border-jci-teal transition-colors" data-i18n-placeholder="join.ph1">
+                        </div>
+                        <div>
+                            <input type="email" name="email" placeholder="Email Address" required class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/40 text-sm focus:outline-none focus:border-jci-teal transition-colors" data-i18n-placeholder="join.ph2">
+                        </div>
+                        <div>
+                            <input type="tel" name="phone" placeholder="Phone Number" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/40 text-sm focus:outline-none focus:border-jci-teal transition-colors" data-i18n-placeholder="join.ph3">
+                        </div>
+                        <div>
+                            <textarea name="message" rows="3" placeholder="Why do you want to join JCI El Alia?" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/40 text-sm focus:outline-none focus:border-jci-teal transition-colors resize-none" data-i18n-placeholder="join.ph4"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-jci-teal hover:bg-jci-blue text-white py-3.5 rounded-xl font-semibold text-sm transition-colors" data-i18n="join.submit">Send My Application</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARTNERS -->
+    <section class="py-16 bg-gray-50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-sm font-semibold text-jci-black/40 uppercase tracking-wider mb-10 reveal" data-i18n="partners.label">Our Partners & Collaborators</p>
+        </div>
+        <div class="relative">
+            <div class="flex partners-track whitespace-nowrap">
+                <div class="flex items-center gap-12 px-6">
+                    <div class="flex flex-col items-center gap-2 min-w-[140px]">
+                        <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center"><i class="fas fa-landmark text-jci-navy text-xl"></i></div>
+                        <span class="text-xs text-jci-black/50 text-center whitespace-normal">Municipality of El Alia</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 min-w-[140px]">
+                        <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center"><i class="fas fa-home text-jci-blue text-xl"></i></div>
+                        <span class="text-xs text-jci-black/50 text-center whitespace-normal">Maison des Jeunes El Alia</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 min-w-[140px]">
+                        <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center"><i class="fas fa-users text-jci-teal text-xl"></i></div>
+                        <span class="text-xs text-jci-black/50 text-center whitespace-normal">Maison des Associations</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 min-w-[140px]">
+                        <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center"><i class="fas fa-child text-jci-yellow text-xl"></i></div>
+                        <span class="text-xs text-jci-black/50 text-center whitespace-normal">Complexe de l'Enfance</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 min-w-[140px]">
+                        <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center"><i class="fas fa-broadcast-tower text-jci-navy text-xl"></i></div>
+                        <span class="text-xs text-jci-black/50 text-center whitespace-normal">Radio Jeunes El Alia</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 min-w-[140px]">
+                        <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center"><i class="fas fa-seedling text-jci-teal text-xl"></i></div>
+                        <span class="text-xs text-jci-black/50 text-center whitespace-normal">CRT El Alia</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 min-w-[140px]">
+                        <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center"><i class="fas fa-tractor text-jci-yellow text-xl"></i></div>
+                        <span class="text-xs text-jci-black/50 text-center whitespace-normal">Centre Formation Agricole</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 min-w-[140px]">
+                        <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center"><i class="fas fa-flask text-jci-blue text-xl"></i></div>
+                        <span class="text-xs text-jci-black/50 text-center whitespace-normal">Club Jeunes & Science</span>
+                    </div>
+                </div>
+                <!-- Duplicate for seamless loop -->
+                <div class="flex items-center gap-12 px-6">
+                    <div class="flex flex-col items-center gap-2 min-w-[140px]">
+                        <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center"><i class="fas fa-landmark text-jci-navy text-xl"></i></div>
+                        <span class="text-xs text-jci-black/50 text-center whitespace-normal">Municipality of El Alia</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 min-w-[140px]">
+                        <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center"><i class="fas fa-home text-jci-blue text-xl"></i></div>
+                        <span class="text-xs text-jci-black/50 text-center whitespace-normal">Maison des Jeunes El Alia</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 min-w-[140px]">
+                        <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center"><i class="fas fa-users text-jci-teal text-xl"></i></div>
+                        <span class="text-xs text-jci-black/50 text-center whitespace-normal">Maison des Associations</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 min-w-[140px]">
+                        <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center"><i class="fas fa-child text-jci-yellow text-xl"></i></div>
+                        <span class="text-xs text-jci-black/50 text-center whitespace-normal">Complexe de l'Enfance</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 min-w-[140px]">
+                        <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center"><i class="fas fa-broadcast-tower text-jci-navy text-xl"></i></div>
+                        <span class="text-xs text-jci-black/50 text-center whitespace-normal">Radio Jeunes El Alia</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 min-w-[140px]">
+                        <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center"><i class="fas fa-seedling text-jci-teal text-xl"></i></div>
+                        <span class="text-xs text-jci-black/50 text-center whitespace-normal">CRT El Alia</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 min-w-[140px]">
+                        <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center"><i class="fas fa-tractor text-jci-yellow text-xl"></i></div>
+                        <span class="text-xs text-jci-black/50 text-center whitespace-normal">Centre Formation Agricole</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 min-w-[140px]">
+                        <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center"><i class="fas fa-flask text-jci-blue text-xl"></i></div>
+                        <span class="text-xs text-jci-black/50 text-center whitespace-normal">Club Jeunes & Science</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BACK TO TOP -->
+    <button id="back-to-top" onclick="window.scrollTo({top:0})" class="fixed bottom-6 right-6 z-40 w-12 h-12 bg-jci-blue text-white rounded-full shadow-lg flex items-center justify-center hover:bg-jci-navy transition-colors">
+        <i class="fas fa-arrow-up text-sm"></i>
+    </button>
+
+    <!-- FOOTER -->
+    <footer class="bg-jci-black text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-12 mb-12">
+                <!-- Col 1 -->
+                <div>
+                    <img src="content/images/El Alia.png" alt="JCI El Alia" class="h-14 w-auto mb-4 brightness-0 invert">
+                    <p class="text-white/50 text-sm leading-relaxed mb-4" data-i18n="footer.desc">Developing leaders for a changing world in El Alia since 1989. Part of JCI Tunisia and JCI International.</p>
+                    <div class="flex items-center gap-2 text-white/40 text-sm">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Avenue Habib Bourguiba, El Alia 7016, Tunisia</span>
+                    </div>
+                </div>
+                <!-- Col 2 -->
+                <div>
+                    <h4 class="font-semibold text-white mb-4" data-i18n="footer.links">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-white/50 hover:text-jci-teal text-sm transition-colors" data-i18n="nav.home">Home</a></li>
+                        <li><a href="#about" class="text-white/50 hover:text-jci-teal text-sm transition-colors" data-i18n="nav.about">Who We Are</a></li>
+                        <li><a href="#impact" class="text-white/50 hover:text-jci-teal text-sm transition-colors" data-i18n="nav.impact">Our Impact</a></li>
+                        <li><a href="#join" class="text-white/50 hover:text-jci-teal text-sm transition-colors" data-i18n="nav.join">Join Us</a></li>
+                        <li><a href="https://jci.cc" target="_blank" class="text-white/50 hover:text-jci-teal text-sm transition-colors">JCI International</a></li>
+                    </ul>
+                </div>
+                <!-- Col 3 -->
+                <div>
+                    <h4 class="font-semibold text-white mb-4" data-i18n="footer.connect">Connect With Us</h4>
+                    <div class="flex items-center gap-4 mb-6">
+                        <a href="https://www.facebook.com/jcielalia" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-jci-blue transition-colors"><i class="fab fa-facebook-f text-white text-sm"></i></a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-jci-blue transition-colors"><i class="fab fa-instagram text-white text-sm"></i></a>
+                        <a href="https://www.linkedin.com/in/jci-el-alia" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-jci-blue transition-colors"><i class="fab fa-linkedin-in text-white text-sm"></i></a>
+                    </div>
+                    <div class="space-y-2 text-sm text-white/50">
+                        <div class="flex items-center gap-2"><i class="fas fa-envelope text-xs"></i><span>jcielalia@gmail.com</span></div>
+                        <div class="flex items-center gap-2"><i class="fas fa-phone text-xs"></i><span>+216 20 382 274</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-white/30 text-sm">&copy; 2026 JCI El Alia. All rights reserved.</p>
+                <p class="text-white/30 text-sm" data-i18n="footer.affiliation">Part of JCI Tunisia &middot; JCI International</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+    // Mobile menu
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        const icon = menuBtn.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+    });
+    mobileMenu.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    // 5. SCROLL ANIMATIONS
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    revealEls.forEach(el => revealObs.observe(el));
+
+    // 6. NAVBAR ACTIVE STATE + 8. BACK TO TOP
+    const sects = document.querySelectorAll('section[id]');
+    const navLks = document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll', () => {
+        let cur = '';
+        sects.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+        navLks.forEach(l => { l.classList.toggle('active', l.getAttribute('href') === '#' + cur); });
+        document.getElementById('back-to-top').classList.toggle('visible', window.scrollY > 600);
+    });
+
+    // 7. PLACEHOLDER TRANSLATIONS
+    const placeholders = {
+        en: {'join.ph1':'Full Name','join.ph2':'Email Address','join.ph3':'Phone Number','join.ph4':'Why do you want to join JCI El Alia?'},
+        fr: {'join.ph1':'Nom Complet','join.ph2':'Adresse Email','join.ph3':'Numéro de Téléphone','join.ph4':'Pourquoi souhaitez-vous rejoindre JCI El Alia ?'},
+        ar: {'join.ph1':'\u0627\u0644\u0627\u0633\u0645 \u0627\u0644\u0643\u0627\u0645\u0644','join.ph2':'\u0627\u0644\u0628\u0631\u064a\u062f \u0627\u0644\u0625\u0644\u0643\u062a\u0631\u0648\u0646\u064a','join.ph3':'\u0631\u0642\u0645 \u0627\u0644\u0647\u0627\u062a\u0641','join.ph4':'\u0644\u0645\u0627\u0630\u0627 \u062a\u0631\u064a\u062f \u0627\u0644\u0627\u0646\u0636\u0645\u0627\u0645 \u0625\u0644\u0649 \u0627\u0644\u063a\u0631\u0641\u0629 \u0627\u0644\u0641\u062a\u064a\u0629 \u0628\u0627\u0644\u0639\u0627\u0644\u064a\u0629\u061f'}
+    };
+
+    const translations = {
+        en: {
+            'nav.home':'Home','nav.about':'Who We Are','nav.impact':'Our Impact','nav.join':'Join Us','nav.cta':'Become a Member',
+            'hero.badge':'Since 1989 · El Alia, Tunisia','hero.title1':'Developing Leaders','hero.title2':'for a Changing World',
+            'hero.subtitle':'JCI El Alia empowers young citizens aged 18-40 to create positive change through leadership, action, and international cooperation.',
+            'hero.cta1':'Become an Active Citizen','hero.cta2':'Discover Our Story',
+            'hero.stat1':'Years of Impact','hero.stat2':'Active Members','hero.stat3':'Projects Delivered',
+            'about.label':'Who We Are','about.title':'A legacy of youth leadership in <span class="font-semibold">El Alia</span>',
+            'about.p1':'Founded in 1989, JCI El Alia is part of JCI Tunisia\'s network of 113 local chapters. We bring the global JCI mission to the heart of Bizerte Governorate, developing young leaders who drive lasting impact.',
+            'about.p2':'Our members are students, professionals, and entrepreneurs united by a shared belief: that active citizenship transforms communities. From environmental action to entrepreneurship, we create opportunities for growth.',
+            'about.tag1':'Part of JCI International','about.tag2':'Zone B, Bizerte',
+            'about.card1':'Founded','about.card2':'Presidents','about.card3':'Twin Chapters','about.card4':'Avg. Age',
+            'pillars.label':'Areas of Opportunity','pillars.title':'Four pillars of <span class="font-semibold">positive change</span>',
+            'pillars.t1':'Individual Development','pillars.d1':'Build confidence, communication, and leadership skills through hands-on training programs.',
+            'pillars.t2':'Community Impact','pillars.d2':'Drive meaningful change through environmental, health, and educational initiatives in El Alia.',
+            'pillars.t3':'International Cooperation','pillars.d3':'Connect with chapters worldwide through twinning programs and cultural exchanges.',
+            'pillars.t4':'Business & Entrepreneurship','pillars.d4':'Support local youth entrepreneurship through workshops, hackathons, and mentoring.',
+            'impact.label':'Our Impact','impact.title':'Projects that <span class="font-semibold">make a difference</span>',
+            'impact.cat1':'Education','impact.cat2':'Entrepreneurship','impact.cat3':'Innovation','impact.cat4':'Community','impact.cat5':'Education','impact.cat6':'Leadership',
+            'impact.p1':'Annual university orientation forum helping baccalaureate students choose their academic path. 4 editions, 240+ participants.',
+            'impact.p2':'Supporting small business owners and artisans through training workshops and a marketplace exhibition for local products.',
+            'impact.p3':'A hackathon fostering innovation with coding challenges, entrepreneurship workshops, and team competitions.',
+            'impact.p4':'Multi-day sports tournament for local clubs, bringing the community together through football and handball.',
+            'impact.p5':'Practical training program for baccalaureate students, improving their applied exam performance through specialist workshops.',
+            'impact.p6':'Debate and public speaking forum in collaboration with 5 neighboring chapters, preparing members for championships.',
+            'join.label':'Join Us','join.title':'Ready to become a <span class="font-semibold text-jci-teal">young leader</span>?',
+            'join.desc':'If you\'re between 18 and 40 years old and want to develop your skills, serve your community, and connect with a global network, JCI El Alia is your place.',
+            'join.b1':'Free leadership and professional training','join.b2':'Access to a network of 200,000+ members worldwide',
+            'join.b3':'Opportunities to lead real community projects','join.b4':'International conferences and cultural exchanges',
+            'join.formtitle':'Express Your Interest','join.submit':'Send My Application',
+            'footer.desc':'Developing leaders for a changing world in El Alia since 1989. Part of JCI Tunisia and JCI International.',
+            'footer.links':'Quick Links','footer.connect':'Connect With Us','footer.affiliation':'Part of JCI Tunisia · JCI International'
+        },
+        fr: {
+            'nav.home':'Accueil','nav.about':'Qui Sommes-Nous','nav.impact':'Notre Impact','nav.join':'Rejoignez-Nous','nav.cta':'Devenir Membre',
+            'hero.badge':'Depuis 1989 · El Alia, Tunisie','hero.title1':'Développer des Leaders','hero.title2':'pour un Monde en Évolution',
+            'hero.subtitle':'JCI El Alia permet aux jeunes citoyens de 18 à 40 ans de créer un changement positif à travers le leadership, l\'action et la coopération internationale.',
+            'hero.cta1':'Devenir un Citoyen Actif','hero.cta2':'Découvrir Notre Histoire',
+            'hero.stat1':'Années d\'Impact','hero.stat2':'Membres Actifs','hero.stat3':'Projets Réalisés',
+            'about.label':'Qui Sommes-Nous','about.title':'Un héritage de leadership jeune à <span class="font-semibold">El Alia</span>',
+            'about.p1':'Fondée en 1989, JCI El Alia fait partie du réseau de 113 organisations locales de JCI Tunisie. Nous apportons la mission mondiale de la JCI au cœur du Gouvernorat de Bizerte.',
+            'about.p2':'Nos membres sont des étudiants, des professionnels et des entrepreneurs unis par une conviction commune : la citoyenneté active transforme les communautés.',
+            'about.tag1':'Membre de JCI International','about.tag2':'Zone B, Bizerte',
+            'about.card1':'Fondée','about.card2':'Présidents','about.card3':'Jumelages','about.card4':'Âge Moyen',
+            'pillars.label':'Axes d\'Opportunité','pillars.title':'Quatre piliers de <span class="font-semibold">changement positif</span>',
+            'pillars.t1':'Développement Individuel','pillars.d1':'Développer la confiance, la communication et les compétences en leadership à travers des formations pratiques.',
+            'pillars.t2':'Impact Communautaire','pillars.d2':'Créer un changement significatif à travers des initiatives environnementales, sanitaires et éducatives.',
+            'pillars.t3':'Coopération Internationale','pillars.d3':'Se connecter avec des chapitres du monde entier à travers des programmes de jumelage et des échanges culturels.',
+            'pillars.t4':'Économie & Entrepreneuriat','pillars.d4':'Soutenir l\'entrepreneuriat des jeunes à travers des ateliers, hackathons et mentorat.',
+            'impact.label':'Notre Impact','impact.title':'Des projets qui <span class="font-semibold">font la différence</span>',
+            'impact.cat1':'Éducation','impact.cat2':'Entrepreneuriat','impact.cat3':'Innovation','impact.cat4':'Communauté','impact.cat5':'Éducation','impact.cat6':'Leadership',
+            'impact.p1':'Forum annuel d\'orientation universitaire aidant les bacheliers à choisir leur parcours académique. 4 éditions, 240+ participants.',
+            'impact.p2':'Soutien aux petits entrepreneurs et artisans à travers des ateliers de formation et un marché d\'exposition de produits locaux.',
+            'impact.p3':'Un hackathon favorisant l\'innovation avec des défis de programmation, des ateliers d\'entrepreneuriat et des compétitions d\'équipe.',
+            'impact.p4':'Tournoi sportif multi-jours pour les clubs locaux, rassemblant la communauté autour du football et du handball.',
+            'impact.p5':'Programme de formation pratique pour les bacheliers, améliorant leurs performances aux examens pratiques.',
+            'impact.p6':'Forum de débat et d\'art oratoire en collaboration avec 5 chapitres voisins, préparant les membres aux championnats.',
+            'join.label':'Rejoignez-Nous','join.title':'Prêt à devenir un <span class="font-semibold text-jci-teal">jeune leader</span> ?',
+            'join.desc':'Si vous avez entre 18 et 40 ans et souhaitez développer vos compétences, servir votre communauté et vous connecter à un réseau mondial, JCI El Alia est votre place.',
+            'join.b1':'Formations gratuites en leadership et développement professionnel','join.b2':'Accès à un réseau de 200 000+ membres dans le monde',
+            'join.b3':'Opportunités de diriger de vrais projets communautaires','join.b4':'Conférences internationales et échanges culturels',
+            'join.formtitle':'Exprimez Votre Intérêt','join.submit':'Envoyer Ma Candidature',
+            'footer.desc':'Développer des leaders pour un monde en évolution à El Alia depuis 1989. Membre de JCI Tunisie et JCI International.',
+            'footer.links':'Liens Rapides','footer.connect':'Nous Suivre','footer.affiliation':'Membre de JCI Tunisie · JCI International'
+        },
+        ar: {
+            'nav.home':'الرئيسية','nav.about':'من نحن','nav.impact':'أثرنا','nav.join':'انضم إلينا','nav.cta':'كن عضواً',
+            'hero.badge':'منذ 1989 · العالية، تونس','hero.title1':'تطوير القادة','hero.title2':'لعالم متغيّر',
+            'hero.subtitle':'الغرفة الفتية العالمية بالعالية تمكّن الشباب من 18 إلى 40 سنة من إحداث تغيير إيجابي من خلال القيادة والعمل والتعاون الدولي.',
+            'hero.cta1':'كن مواطناً فاعلاً','hero.cta2':'اكتشف قصتنا',
+            'hero.stat1':'سنة من التأثير','hero.stat2':'عضو نشط','hero.stat3':'مشروع منجز',
+            'about.label':'من نحن','about.title':'إرث من القيادة الشبابية في <span class="font-semibold">العالية</span>',
+            'about.p1':'تأسست سنة 1989، الغرفة الفتية العالمية بالعالية جزء من شبكة 113 غرفة محلية تابعة للغرفة الفتية التونسية. نحمل رسالة الغرفة الفتية العالمية إلى قلب ولاية بنزرت.',
+            'about.p2':'أعضاؤنا طلاب ومهنيون ورواد أعمال يجمعهم إيمان مشترك: المواطنة الفاعلة تغيّر المجتمعات. من العمل البيئي إلى ريادة الأعمال، نخلق فرصاً للنمو.',
+            'about.tag1':'عضو في الغرفة الفتية العالمية','about.tag2':'الإقليم ب، بنزرت',
+            'about.card1':'سنة التأسيس','about.card2':'رؤساء','about.card3':'اتفاقيات توأمة','about.card4':'متوسط العمر',
+            'pillars.label':'محاور الفرص','pillars.title':'أربعة ركائز <span class="font-semibold">للتغيير الإيجابي</span>',
+            'pillars.t1':'التنمية الفردية','pillars.d1':'بناء الثقة والتواصل ومهارات القيادة من خلال برامج تدريبية عملية.',
+            'pillars.t2':'الأثر المجتمعي','pillars.d2':'إحداث تغيير ملموس من خلال مبادرات بيئية وصحية وتعليمية في العالية.',
+            'pillars.t3':'التعاون الدولي','pillars.d3':'التواصل مع غرف حول العالم من خلال برامج التوأمة والتبادل الثقافي.',
+            'pillars.t4':'الاقتصاد وريادة الأعمال','pillars.d4':'دعم ريادة الأعمال الشبابية من خلال ورشات عمل وهاكاثونات وإرشاد.',
+            'impact.label':'أثرنا','impact.title':'مشاريع <span class="font-semibold">تصنع الفرق</span>',
+            'impact.cat1':'تعليم','impact.cat2':'ريادة أعمال','impact.cat3':'ابتكار','impact.cat4':'مجتمع','impact.cat5':'تعليم','impact.cat6':'قيادة',
+            'impact.p1':'منتدى سنوي للتوجيه الجامعي يساعد تلاميذ البكالوريا في اختيار مسارهم الأكاديمي. 4 نسخ، أكثر من 240 مشارك.',
+            'impact.p2':'دعم أصحاب المشاريع الصغيرة والحرفيين من خلال ورشات تكوينية ومعرض لعرض المنتجات المحلية.',
+            'impact.p3':'هاكاثون لتعزيز الابتكار مع تحديات برمجية وورشات ريادة أعمال ومسابقات فرق.',
+            'impact.p4':'دوري رياضي متعدد الأيام للأندية المحلية، يجمع المجتمع حول كرة القدم وكرة اليد.',
+            'impact.p5':'برنامج تدريبي تطبيقي لتلاميذ البكالوريا، يحسّن أداءهم في الامتحانات التطبيقية.',
+            'impact.p6':'منتدى مناظرة وفن خطابة بالتعاون مع 5 غرف مجاورة، يحضّر الأعضاء للبطولات.',
+            'join.label':'انضم إلينا','join.title':'مستعد لتصبح <span class="font-semibold text-jci-teal">قائداً شاباً</span>؟',
+            'join.desc':'إذا كان عمرك بين 18 و40 سنة وتريد تطوير مهاراتك وخدمة مجتمعك والتواصل مع شبكة عالمية، الغرفة الفتية بالعالية هي مكانك.',
+            'join.b1':'تكوينات مجانية في القيادة والتنمية المهنية','join.b2':'الوصول إلى شبكة تضم أكثر من 200,000 عضو حول العالم',
+            'join.b3':'فرص لقيادة مشاريع مجتمعية حقيقية','join.b4':'مؤتمرات دولية وتبادلات ثقافية',
+            'join.formtitle':'عبّر عن اهتمامك','join.submit':'أرسل طلبي',
+            'footer.desc':'تطوير القادة لعالم متغيّر في العالية منذ 1989. عضو في الغرفة الفتية التونسية والغرفة الفتية العالمية.',
+            'footer.links':'روابط سريعة','footer.connect':'تواصل معنا','footer.affiliation':'عضو في الغرفة الفتية التونسية · الغرفة الفتية العالمية'
+        }
+    };
+
+    let currentLang = 'en';
+    function setLang(lang) {
+        currentLang = lang;
+        const html = document.documentElement;
+        if (lang === 'ar') {
+            html.setAttribute('dir', 'rtl');
+            html.setAttribute('lang', 'ar');
+            document.body.style.fontFamily = '"Noto Sans Arabic", sans-serif';
+        } else {
+            html.setAttribute('dir', 'ltr');
+            html.setAttribute('lang', lang);
+            document.body.style.fontFamily = '"Plus Jakarta Sans", sans-serif';
+        }
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[lang] && translations[lang][key]) {
+                el.innerHTML = translations[lang][key];
+            }
+        });
+        // 7. Translate placeholders
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            if (placeholders[lang] && placeholders[lang][key]) {
+                el.setAttribute('placeholder', placeholders[lang][key]);
+            }
+        });
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.textContent.trim() === lang.toUpperCase()) {
+                btn.classList.add('active');
+            }
+        });
+    }
+    </script>
+</body>
+</html>
