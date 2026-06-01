@@ -9,6 +9,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "check:i18n": "node scripts/check-i18n.mjs",
+    "deploy": "astro build && wrangler pages deploy dist --project-name jci-el-alia --branch main --commit-dirty=true",
     "astro": "astro"
   },
   "dependencies": {
