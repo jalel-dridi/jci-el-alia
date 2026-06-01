@@ -14,8 +14,8 @@ const {
 } = Astro.props
 
 // Canonical + absolute OG image URL (falls back gracefully if `site` unset)
-const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://jcielalia.pages.dev').href
-const ogImage = new URL(image, Astro.site ?? 'https://jcielalia.pages.dev').href
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://jci-el-alia.pages.dev').href
+const ogImage = new URL(image, Astro.site ?? 'https://jci-el-alia.pages.dev').href
 
 // Organization structured data for richer search results.
 const jsonLd = {
@@ -23,7 +23,7 @@ const jsonLd = {
   '@type': 'NGO',
   name: 'JCI El Alia',
   alternateName: 'Jeune Chambre Internationale El Alia',
-  url: Astro.site?.href ?? 'https://jcielalia.pages.dev',
+  url: Astro.site?.href ?? 'https://jci-el-alia.pages.dev',
   logo: ogImage,
   foundingDate: '1989',
   email: 'jcielalia@gmail.com',
