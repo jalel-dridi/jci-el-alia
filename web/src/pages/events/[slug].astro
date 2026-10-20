@@ -1,6 +1,7 @@
 ---
 /**
- * Event album page — full description + photo gallery with a simple lightbox.
+ * Event album page — full description + photo gallery with a lightbox
+ * (prev/next, arrow keys, swipe). Emits schema.org Event data for Google.
  * Static paths are generated from all events (CMS, with empty fallback).
  */
 import Base from '../../layouts/Base.astro'
@@ -33,6 +34,24 @@ const cover = eventCover(event, 1600, 900)
 const shareImage = eventCover(event, 1200, 630) || undefined
 const gallery = eventGallery(event)
 const dateStr = formatDate(event.date, lang)
+
+// schema.org Event — lets Google show date/place for the event in results.
+const eventLd = event.date && {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: pick(event.title, 'en'),
+  description: pick(event.summary, 'en') || undefined,
+  startDate: event.date,
+  eventStatus: 'https://schema.org/EventScheduled',
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  image: shareImage ? [new URL(shareImage, Astro.site ?? 'https://jci-el-alia.pages.dev').href] : undefined,
+  location: {
+    '@type': 'Place',
+    name: event.location || 'El Alia',
+    address: {'@type': 'PostalAddress', addressLocality: 'El Alia', addressRegion: 'Bizerte', addressCountry: 'TN'},
+  },
+  organizer: {'@type': 'Organization', name: 'JCI El Alia', url: Astro.site?.href ?? 'https://jci-el-alia.pages.dev'},
+}
 ---
 
 <Base
@@ -42,6 +61,7 @@ const dateStr = formatDate(event.date, lang)
   description={pick(event.summary, lang) || undefined}
   image={shareImage}
 >
+  {eventLd && <script type="application/ld+json" set:html={JSON.stringify(eventLd)} is:inline />}
   <Navbar lang={lang} />
   <main class="pt-16 lg:pt-20">
     <!-- Hero / cover -->
@@ -70,8 +90,8 @@ const dateStr = formatDate(event.date, lang)
     {gallery.length > 0 && (
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
         <div class="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
-          {gallery.map((img) => (
-            <button class="gallery-item block w-full break-inside-avoid rounded-xl overflow-hidden group" data-full={img.full} aria-label={`View photo: ${pick(event.title, lang)}`}>
+          {gallery.map((img, i) => (
+            <button class="gallery-item block w-full break-inside-avoid rounded-xl overflow-hidden group" data-full={img.full} aria-label={`View photo ${i + 1} of ${gallery.length}: ${pick(event.title, lang)}`}>
               <img src={img.thumb} alt={img.alt || pick(event.title, lang)} loading="lazy" class="w-full group-hover:scale-105 transition-transform duration-500" />
             </button>
           ))}
@@ -82,9 +102,12 @@ const dateStr = formatDate(event.date, lang)
   <Footer settings={settings} lang={lang} />
 
   <!-- Lightbox -->
-  <div id="lightbox" class="fixed inset-0 z-[60] bg-black/90 hidden items-center justify-center p-4">
-    <button id="lightbox-close" aria-label="Close" class="absolute top-6 right-6 text-white/80 hover:text-white text-2xl"><Icon name="fa-times" /></button>
-    <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[90vh] rounded-lg object-contain" />
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label={pick(event.title, lang)} class="fixed inset-0 z-[60] bg-black/90 hidden items-center justify-center p-4 select-none">
+    <button id="lightbox-close" aria-label="Close" class="absolute top-5 end-5 w-11 h-11 flex items-center justify-center rounded-full text-white/80 hover:text-white hover:bg-white/10 text-2xl"><Icon name="fa-times" /></button>
+    <button id="lightbox-prev" aria-label="Previous photo" class="absolute start-2 sm:start-5 top-1/2 -translate-y-1/2 w-11 h-11 flex items-center justify-center rounded-full bg-black/50 hover:bg-black/70 text-white text-lg"><Icon name="fa-chevron-left" class="rtl:rotate-180" /></button>
+    <button id="lightbox-next" aria-label="Next photo" class="absolute end-2 sm:end-5 top-1/2 -translate-y-1/2 w-11 h-11 flex items-center justify-center rounded-full bg-black/50 hover:bg-black/70 text-white text-lg"><Icon name="fa-chevron-right" class="rtl:rotate-180" /></button>
+    <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[85vh] rounded-lg object-contain" />
+    <div id="lightbox-count" class="absolute bottom-5 left-1/2 -translate-x-1/2 text-white/70 text-sm tabular-nums" dir="ltr"></div>
   </div>
 
   <SiteScripts translations={translations} />
@@ -93,17 +116,73 @@ const dateStr = formatDate(event.date, lang)
     (function () {
       const lb = document.getElementById('lightbox')
       const lbImg = document.getElementById('lightbox-img')
-      const close = document.getElementById('lightbox-close')
-      document.querySelectorAll('.gallery-item').forEach((b) => {
-        b.addEventListener('click', () => {
-          lbImg.src = b.getAttribute('data-full')
-          lb.classList.remove('hidden'); lb.classList.add('flex')
-        })
-      })
-      function hide() { lb.classList.add('hidden'); lb.classList.remove('flex'); lbImg.src = '' }
-      close.addEventListener('click', hide)
+      const count = document.getElementById('lightbox-count')
+      const closeBtn = document.getElementById('lightbox-close')
+      const prevBtn = document.getElementById('lightbox-prev')
+      const nextBtn = document.getElementById('lightbox-next')
+      const items = [...document.querySelectorAll('.gallery-item')]
+      if (!items.length) return
+      const srcs = items.map((b) => b.getAttribute('data-full'))
+      const single = srcs.length < 2
+      prevBtn.hidden = nextBtn.hidden = single
+      let current = 0
+      let opener = null
+
+      function show(i) {
+        current = (i + srcs.length) % srcs.length
+        lbImg.src = srcs[current]
+        lbImg.alt = items[current].querySelector('img')?.alt || ''
+        count.textContent = single ? '' : current + 1 + ' / ' + srcs.length
+        // Warm the cache for the neighbours so prev/next feel instant
+        ;[current - 1, current + 1].forEach((n) => { new Image().src = srcs[(n + srcs.length) % srcs.length] })
+      }
+      function open(i, from) {
+        opener = from
+        show(i)
+        lb.classList.remove('hidden'); lb.classList.add('flex')
+        document.body.style.overflow = 'hidden'
+        closeBtn.focus()
+      }
+      function hide() {
+        if (lb.classList.contains('hidden')) return
+        lb.classList.add('hidden'); lb.classList.remove('flex'); lbImg.src = ''
+        document.body.style.overflow = ''
+        opener?.focus()
+      }
+      const isOpen = () => !lb.classList.contains('hidden')
+      const rtl = () => document.documentElement.dir === 'rtl'
+
+      items.forEach((b, i) => b.addEventListener('click', () => open(i, b)))
+      closeBtn.addEventListener('click', hide)
+      prevBtn.addEventListener('click', () => show(current - 1))
+      nextBtn.addEventListener('click', () => show(current + 1))
       lb.addEventListener('click', (e) => { if (e.target === lb) hide() })
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hide() })
+      document.addEventListener('keydown', (e) => {
+        if (!isOpen()) return
+        if (e.key === 'Escape') hide()
+        // Arrow keys follow reading direction (left = next in Arabic)
+        else if (e.key === 'ArrowRight') show(current + (rtl() ? -1 : 1))
+        else if (e.key === 'ArrowLeft') show(current + (rtl() ? 1 : -1))
+        else if (e.key === 'Tab') {
+          // Keep keyboard focus inside the dialog
+          const f = [closeBtn, prevBtn, nextBtn].filter((el) => !el.hidden)
+          const idx = f.indexOf(document.activeElement)
+          e.preventDefault()
+          f[(idx + (e.shiftKey ? -1 : 1) + f.length) % f.length].focus()
+        }
+      })
+
+      // Swipe on touch screens
+      let x0 = null
+      lb.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX }, {passive: true})
+      lb.addEventListener('touchend', (e) => {
+        if (x0 === null || single) return
+        const dx = e.changedTouches[0].clientX - x0
+        x0 = null
+        if (Math.abs(dx) < 50) return
+        const forward = dx < 0 !== rtl()
+        show(current + (forward ? 1 : -1))
+      })
     })()
   </script>
 </Base>

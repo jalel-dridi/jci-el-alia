@@ -20,13 +20,23 @@ members, partners, and the homepage settings. No coding required.
    - **Pillars** — the four areas of opportunity.
 4. Every text field has **English / Français / العربية** — fill what you can;
    English is the fallback if a translation is missing.
-5. Click **Publish**. The website updates automatically within ~1 minute.
+5. Click **Publish**. The website updates automatically within ~1 minute
+   (and in any case overnight).
 
 ## Tips
 
 - **Images:** upload the original full-size photo. The site automatically
   resizes, compresses, and serves the right version — you don't need to edit
   photos first.
+- **Upcoming events:** give an event a future date and it appears in the
+  "Coming Up" section under the homepage hero, with "Add to calendar" buttons.
+  After the date passes it moves to "Our Work" automatically — add the photo
+  album then.
+- **Project photos:** if a project has no photo, the site borrows the cover of
+  its latest event with a matching name (e.g. "Orient'Up" → "Orient'Up 4.0").
+  Upload a photo on the project to override it.
+- **Icons:** the "icon" fields take Font Awesome names such as `fa-compass`
+  (browse https://fontawesome.com/search?ic=free).
 - **Mistakes:** Sanity keeps document history, so changes can be rolled back.
 - **New president each year:** add a Legacy Timeline entry and update the
   current flag; update Site Settings theme/slogan and the Board Members list.

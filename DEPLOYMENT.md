@@ -21,10 +21,16 @@ Push code to GitHub ────────────────────
                                                   Cloudflare Pages (live site)
 ```
 
-Two triggers rebuild + redeploy the site automatically:
+Three triggers rebuild + redeploy the site automatically:
 1. **Pushing code** to `main`.
 2. **Publishing content** in the dashboard (via the Sanity webhook below).
+3. **Every night at 03:00 Tunis time** — a safety net so dashboard edits go
+   live within a day even if the webhook breaks, and so upcoming events move
+   to "Our Work" once their date passes.
 You can also click **Run workflow** on the Deploy action in GitHub anytime.
+
+> GitHub pauses scheduled workflows after 60 days without commits to the repo.
+> If that happens, re-enable "Deploy" from the repository's **Actions** tab.
 
 ## One-time setup of the automation
 

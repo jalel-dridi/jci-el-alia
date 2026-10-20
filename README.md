@@ -18,8 +18,9 @@ JCI El Alia Site/
   is fetched from Sanity at build time. Free, fast, no server.
 - **CMS / Dashboard:** Sanity (free plan: 20 editors, 100 GB assets + bandwidth).
 - **Content model:** every text field is trilingual `{ en, fr, ar }`.
-- **Publishing:** a Sanity webhook triggers a Cloudflare rebuild on publish, so
-  edits go live in ~1 minute.
+- **Publishing:** a Sanity webhook triggers a rebuild on publish, so edits go
+  live in ~1 minute; a nightly rebuild catches anything missed. See
+  `DEPLOYMENT.md` for the live pipeline (GitHub Actions → Cloudflare Pages).
 
 If the CMS is empty or unreachable, the site falls back to real seed data in
 `web/src/data/seed.js`, so it always renders a complete page.
@@ -102,5 +103,7 @@ Hit **Publish** and the site updates automatically.
 
 ## Membership form
 
-The Join form posts to Formspree. Replace `YOUR_ID` in
-`web/src/components/Join.astro` with your Formspree form ID.
+The Join form posts to Formspree. Set `FORMSPREE_ID` at the top of
+`web/src/components/Join.astro` to your form's ID. Until it is set, submitting
+opens the visitor's email app pre-filled to the chapter's contact email, so no
+application is lost.

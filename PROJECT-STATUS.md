@@ -1,7 +1,6 @@
 # Project Status & Handover
 
-_Last updated: pre-deployment. The site is fully built and verified locally;
-the only remaining work is account-linked deployment._
+_Last updated: October 2026. The site and dashboard are live._
 
 ## What this is
 
@@ -10,52 +9,45 @@ Board members edit everything (events, photo albums, projects, presidents,
 board, partners, settings) through a friendly UI and click Publish — the site
 updates automatically.
 
+## Live
+
+| What | Where |
+|------|-------|
+| Website | https://jci-el-alia.pages.dev (Cloudflare Pages) |
+| Dashboard | https://jcielalia.sanity.studio |
+| Sanity project | `3fwebql8`, dataset `production` |
+| Deploys | GitHub Actions `Deploy`: on push, on publish (webhook), nightly |
+
 ## Current state
 
 | Area | Status |
 |------|--------|
-| Astro frontend (`web/`) | ✅ Built, all sections, 3 pages, trilingual + RTL |
-| Sanity dashboard (`studio/`) | ✅ Schema complete, builds clean |
-| Real chapter content (seed) | ✅ 9 presidents, 6 projects, 4 pillars, 8 partners, 2025 board, 4 milestones |
-| Accessibility | ✅ Skip link, ARIA labels, reduced-motion support |
-| SEO | ✅ Meta, Open Graph, Twitter, JSON-LD, sitemap, robots.txt |
-| Performance | ✅ Sized/lazy images, hero priority, cache headers, optimized icons |
-| CI | ✅ GitHub Actions builds web + studio, i18n check |
-| Deployment | ⏳ Pending login (see below) |
+| Frontend (`web/`) | ✅ Live — homepage, `/events`, album pages, 404 |
+| Dashboard (`studio/`) | ✅ Live, real content (10 events, 9 presidents, 14 board members) |
+| Languages | ✅ EN/FR/AR incl. events, roles, categories, dates; RTL |
+| Upcoming events | ✅ "Coming Up" section + `.ics` / Google Calendar links |
+| SEO | ✅ Meta, Open Graph (event covers on album pages), JSON-LD Organization + Event, sitemap |
+| Performance | ✅ Inline SVG icons (no icon font), sized/lazy images, cache headers |
+| CI | ✅ Builds web + studio, i18n completeness check |
 
-## Sections on the homepage
+## Open items
 
-Navbar → Hero (animated counters) → About → Legacy timeline (9 presidents) →
-Pillars → Impact (projects) → Achievements (milestones) → Testimonial (Arvo
-quote) → Our Work (events + albums) → Team (board) → Join (form) → Partners →
-Footer. Plus `/events` archive, `/events/[slug]` album pages, and a 404.
-
-## Remaining steps (need accounts — not yet done)
-
-1. `sanity login` (GitHub account `JalelDridi`)
-2. `sanity init` → creates project, gives a **project ID**
-3. Put the ID in `web/.env` and `studio/.env` (copy from `.env.example`)
-4. Run `studio/scripts/seed.mjs` with a write token to load real data
-5. `sanity deploy` → dashboard at `jcielalia.sanity.studio`
-6. Push to GitHub → connect Cloudflare Pages (root `web`, build `npm run build`,
-   output `dist`) → add the two `PUBLIC_SANITY_*` env vars
-7. Add CORS origins in Sanity + a deploy-hook webhook for auto-rebuilds
-
-Full details in `README.md`. Dashboard editing guide in `studio/README.md`.
+- **Custom domain** — then update `site` in `web/astro.config.mjs`, add the
+  domain in Cloudflare Pages → Custom domains, and add it to Sanity CORS origins.
+- **Formspree ID** — set `FORMSPREE_ID` in `web/src/components/Join.astro`
+  (until then the form falls back to email).
+- **Sanity webhook** — verify it fires (sanity.io/manage → API → Webhooks →
+  attempts log); the nightly rebuild covers it meanwhile.
+- **Photos** — board members (0/14) and presidents (1/9) have no photos yet;
+  plain (logo-free) event covers would look cleaner.
 
 ## Key decisions (why things are the way they are)
 
 - **Astro + Sanity, both free.** Chosen for non-technical editors, heavy photo
   albums, and annual board turnover (handover = invite the new board).
-- **Static build + webhook**, not SSR — keeps hosting free and fast.
+- **Static build + webhook + nightly rebuild**, not SSR — keeps hosting free
+  and fast; "upcoming vs past" is decided at build time.
 - **Seed fallback** (`web/src/data/seed.js`) — the site renders complete content
   even if the CMS is empty/offline; also the source for the seed script.
 - **Tailwind v4 via PostCSS**, not the Vite plugin (Astro 6 Rolldown issue).
 - **Formspree** for the Join form so applicant data stays out of public content.
-
-## Things to revisit later
-
-- Replace `YOUR_ID` in `web/src/components/Join.astro` with the real Formspree ID.
-- Add a real hero background photo + project/event photos via the dashboard.
-- Point `site` in `web/astro.config.mjs` to the final domain before launch.
-- Consider a custom domain in Cloudflare Pages.
