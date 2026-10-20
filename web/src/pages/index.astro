@@ -38,7 +38,7 @@ const testimonial = seed.testimonial
 // Show the most recent board year that actually has members.
 const boardYear = board.length ? Math.max(...board.map((m) => m.year || 0)) : settings.year
 
-const translations = buildTranslations({settings, presidents, projects, pillars, testimonial, achievements: seed.achievements})
+const translations = buildTranslations({settings, presidents, projects, pillars, testimonial, achievements: seed.achievements, events, board})
 const lang = 'en'
 ---
 
@@ -49,12 +49,12 @@ const lang = 'en'
     <About settings={settings} presidents={presidents} lang={lang} />
     <Legacy presidents={presidents} lang={lang} />
     <Pillars pillars={pillars} lang={lang} />
-    <Impact projects={projects} lang={lang} />
+    <Impact projects={projects} events={events} lang={lang} />
     <Achievements achievements={seed.achievements} lang={lang} />
     <Testimonial testimonial={testimonial} lang={lang} />
     <Work events={events} lang={lang} />
     <Team board={board} year={boardYear} lang={lang} />
-    <Join lang={lang} />
+    <Join settings={settings} lang={lang} />
     <Partners partners={partners} lang={lang} />
   </main>
   <Footer settings={settings} lang={lang} />

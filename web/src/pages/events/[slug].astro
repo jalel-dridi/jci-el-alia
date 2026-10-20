@@ -24,7 +24,7 @@ const settings = await getSiteSettings(seed.siteSettings)
 const presidents = await getPresidents(seed.presidents)
 const projects = await getProjects(seed.projects)
 const pillars = await getPillars(seed.pillars)
-const translations = buildTranslations({settings, presidents, projects, pillars, testimonial: seed.testimonial})
+const translations = buildTranslations({settings, presidents, projects, pillars, testimonial: seed.testimonial, events: [event]})
 const lang = 'en'
 
 const cover = eventCover(event, 1600, 900)
@@ -51,8 +51,8 @@ const dateStr = event.date ? new Date(event.date).toLocaleDateString('en-GB', {y
         <a href="/#work" class="text-white/70 hover:text-white text-sm mb-4 inline-flex items-center gap-2 w-fit">
           <i class="fas fa-arrow-left rtl:rotate-180"></i><span data-i18n="work.back">{t('work.back', lang)}</span>
         </a>
-        <span class="inline-block bg-jci-blue text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 w-fit capitalize">{event.category}</span>
-        <h1 class="text-3xl lg:text-5xl font-light text-white">{pick(event.title, lang)}</h1>
+        <span class="inline-block bg-jci-blue text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 w-fit capitalize" data-i18n={`cat.${event.category}`}>{t(`cat.${event.category}`, lang)}</span>
+        <h1 class="text-3xl lg:text-5xl font-light text-white" data-i18n={`ev.${event.slug}.title`}>{pick(event.title, lang)}</h1>
         <div class="flex flex-wrap items-center gap-4 text-white/60 text-sm mt-3">
           {dateStr && <span><i class="fas fa-calendar mr-2"></i>{dateStr}</span>}
           {event.location && <span><i class="fas fa-map-marker-alt mr-2"></i>{event.location}</span>}
@@ -62,7 +62,7 @@ const dateStr = event.date ? new Date(event.date).toLocaleDateString('en-GB', {y
 
     <!-- Description -->
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <p class="text-lg text-jci-black/70 leading-[1.9] whitespace-pre-line">{pick(event.description, lang) || pick(event.summary, lang)}</p>
+      <p class="text-lg text-jci-black/70 leading-[1.9] whitespace-pre-line" data-i18n={`ev.${event.slug}.desc`}>{pick(event.description, lang) || pick(event.summary, lang)}</p>
     </div>
 
     <!-- Gallery -->

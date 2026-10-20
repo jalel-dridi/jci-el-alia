@@ -1,10 +1,15 @@
 ---
 /**
  * Join Us — benefits list + Formspree intake form.
- * Replace the form action with your real Formspree endpoint before launch.
+ * Set FORMSPREE_ID to the form's ID (formspree.io/f/<ID>). Until then, the form
+ * opens the visitor's email app pre-filled to the chapter's address, so
+ * applications are never lost.
  */
 import {t} from '../i18n/utils.js'
-const {lang = 'en'} = Astro.props
+
+const FORMSPREE_ID = ''
+const {settings = {}, lang = 'en'} = Astro.props
+const action = FORMSPREE_ID ? `https://formspree.io/f/${FORMSPREE_ID}` : `mailto:${settings.email || 'jcielalia@gmail.com'}`
 ---
 
 <section id="join" class="py-24 lg:py-32 bg-gradient-to-br from-jci-black via-jci-navy to-jci-blue relative overflow-hidden">
@@ -30,13 +35,14 @@ const {lang = 'en'} = Astro.props
       <div class="reveal reveal-delay-2">
         <div class="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20">
           <h3 class="text-xl font-semibold text-white mb-6" data-i18n="join.formtitle">{t('join.formtitle', lang)}</h3>
-          <form id="join-form" action="https://formspree.io/f/YOUR_ID" method="POST" class="space-y-4">
+          <form id="join-form" action={action} method="POST" class="space-y-4">
             <input type="text" name="name" required placeholder={t('join.ph1', lang)} data-i18n-ph="join.ph1" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/40 text-sm focus:outline-none focus:border-jci-teal transition-colors" />
             <input type="email" name="email" required placeholder={t('join.ph2', lang)} data-i18n-ph="join.ph2" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/40 text-sm focus:outline-none focus:border-jci-teal transition-colors" />
             <input type="tel" name="phone" placeholder={t('join.ph3', lang)} data-i18n-ph="join.ph3" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/40 text-sm focus:outline-none focus:border-jci-teal transition-colors" />
             <textarea name="message" rows="3" placeholder={t('join.ph4', lang)} data-i18n-ph="join.ph4" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/40 text-sm focus:outline-none focus:border-jci-teal transition-colors resize-none"></textarea>
             <button type="submit" class="w-full bg-jci-teal hover:bg-jci-blue text-white py-3.5 rounded-xl font-semibold text-sm transition-colors disabled:opacity-60" data-i18n="join.submit">{t('join.submit', lang)}</button>
             <p id="join-success" class="hidden text-jci-teal text-sm text-center" data-i18n="join.success">{t('join.success', lang)}</p>
+            <p id="join-mailto" class="hidden text-jci-teal text-sm text-center" data-i18n="join.mailto">{t('join.mailto', lang)}</p>
             <p id="join-error" class="hidden text-red-300 text-sm text-center" data-i18n="join.error">{t('join.error', lang)}</p>
           </form>
         </div>
@@ -53,9 +59,16 @@ const {lang = 'en'} = Astro.props
     const err = document.getElementById('join-error')
     const btn = form.querySelector('button[type="submit"]')
     form.addEventListener('submit', async (e) => {
-      // Only intercept once a real Formspree endpoint is configured.
-      if (form.action.includes('YOUR_ID')) return
       e.preventDefault()
+      // No Formspree ID yet: hand the application to the visitor's email app.
+      if (form.action.startsWith('mailto:')) {
+        const d = new FormData(form)
+        const body = ['Name: ' + d.get('name'), 'Email: ' + d.get('email'), 'Phone: ' + (d.get('phone') || '-'), '', d.get('message') || ''].join('
+')
+        location.href = form.action + '?subject=' + encodeURIComponent('Membership application - ' + d.get('name')) + '&body=' + encodeURIComponent(body)
+        document.getElementById('join-mailto').classList.remove('hidden')
+        return
+      }
       ok.classList.add('hidden'); err.classList.add('hidden')
       btn.disabled = true
       try {

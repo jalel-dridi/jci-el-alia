@@ -3,16 +3,21 @@
  * Our Work — the yearly showcase of events with photo albums.
  * Events are grouped by year (newest first). Each card links to its album
  * page at /events/[slug]. Shows a friendly empty-state when no events exist
- * yet (before the CMS is populated).
+ * yet (before the CMS is populated). Only the latest few are shown here; the
+ * full archive lives at /events.
  */
 import {t} from '../i18n/utils.js'
-import {pick, eventCover, eventGallery} from '../lib/sanity.js'
+import EventCard from './EventCard.astro'
 
+const HOMEPAGE_LIMIT = 6
 const {events = [], lang = 'en'} = Astro.props
+const latest = [...events]
+  .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')))
+  .slice(0, HOMEPAGE_LIMIT)
 
 // Group by year, newest first
 const byYear = {}
-for (const ev of events) {
+for (const ev of latest) {
   const y = ev.year || (ev.date ? new Date(ev.date).getFullYear() : 0)
   ;(byYear[y] ||= []).push(ev)
 }
@@ -40,31 +45,7 @@ const years = Object.keys(byYear).map(Number).sort((a, b) => b - a)
             <div class="flex-1 h-px bg-gray-200"></div>
           </div>
           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {byYear[year].map((ev) => {
-              const cover = eventCover(ev, 800, 500)
-              const count = eventGallery(ev).length
-              return (
-                <a href={`/events/${ev.slug}`} class="card-hover group bg-white rounded-2xl overflow-hidden border border-gray-100 block">
-                  <div class="h-52 overflow-hidden bg-gray-100 relative">
-                    {cover && <img src={cover} alt={pick(ev.title, lang)} width="800" height="500" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />}
-                    {count > 0 && (
-                      <span class="absolute top-3 right-3 rtl:right-auto rtl:left-3 bg-jci-black/70 text-white text-xs font-medium px-2.5 py-1 rounded-full backdrop-blur-sm">
-                        <i class="fas fa-camera mr-1"></i>{count} <span data-i18n="work.photos">{t('work.photos', lang)}</span>
-                      </span>
-                    )}
-                  </div>
-                  <div class="p-6">
-                    <span class="inline-block bg-jci-blue/10 text-jci-blue text-xs font-semibold px-3 py-1 rounded-full mb-3 capitalize">{ev.category}</span>
-                    <h3 class="text-lg font-semibold text-jci-black mb-2">{pick(ev.title, lang)}</h3>
-                    <p class="text-sm text-jci-black/60 leading-relaxed mb-4 line-clamp-2">{pick(ev.summary, lang)}</p>
-                    <span class="inline-flex items-center gap-2 text-jci-teal text-sm font-medium">
-                      <span data-i18n="work.viewalbum">{t('work.viewalbum', lang)}</span>
-                      <i class="fas fa-arrow-right rtl:rotate-180 group-hover:translate-x-1 transition-transform"></i>
-                    </span>
-                  </div>
-                </a>
-              )
-            })}
+            {byYear[year].map((ev) => <EventCard ev={ev} lang={lang} />)}
           </div>
         </div>
       ))

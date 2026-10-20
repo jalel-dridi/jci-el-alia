@@ -42,7 +42,7 @@ const accents = [
                 </div>
               )}
               <h3 class="font-semibold text-jci-black">{m.name}</h3>
-              <p class="text-sm text-jci-black/50 mt-1">{pick(m.role, lang)}</p>
+              <p class="text-sm text-jci-black/50 mt-1" data-i18n={`board.${m.year}.${m.name}.role`}>{pick(m.role, lang)}</p>
             </div>
           )
         })}

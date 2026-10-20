@@ -1,12 +1,23 @@
 ---
 /**
- * Our Impact — flagship project cards. Uses a real photo when present,
- * otherwise a branded gradient + icon placeholder (so it always looks good).
+ * Our Impact — flagship project cards. Uses the project's own photo when
+ * present, else the cover of its latest edition in the events (matched by
+ * title, e.g. "Orient'Up" -> "Orient'Up 4"), else a branded gradient + icon.
  */
 import {t} from '../i18n/utils.js'
-import {pick, urlFor} from '../lib/sanity.js'
+import {pick, urlFor, eventCover} from '../lib/sanity.js'
 
-const {projects, lang = 'en'} = Astro.props
+const {projects, events = [], lang = 'en'} = Astro.props
+
+const norm = (s = '') => s.toLowerCase().replace(/[^a-z0-9]/g, '')
+const newestFirst = [...events].sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')))
+function projectImage(p) {
+  if (p.image) return urlFor(p.image).width(800).height(450).fit('crop').quality(70).url()
+  const key = norm((p.title?.en || '').split('/')[0])
+  if (!key) return null
+  const ev = newestFirst.find((e) => norm(e.title?.en).startsWith(key))
+  return ev ? eventCover(ev, 800, 450) : null
+}
 
 // Rotating gradient + badge palette for placeholder cards
 const gradients = [
@@ -35,7 +46,7 @@ const badges = [
     </div>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
       {projects.map((p, i) => {
-        const img = p.image ? urlFor(p.image).width(800).height(450).fit('crop').quality(70).url() : null
+        const img = projectImage(p)
         return (
           <div class="card-hover group bg-white rounded-2xl overflow-hidden border border-gray-100 reveal">
             {img ? (

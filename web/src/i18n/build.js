@@ -4,11 +4,12 @@ import {pick} from '../lib/sanity.js'
 /**
  * Build a combined translation dictionary { en:{}, fr:{}, ar:{} } that merges
  * the static UI strings with all CMS content (presidents, projects, pillars,
- * partners, settings, testimonial). Each piece of content gets a stable key
+ * partners, settings, testimonial, events, board roles). Each piece of content gets a stable key
  * (e.g. "proj.1.title") so the client can swap languages instantly — exactly
  * like the original single-page site, but content-driven.
  */
-export function buildTranslations({settings, presidents, projects, pillars, testimonial, achievements}) {  const dict = {en: {}, fr: {}, ar: {}}
+export function buildTranslations({settings, presidents, projects, pillars, testimonial, achievements, events = [], board = []}) {
+  const dict = {en: {}, fr: {}, ar: {}}
 
   // Seed with static UI strings
   for (const lang of languages) {
@@ -54,6 +55,16 @@ export function buildTranslations({settings, presidents, projects, pillars, test
   if (achievements) {
     achievements.forEach((a, i) => add(`ach.${i}`, a.text))
   }
+
+  // Events — card title/summary and album page text, keyed by slug
+  events.forEach((ev) => {
+    add(`ev.${ev.slug}.title`, ev.title)
+    add(`ev.${ev.slug}.sum`, ev.summary)
+    add(`ev.${ev.slug}.desc`, ev.description || ev.summary)
+  })
+
+  // Board — roles, keyed by year + name (stable regardless of sort order)
+  board.forEach((m) => add(`board.${m.year}.${m.name}.role`, m.role))
 
   return dict
 }
