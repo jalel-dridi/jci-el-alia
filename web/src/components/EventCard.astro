@@ -6,6 +6,7 @@
  */
 import {t} from '../i18n/utils.js'
 import {pick, eventCover, eventGallery} from '../lib/sanity.js'
+import Icon from './Icon.astro'
 
 const {ev, lang = 'en'} = Astro.props
 const cover = eventCover(ev, 800, 500)
@@ -18,7 +19,7 @@ const catKey = `cat.${ev.category}`
     {cover && <img src={cover} alt={pick(ev.title, lang)} width="800" height="500" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />}
     {count > 0 && (
       <span class="absolute top-3 right-3 rtl:right-auto rtl:left-3 bg-jci-black/70 text-white text-xs font-medium px-2.5 py-1 rounded-full backdrop-blur-sm">
-        <i class="fas fa-camera mr-1 rtl:mr-0 rtl:ml-1"></i>{count} <span data-i18n="work.photos">{t('work.photos', lang)}</span>
+        <Icon name="fa-camera" class="me-1" />{count} <span data-i18n="work.photos">{t('work.photos', lang)}</span>
       </span>
     )}
   </div>
@@ -30,7 +31,7 @@ const catKey = `cat.${ev.category}`
     <p class="text-sm text-jci-black/60 leading-relaxed mb-4 line-clamp-2" data-i18n={`ev.${ev.slug}.sum`}>{pick(ev.summary, lang)}</p>
     <span class="inline-flex items-center gap-2 text-jci-teal text-sm font-medium">
       <span data-i18n="work.viewalbum">{t('work.viewalbum', lang)}</span>
-      <i class="fas fa-arrow-right rtl:rotate-180 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform"></i>
+      <Icon name="fa-arrow-right" class="rtl:rotate-180 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform" />
     </span>
   </div>
 </a>

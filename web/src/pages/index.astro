@@ -6,6 +6,7 @@
 import Base from '../layouts/Base.astro'
 import Navbar from '../components/Navbar.astro'
 import Hero from '../components/Hero.astro'
+import Upcoming from '../components/Upcoming.astro'
 import About from '../components/About.astro'
 import Legacy from '../components/Legacy.astro'
 import Pillars from '../components/Pillars.astro'
@@ -25,6 +26,7 @@ import {
 import * as seed from '../data/seed.js'
 import {events as seedEvents} from '../data/events.js'
 import {buildTranslations} from '../i18n/build.js'
+import {pastEvents} from '../lib/events.js'
 
 const settings = await getSiteSettings(seed.siteSettings)
 const presidents = await getPresidents(seed.presidents)
@@ -46,13 +48,14 @@ const lang = 'en'
   <Navbar lang={lang} />
   <main>
     <Hero settings={settings} lang={lang} />
+    <Upcoming events={events} lang={lang} />
     <About settings={settings} presidents={presidents} lang={lang} />
     <Legacy presidents={presidents} lang={lang} />
     <Pillars pillars={pillars} lang={lang} />
     <Impact projects={projects} events={events} lang={lang} />
     <Achievements achievements={seed.achievements} lang={lang} />
     <Testimonial testimonial={testimonial} lang={lang} />
-    <Work events={events} lang={lang} />
+    <Work events={pastEvents(events)} lang={lang} />
     <Team board={board} year={boardYear} lang={lang} />
     <Join settings={settings} lang={lang} />
     <Partners partners={partners} lang={lang} />

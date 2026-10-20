@@ -3,6 +3,7 @@
  * Footer — chapter info, quick links, social/contact. Data-driven contact.
  */
 import {t} from '../i18n/utils.js'
+import Icon from './Icon.astro'
 const {settings, lang = 'en'} = Astro.props
 const year = new Date().getFullYear()
 ---
@@ -14,7 +15,7 @@ const year = new Date().getFullYear()
         <img src="/images/logo.png" alt="JCI El Alia" class="h-14 w-auto mb-4 brightness-0 invert" />
         <p class="text-white/50 text-sm leading-relaxed mb-4" data-i18n="footer.desc">{t('footer.desc', lang)}</p>
         <div class="flex items-center gap-2 text-white/40 text-sm">
-          <i class="fas fa-map-marker-alt"></i>
+          <Icon name="fa-map-marker-alt" />
           <span>{settings.address}</span>
         </div>
       </div>
@@ -32,13 +33,13 @@ const year = new Date().getFullYear()
       <div>
         <h4 class="font-semibold text-white mb-4" data-i18n="footer.connect">{t('footer.connect', lang)}</h4>
         <div class="flex items-center gap-4 mb-6">
-          {settings.facebook && <a href={settings.facebook} target="_blank" rel="noopener" aria-label="Facebook" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-jci-blue transition-colors"><i class="fab fa-facebook-f text-white text-sm"></i></a>}
-          {settings.instagram && <a href={settings.instagram} target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-jci-blue transition-colors"><i class="fab fa-instagram text-white text-sm"></i></a>}
-          {settings.linkedin && <a href={settings.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-jci-blue transition-colors"><i class="fab fa-linkedin-in text-white text-sm"></i></a>}
+          {settings.facebook && <a href={settings.facebook} target="_blank" rel="noopener" aria-label="Facebook" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-jci-blue transition-colors"><Icon name="fa-facebook-f" class="text-white text-sm" /></a>}
+          {settings.instagram && <a href={settings.instagram} target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-jci-blue transition-colors"><Icon name="fa-instagram" class="text-white text-sm" /></a>}
+          {settings.linkedin && <a href={settings.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-jci-blue transition-colors"><Icon name="fa-linkedin-in" class="text-white text-sm" /></a>}
         </div>
         <div class="space-y-2 text-sm text-white/50">
-          {settings.email && <div class="flex items-center gap-2"><i class="fas fa-envelope text-xs"></i><span>{settings.email}</span></div>}
-          {settings.phone && <div class="flex items-center gap-2"><i class="fas fa-phone text-xs"></i><span>{settings.phone}</span></div>}
+          {settings.email && <div class="flex items-center gap-2"><Icon name="fa-envelope" class="text-xs" /><a href={`mailto:${settings.email}`} class="hover:text-jci-teal transition-colors">{settings.email}</a></div>}
+          {settings.phone && <div class="flex items-center gap-2"><Icon name="fa-phone" class="text-xs" /><a href={`tel:${settings.phone.replace(/\s+/g, '')}`} dir="ltr" class="hover:text-jci-teal transition-colors">{settings.phone}</a></div>}
         </div>
       </div>
     </div>
@@ -50,5 +51,5 @@ const year = new Date().getFullYear()
 </footer>
 
 <button id="back-to-top" aria-label="Back to top" class="fixed bottom-6 right-6 rtl:right-auto rtl:left-6 z-40 w-12 h-12 bg-jci-blue text-white rounded-full shadow-lg flex items-center justify-center hover:bg-jci-navy transition-colors">
-  <i class="fas fa-arrow-up text-sm"></i>
+  <Icon name="fa-arrow-up" class="text-sm" />
 </button>

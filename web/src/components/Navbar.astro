@@ -4,6 +4,7 @@
  * and a polished mobile menu. Text uses data-i18n keys swapped client-side.
  */
 import {t} from '../i18n/utils.js'
+import Icon from './Icon.astro'
 const lang = 'en'
 ---
 
@@ -34,8 +35,9 @@ const lang = 'en'
         <a href="#join" class="bg-jci-blue text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-jci-navy transition-colors" data-i18n="nav.cta">{t('nav.cta', lang)}</a>
       </div>
 
-      <button id="mobile-menu-btn" aria-label="Menu" class="xl:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
-        <i class="fas fa-bars text-xl text-jci-black"></i>
+      <button id="mobile-menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu" class="xl:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
+        <Icon name="fa-bars" class="menu-open text-xl text-jci-black" />
+        <Icon name="fa-times" class="menu-close hidden text-xl text-jci-black" />
       </button>
     </div>
   </div>

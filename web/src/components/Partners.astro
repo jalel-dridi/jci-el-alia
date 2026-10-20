@@ -5,6 +5,7 @@
  */
 import {t} from '../i18n/utils.js'
 import {urlFor} from '../lib/sanity.js'
+import Icon from './Icon.astro'
 
 const {partners, lang = 'en'} = Astro.props
 const iconColors = ['text-jci-navy', 'text-jci-blue', 'text-jci-teal', 'text-jci-yellow']
@@ -23,7 +24,7 @@ const iconColors = ['text-jci-navy', 'text-jci-blue', 'text-jci-teal', 'text-jci
             return (
               <div class="flex flex-col items-center gap-2 min-w-[140px]">
                 <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center overflow-hidden">
-                  {logo ? <img src={logo} alt={p.name} class="w-10 h-10 object-contain" /> : <i class={`fas ${p.icon || 'fa-handshake'} ${iconColors[i % 4]} text-xl`}></i>}
+                  {logo ? <img src={logo} alt={p.name} class="w-10 h-10 object-contain" /> : <Icon name={p.icon || 'fa-handshake'} class={`${iconColors[i % 4]} text-xl`} />}
                 </div>
                 <span class="text-xs text-jci-black/50 text-center whitespace-normal">{p.name}</span>
               </div>

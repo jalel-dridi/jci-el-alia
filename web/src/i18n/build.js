@@ -1,4 +1,5 @@
 import {ui, languages} from './ui.js'
+import {formatDate} from './utils.js'
 import {pick} from '../lib/sanity.js'
 
 /**
@@ -61,6 +62,10 @@ export function buildTranslations({settings, presidents, projects, pillars, test
     add(`ev.${ev.slug}.title`, ev.title)
     add(`ev.${ev.slug}.sum`, ev.summary)
     add(`ev.${ev.slug}.desc`, ev.description || ev.summary)
+    if (ev.date) {
+      add(`ev.${ev.slug}.date`, Object.fromEntries(languages.map((l) => [l, formatDate(ev.date, l)])))
+      add(`ev.${ev.slug}.mon`, Object.fromEntries(languages.map((l) => [l, formatDate(ev.date, l, {month: 'short'})])))
+    }
   })
 
   // Board — roles, keyed by year + name (stable regardless of sort order)

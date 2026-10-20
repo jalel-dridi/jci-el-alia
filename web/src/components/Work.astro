@@ -8,6 +8,7 @@
  */
 import {t} from '../i18n/utils.js'
 import EventCard from './EventCard.astro'
+import Icon from './Icon.astro'
 
 const HOMEPAGE_LIMIT = 6
 const {events = [], lang = 'en'} = Astro.props
@@ -34,7 +35,7 @@ const years = Object.keys(byYear).map(Number).sort((a, b) => b - a)
 
     {events.length === 0 ? (
       <div class="text-center py-16 border-2 border-dashed border-gray-200 rounded-3xl">
-        <i class="fas fa-images text-gray-300 text-5xl mb-4"></i>
+        <Icon name="fa-images" class="text-gray-300 text-5xl mb-4" />
         <p class="text-jci-black/40">Events and photo albums will appear here once added in the dashboard.</p>
       </div>
     ) : (
@@ -55,7 +56,7 @@ const years = Object.keys(byYear).map(Number).sort((a, b) => b - a)
       <div class="text-center mt-4">
         <a href="/events" class="inline-flex items-center gap-2 text-jci-blue font-semibold hover:text-jci-navy transition-colors">
           <span data-i18n="work.viewall">{t('work.viewall', lang)}</span>
-          <i class="fas fa-arrow-right rtl:rotate-180"></i>
+          <Icon name="fa-arrow-right" class="rtl:rotate-180" />
         </a>
       </div>
     )}

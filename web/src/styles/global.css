@@ -27,6 +27,17 @@ body {
   font-family: var(--font-arabic);
 }
 
+/* Inline SVG icons (components/Icon.astro): sized like the old icon font.
+   In the components layer so utilities (hidden, rotate-*, ...) still win. */
+@layer components {
+  .icon {
+    display: inline-block;
+    height: 1em;
+    vertical-align: -0.125em;
+    flex-shrink: 0;
+  }
+}
+
 /* Navbar blur */
 .nav-blur {
   backdrop-filter: blur(12px);

@@ -4,6 +4,7 @@
  */
 import {t} from '../i18n/utils.js'
 import {pick} from '../lib/sanity.js'
+import Icon from './Icon.astro'
 
 const {pillars, lang = 'en'} = Astro.props
 
@@ -27,7 +28,7 @@ const delays = ['reveal-delay-1', 'reveal-delay-2', 'reveal-delay-3', 'reveal-de
       {pillars.map((p, i) => (
         <div class={`card-hover bg-white rounded-2xl p-8 border border-gray-100 reveal ${delays[i % 4]}`}>
           <div class={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 ${chip[p.color] || chip['jci-blue']}`}>
-            <i class={`fas ${p.icon || 'fa-star'} text-lg`}></i>
+            <Icon name={p.icon || 'fa-star'} class="text-lg" />
           </div>
           <h3 class="text-lg font-semibold text-jci-black mb-3" data-i18n={`pillar.${i}.title`}>{pick(p.title, lang)}</h3>
           <p class="text-sm text-jci-black/60 leading-relaxed" data-i18n={`pillar.${i}.desc`}>{pick(p.description, lang)}</p>

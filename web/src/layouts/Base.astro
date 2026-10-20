@@ -47,6 +47,23 @@ const jsonLd = {
 <html lang={lang} dir={dir}>
   <head>
     <meta charset="UTF-8" />
+    <!-- Apply a saved FR/AR choice before first paint (direction + font), and
+         hide the page until SiteScripts swaps the text, so returning visitors
+         don't see an English, left-to-right flash. Fails open after 1.5s. -->
+    <script is:inline>
+      (function () {
+        try {
+          var l = localStorage.getItem('jci-lang')
+          if (l !== 'fr' && l !== 'ar') return
+          var h = document.documentElement
+          h.lang = l
+          if (l === 'ar') h.dir = 'rtl'
+          h.classList.add('i18n-pending')
+          setTimeout(function () { h.classList.remove('i18n-pending') }, 1500)
+        } catch (e) {}
+      })()
+    </script>
+    <style is:inline>.i18n-pending body { visibility: hidden }</style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0097D7" />
@@ -74,14 +91,9 @@ const jsonLd = {
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Arvo:wght@400;700&display=swap"
       rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />

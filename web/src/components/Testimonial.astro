@@ -5,6 +5,7 @@
  */
 import {t} from '../i18n/utils.js'
 import {pick} from '../lib/sanity.js'
+import Icon from './Icon.astro'
 
 const {testimonial, lang = 'en'} = Astro.props
 ---
@@ -12,13 +13,13 @@ const {testimonial, lang = 'en'} = Astro.props
 <section class="py-24 lg:py-32 bg-gray-50">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
     <p class="text-jci-blue font-semibold text-sm uppercase tracking-wider mb-8" data-i18n="quote.label">{t('quote.label', lang)}</p>
-    <i class="fas fa-quote-left text-jci-teal/30 text-5xl mb-6"></i>
+    <Icon name="fa-quote-left" class="text-jci-teal/30 text-5xl mb-6" />
     <blockquote class="font-arvo text-2xl sm:text-3xl text-jci-black leading-[1.5] mb-8" data-i18n="quote.text">
       {pick(testimonial.quote, lang)}
     </blockquote>
     <div class="flex items-center justify-center gap-4">
       <div class="w-12 h-12 rounded-full bg-jci-blue/10 flex items-center justify-center">
-        <i class="fas fa-user text-jci-blue"></i>
+        <Icon name="fa-user" class="text-jci-blue" />
       </div>
       <div class="text-left rtl:text-right">
         <div class="font-semibold text-jci-black">{testimonial.author}</div>

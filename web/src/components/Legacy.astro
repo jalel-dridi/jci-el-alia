@@ -6,6 +6,7 @@
  */
 import {t} from '../i18n/utils.js'
 import {pick, urlFor} from '../lib/sanity.js'
+import Icon from './Icon.astro'
 
 const {presidents, lang = 'en'} = Astro.props
 const ordered = [...presidents].sort((a, b) => a.year - b.year)
@@ -46,7 +47,7 @@ const ordered = [...presidents].sort((a, b) => a.year - b.year)
                       <img src={photo} alt={p.name} width="120" height="120" loading="lazy" class="w-12 h-12 rounded-full object-cover flex-shrink-0" />
                     ) : (
                       <div class={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${isCurrent ? 'bg-jci-yellow/20 text-jci-yellow' : 'bg-jci-teal/15 text-jci-teal'}`}>
-                        <i class="fas fa-user text-base"></i>
+                        <Icon name="fa-user" class="text-base" />
                       </div>
                     )}
                     <div class="min-w-0">

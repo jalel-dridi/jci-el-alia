@@ -13,6 +13,7 @@ import * as seed from '../../data/seed.js'
 import {events as seedEvents} from '../../data/events.js'
 import {buildTranslations} from '../../i18n/build.js'
 import {t} from '../../i18n/utils.js'
+import Icon from '../../components/Icon.astro'
 
 const events = await getEvents(seedEvents)
 const settings = await getSiteSettings(seed.siteSettings)
@@ -42,7 +43,7 @@ const years = Object.keys(byYear).map(Number).sort((a, b) => b - a)
 
       {events.length === 0 ? (
         <div class="text-center py-16 border-2 border-dashed border-gray-200 rounded-3xl">
-          <i class="fas fa-images text-gray-300 text-5xl mb-4"></i>
+          <Icon name="fa-images" class="text-gray-300 text-5xl mb-4" />
           <p class="text-jci-black/40">Events and photo albums will appear here once added in the dashboard.</p>
         </div>
       ) : (

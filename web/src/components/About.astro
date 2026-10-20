@@ -3,6 +3,7 @@
  * About / Who We Are — two-column intro with a stat grid.
  */
 import {t} from '../i18n/utils.js'
+import Icon from './Icon.astro'
 const {settings, presidents, lang = 'en'} = Astro.props
 const presidentCount = new Set(presidents.map((p) => p.name)).size || presidents.length
 ---
@@ -17,11 +18,11 @@ const presidentCount = new Set(presidents.map((p) => p.name)).size || presidents
         <p class="text-base text-jci-black/60 leading-[1.8] mb-8" data-i18n="about.p2">{t('about.p2', lang)}</p>
         <div class="flex flex-wrap gap-4">
           <div class="flex items-center gap-2 bg-jci-blue/5 rounded-full px-4 py-2">
-            <i class="fas fa-globe-africa text-jci-blue text-sm"></i>
+            <Icon name="fa-globe-africa" class="text-jci-blue text-sm" />
             <span class="text-sm font-medium text-jci-black/70" data-i18n="about.tag1">{t('about.tag1', lang)}</span>
           </div>
           <div class="flex items-center gap-2 bg-jci-teal/10 rounded-full px-4 py-2">
-            <i class="fas fa-map-marker-alt text-jci-teal text-sm"></i>
+            <Icon name="fa-map-marker-alt" class="text-jci-teal text-sm" />
             <span class="text-sm font-medium text-jci-black/70" data-i18n="about.tag2">{t('about.tag2', lang)}</span>
           </div>
         </div>

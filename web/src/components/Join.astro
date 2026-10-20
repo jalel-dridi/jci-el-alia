@@ -6,6 +6,7 @@
  * applications are never lost.
  */
 import {t} from '../i18n/utils.js'
+import Icon from './Icon.astro'
 
 const FORMSPREE_ID = ''
 const {settings = {}, lang = 'en'} = Astro.props
@@ -26,7 +27,7 @@ const action = FORMSPREE_ID ? `https://formspree.io/f/${FORMSPREE_ID}` : `mailto
         <ul class="space-y-4 mb-8">
           {['join.b1', 'join.b2', 'join.b3', 'join.b4'].map((k) => (
             <li class="flex items-center gap-3">
-              <div class="w-6 h-6 bg-jci-teal/20 rounded-full flex items-center justify-center flex-shrink-0"><i class="fas fa-check text-jci-teal text-xs"></i></div>
+              <div class="w-6 h-6 bg-jci-teal/20 rounded-full flex items-center justify-center flex-shrink-0"><Icon name="fa-check" class="text-jci-teal text-xs" /></div>
               <span class="text-white/80 text-sm" data-i18n={k}>{t(k, lang)}</span>
             </li>
           ))}

@@ -51,23 +51,27 @@ const {translations} = Astro.props
     let saved = 'en'
     try { saved = localStorage.getItem('jci-lang') || 'en' } catch (e) {}
     if (saved !== 'en') setLang(saved)
+    document.documentElement.classList.remove('i18n-pending')
 
     // ---- Mobile menu (animated) ----
     const menuBtn = document.getElementById('mobile-menu-btn')
     const mobileMenu = document.getElementById('mobile-menu')
     function closeMenu() {
       mobileMenu.style.maxHeight = '0px'
-      const icon = menuBtn.querySelector('i')
-      icon.classList.add('fa-bars'); icon.classList.remove('fa-times')
+      setMenuIcon(false)
+    }
+    function setMenuIcon(open) {
+      menuBtn.setAttribute('aria-expanded', String(open))
+      menuBtn.querySelector('.menu-open').classList.toggle('hidden', open)
+      menuBtn.querySelector('.menu-close').classList.toggle('hidden', !open)
     }
     if (menuBtn && mobileMenu) {
       menuBtn.addEventListener('click', () => {
         const open = mobileMenu.style.maxHeight && mobileMenu.style.maxHeight !== '0px'
-        const icon = menuBtn.querySelector('i')
         if (open) { closeMenu() }
         else {
           mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px'
-          icon.classList.remove('fa-bars'); icon.classList.add('fa-times')
+          setMenuIcon(true)
         }
       })
       mobileMenu.querySelectorAll('a[href^="#"]').forEach((l) => l.addEventListener('click', closeMenu))

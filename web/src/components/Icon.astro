@@ -1,0 +1,44 @@
+---
+/**
+ * Inline SVG icon (Font Awesome 6 Free shapes via Iconify data), rendered at
+ * build time — no icon font or CDN stylesheet to download. Sized by font-size
+ * like the old <i class="fas ..."> icons, so text-* utilities still apply.
+ *
+ * `name` accepts the Font Awesome names editors already use in the dashboard,
+ * with or without the "fa-" prefix, including v5 names (e.g. "fa-home").
+ */
+import solid from '@iconify-json/fa6-solid/icons.json'
+import brands from '@iconify-json/fa6-brands/icons.json'
+
+// Font Awesome 5 names (still stored in the CMS) -> v6 names
+const renamed = {
+  'map-marker-alt': 'location-dot',
+  times: 'xmark',
+  'globe-africa': 'earth-africa',
+  'microphone-alt': 'microphone-lines',
+  home: 'house',
+  'hands-helping': 'handshake-angle',
+  'broadcast-tower': 'tower-broadcast',
+  'book-reader': 'book-open-reader',
+}
+
+const {name = 'star', class: className = '', ...rest} = Astro.props
+const key = String(name).replace(/^fa-/, '')
+const resolved = renamed[key] || key
+const set = brands.icons[resolved] ? brands : solid
+const icon = set.icons[resolved] || solid.icons.star
+const width = icon.width || set.width || 512
+const height = icon.height || set.height || 512
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox={`0 0 ${width} ${height}`}
+  fill="currentColor"
+  aria-hidden="true"
+  focusable="false"
+  class:list={['icon', className]}
+  style={`width:${(width / height).toFixed(3)}em`}
+  {...rest}
+  set:html={icon.body}
+/>

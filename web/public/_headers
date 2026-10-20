@@ -9,6 +9,10 @@
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
 
+# Calendar files for "Add to calendar"
+/events/*.ics
+  Content-Type: text/calendar; charset=utf-8
+
 # Cache static images for a week
 /images/*
   Cache-Control: public, max-age=604800

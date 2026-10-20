@@ -6,6 +6,7 @@
  */
 import {t} from '../i18n/utils.js'
 import {urlFor, pick} from '../lib/sanity.js'
+import Icon from './Icon.astro'
 
 const {settings, lang = 'en'} = Astro.props
 // Use the Sanity hero image if set, else the curated local photo.
@@ -74,6 +75,6 @@ const bgUrl = settings.heroBackground
 
   <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
     <span class="text-white/50 text-xs uppercase tracking-widest" data-i18n="hero.scroll">{t('hero.scroll', lang)}</span>
-    <i class="fas fa-chevron-down text-white/60"></i>
+    <Icon name="fa-chevron-down" class="text-white/60" />
   </div>
 </section>

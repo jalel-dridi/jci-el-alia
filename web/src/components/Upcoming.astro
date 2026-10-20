@@ -1,0 +1,59 @@
+---
+/**
+ * Coming Up — the next events (date >= build day), with add-to-calendar
+ * buttons. Renders nothing when no future events exist, so the homepage never
+ * shows an empty block. Editors just add an event with a future date.
+ */
+import {t, formatDate} from '../i18n/utils.js'
+import {pick, eventCover} from '../lib/sanity.js'
+import {upcomingEvents, googleCalendarUrl} from '../lib/events.js'
+import Icon from './Icon.astro'
+
+const MAX_SHOWN = 3
+const {events = [], lang = 'en'} = Astro.props
+const upcoming = upcomingEvents(events).slice(0, MAX_SHOWN)
+---
+
+{upcoming.length > 0 && (
+  <section id="upcoming" class="py-20 lg:py-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12 reveal">
+        <p class="text-jci-blue font-semibold text-sm uppercase tracking-wider mb-4" data-i18n="upcoming.label">{t('upcoming.label', lang)}</p>
+        <h2 class="text-3xl lg:text-4xl font-light text-jci-black" data-i18n="upcoming.title">{t('upcoming.title', lang)}</h2>
+      </div>
+      <div class={`grid gap-6 ${upcoming.length === 1 ? 'max-w-2xl mx-auto' : upcoming.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-3'}`}>
+        {upcoming.map((ev) => {
+          const cover = eventCover(ev, 800, 400)
+          const day = ev.date.slice(8, 10).replace(/^0/, '')
+          return (
+            <article class="card-hover bg-white rounded-2xl overflow-hidden border border-gray-100 flex flex-col reveal">
+              <div class="relative h-40 bg-gradient-to-br from-jci-blue to-jci-navy">
+                {cover && <img src={cover} alt={pick(ev.title, lang)} width="800" height="400" loading="lazy" class="w-full h-full object-cover" />}
+                <div class="absolute top-4 start-4 bg-white rounded-xl shadow-lg px-3 py-2 text-center min-w-[64px]">
+                  <div class="text-2xl font-bold text-jci-blue leading-none">{day}</div>
+                  <div class="text-xs font-semibold text-jci-black/60 uppercase mt-1" data-i18n={`ev.${ev.slug}.mon`}>{formatDate(ev.date, lang, {month: 'short'})}</div>
+                </div>
+              </div>
+              <div class="p-6 flex flex-col flex-1">
+                <h3 class="text-lg font-semibold text-jci-black mb-2" data-i18n={`ev.${ev.slug}.title`}>{pick(ev.title, lang)}</h3>
+                <p class="text-sm text-jci-black/60 leading-relaxed mb-4" data-i18n={`ev.${ev.slug}.sum`}>{pick(ev.summary, lang)}</p>
+                <div class="text-sm text-jci-black/50 space-y-1 mb-5">
+                  <div><Icon name="fa-calendar" class="me-2 text-jci-teal" /><span data-i18n={`ev.${ev.slug}.date`}>{formatDate(ev.date, lang)}</span></div>
+                  {ev.location && <div><Icon name="fa-map-marker-alt" class="me-2 text-jci-teal" />{ev.location}</div>}
+                </div>
+                <div class="mt-auto flex flex-wrap gap-2">
+                  <a href={`/events/${ev.slug}.ics`} download class="inline-flex items-center gap-2 bg-jci-blue hover:bg-jci-navy text-white text-sm font-semibold px-4 py-2 rounded-full transition-colors">
+                    <Icon name="fa-calendar-plus" /><span data-i18n="upcoming.addcal">{t('upcoming.addcal', lang)}</span>
+                  </a>
+                  <a href={googleCalendarUrl(ev, lang)} target="_blank" rel="noopener" class="inline-flex items-center gap-2 border border-gray-200 hover:border-jci-blue hover:text-jci-blue text-jci-black/70 text-sm font-medium px-4 py-2 rounded-full transition-colors">
+                    <Icon name="fa-google" /><span data-i18n="upcoming.google">{t('upcoming.google', lang)}</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+          )
+        })}
+      </div>
+    </div>
+  </section>
+)}
