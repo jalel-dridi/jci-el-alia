@@ -7,5 +7,8 @@ import sitemap from '@astrojs/sitemap'
 export default defineConfig({
   // Production URL (Cloudflare Pages). Update if a custom domain is added.
   site: 'https://jci-el-alia.pages.dev',
-  integrations: [sitemap()],
+  integrations: [
+    // hreflang links between the EN (/), FR (/fr/) and AR (/ar/) versions
+    sitemap({i18n: {defaultLocale: 'en', locales: {en: 'en', fr: 'fr', ar: 'ar'}}}),
+  ],
 })

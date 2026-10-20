@@ -21,9 +21,9 @@ const ordered = [...presidents].sort((a, b) => a.year - b.year)
 
   <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16 reveal">
-      <p class="text-jci-teal font-semibold text-sm uppercase tracking-wider mb-4" data-i18n="legacy.label">{t('legacy.label', lang)}</p>
-      <h2 class="text-3xl lg:text-4xl font-light text-white mb-4" data-i18n="legacy.title">{t('legacy.title', lang)}</h2>
-      <p class="text-white/50 max-w-2xl mx-auto leading-[1.7]" data-i18n="legacy.intro">{t('legacy.intro', lang)}</p>
+      <p class="text-jci-teal font-semibold text-sm uppercase tracking-wider mb-4">{t('legacy.label', lang)}</p>
+      <h2 class="text-3xl lg:text-4xl font-light text-white mb-4">{t('legacy.title', lang)}</h2>
+      <p class="text-white/50 max-w-2xl mx-auto leading-[1.7]">{t('legacy.intro', lang)}</p>
     </div>
 
     <div class="relative">
@@ -58,7 +58,7 @@ const ordered = [...presidents].sort((a, b) => a.year - b.year)
                       <h3 class="text-white font-semibold truncate">{p.name}</h3>
                     </div>
                   </div>
-                  <p class="text-white/60 text-sm mt-3 italic font-arvo" data-i18n={`pres.${p.year}.slogan`}>“{pick(p.slogan, lang)}”</p>
+                  <p class="text-white/60 text-sm mt-3 italic font-arvo">“{pick(p.slogan, lang)}”</p>
                 </div>
               </div>
               <div class="hidden sm:block sm:w-1/2"></div>

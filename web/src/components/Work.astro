@@ -6,7 +6,7 @@
  * yet (before the CMS is populated). Only the latest few are shown here; the
  * full archive lives at /events.
  */
-import {t} from '../i18n/utils.js'
+import {t, localePath} from '../i18n/utils.js'
 import EventCard from './EventCard.astro'
 import Icon from './Icon.astro'
 
@@ -28,9 +28,9 @@ const years = Object.keys(byYear).map(Number).sort((a, b) => b - a)
 <section id="work" class="py-24 lg:py-32">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16 reveal">
-      <p class="text-jci-blue font-semibold text-sm uppercase tracking-wider mb-4" data-i18n="work.label">{t('work.label', lang)}</p>
-      <h2 class="text-3xl lg:text-4xl font-light text-jci-black mb-4" data-i18n="work.title">{t('work.title', lang)}</h2>
-      <p class="text-jci-black/50 max-w-2xl mx-auto" data-i18n="work.intro">{t('work.intro', lang)}</p>
+      <p class="text-jci-blue font-semibold text-sm uppercase tracking-wider mb-4">{t('work.label', lang)}</p>
+      <h2 class="text-3xl lg:text-4xl font-light text-jci-black mb-4">{t('work.title', lang)}</h2>
+      <p class="text-jci-black/50 max-w-2xl mx-auto">{t('work.intro', lang)}</p>
     </div>
 
     {events.length === 0 ? (
@@ -54,8 +54,8 @@ const years = Object.keys(byYear).map(Number).sort((a, b) => b - a)
 
     {events.length > 0 && (
       <div class="text-center mt-4">
-        <a href="/events" class="inline-flex items-center gap-2 text-jci-blue font-semibold hover:text-jci-navy transition-colors">
-          <span data-i18n="work.viewall">{t('work.viewall', lang)}</span>
+        <a href={localePath(lang, "/events/")} class="inline-flex items-center gap-2 text-jci-blue font-semibold hover:text-jci-navy transition-colors">
+          <span>{t('work.viewall', lang)}</span>
           <Icon name="fa-arrow-right" class="rtl:rotate-180" />
         </a>
       </div>

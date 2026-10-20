@@ -1,57 +1,23 @@
 ---
 /**
  * All client-side behavior in one place:
- *  - language switching (EN/FR/AR) with RTL + persisted choice
+ *  - remembering the chosen language (pages are per-language: /, /fr/, /ar/)
  *  - animated stat counters on scroll into view
  *  - scroll reveal animations
  *  - active nav link highlighting + back-to-top
  *  - polished mobile menu (animated max-height)
  *  - page-load fade-in
- * The full translation dictionary is injected as JSON.
  */
-const {translations} = Astro.props
 ---
 
-<script is:inline define:vars={{translations}}>
+<script is:inline>
   (function () {
-    const rtlLangs = ['ar']
-
-    // ---- Language switching ----
-    function setLang(lang) {
-      const html = document.documentElement
-      const isRtl = rtlLangs.includes(lang)
-      html.setAttribute('lang', lang)
-      html.setAttribute('dir', isRtl ? 'rtl' : 'ltr')
-      document.body.style.fontFamily = isRtl
-        ? '"Noto Sans Arabic", sans-serif'
-        : '"Plus Jakarta Sans", sans-serif'
-
-      const dict = translations[lang] || translations.en
-      document.querySelectorAll('[data-i18n]').forEach((el) => {
-        const key = el.getAttribute('data-i18n')
-        if (dict[key] != null) el.textContent = dict[key]
+    // ---- Language switcher: remember the choice for the next visit ----
+    document.querySelectorAll('.lang-btn').forEach((a) => {
+      a.addEventListener('click', () => {
+        try { localStorage.setItem('jci-lang', a.getAttribute('data-lang')) } catch (e) {}
       })
-      document.querySelectorAll('[data-i18n-ph]').forEach((el) => {
-        const key = el.getAttribute('data-i18n-ph')
-        if (dict[key] != null) el.setAttribute('placeholder', dict[key])
-      })
-      document.querySelectorAll('.lang-btn').forEach((btn) => {
-        const active = btn.getAttribute('data-lang') === lang
-        btn.classList.toggle('active', active)
-        btn.classList.toggle('text-jci-black/60', !active)
-      })
-      try { localStorage.setItem('jci-lang', lang) } catch (e) {}
-    }
-
-    document.querySelectorAll('.lang-btn').forEach((btn) => {
-      btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang')))
     })
-
-    // Restore saved language
-    let saved = 'en'
-    try { saved = localStorage.getItem('jci-lang') || 'en' } catch (e) {}
-    if (saved !== 'en') setLang(saved)
-    document.documentElement.classList.remove('i18n-pending')
 
     // ---- Mobile menu (animated) ----
     const menuBtn = document.getElementById('mobile-menu-btn')
@@ -74,7 +40,7 @@ const {translations} = Astro.props
           setMenuIcon(true)
         }
       })
-      mobileMenu.querySelectorAll('a[href^="#"]').forEach((l) => l.addEventListener('click', closeMenu))
+      mobileMenu.querySelectorAll('a[href*="#"]').forEach((l) => l.addEventListener('click', closeMenu))
     }
 
     // ---- Scroll reveal ----
@@ -110,7 +76,7 @@ const {translations} = Astro.props
     window.addEventListener('scroll', () => {
       let cur = ''
       sects.forEach((s) => { if (window.scrollY >= s.offsetTop - 100) cur = s.id })
-      navLks.forEach((l) => l.classList.toggle('active', l.getAttribute('href') === '#' + cur))
+      navLks.forEach((l) => l.classList.toggle('active', l.getAttribute('href').endsWith('#' + cur)))
       if (backTop) backTop.classList.toggle('visible', window.scrollY > 600)
     })
 

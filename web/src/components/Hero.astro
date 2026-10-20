@@ -38,43 +38,43 @@ const bgUrl = settings.heroBackground
     <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-5 py-2.5 mb-8 backdrop-blur-sm">
       <span class="w-2 h-2 bg-jci-teal rounded-full animate-pulse"></span>
       <span class="text-white/90 text-sm font-medium">
-        <span data-i18n="site.theme">{pick(settings.theme, lang)}</span> · {settings.year}
+        <span>{pick(settings.theme, lang)}</span> · {settings.year}
       </span>
     </div>
 
-    <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-white leading-[1.2] mb-6" data-i18n="hero.title">
+    <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-white leading-[1.2] mb-6">
       {pick(settings.heroTitle, lang)}
     </h1>
-    <p class="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto mb-10 font-light leading-[1.7]" data-i18n="hero.subtitle">
+    <p class="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto mb-10 font-light leading-[1.7]">
       {pick(settings.heroSubtitle, lang)}
     </p>
 
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-      <a href="#join" class="bg-jci-blue hover:bg-white hover:text-jci-blue text-white px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 shadow-lg shadow-jci-blue/30" data-i18n="hero.cta1">{t('hero.cta1', lang)}</a>
-      <a href="#about" class="bg-white/10 border border-white/30 hover:bg-white/20 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 backdrop-blur-sm" data-i18n="hero.cta2">{t('hero.cta2', lang)}</a>
+      <a href="#join" class="bg-jci-blue hover:bg-white hover:text-jci-blue text-white px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 shadow-lg shadow-jci-blue/30">{t('hero.cta1', lang)}</a>
+      <a href="#about" class="bg-white/10 border border-white/30 hover:bg-white/20 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 backdrop-blur-sm">{t('hero.cta2', lang)}</a>
     </div>
 
     <!-- Animated counters -->
     <div class="mt-16 lg:mt-20 flex items-center justify-center gap-8 sm:gap-12 lg:gap-16">
       <div class="text-center">
         <div class="text-3xl lg:text-4xl font-bold text-white"><span class="counter" data-target={settings.yearsOfImpact}>0</span><span class="text-jci-teal">+</span></div>
-        <div class="text-xs sm:text-sm text-white/50 mt-1 uppercase tracking-wider" data-i18n="hero.stat1">{t('hero.stat1', lang)}</div>
+        <div class="text-xs sm:text-sm text-white/50 mt-1 uppercase tracking-wider">{t('hero.stat1', lang)}</div>
       </div>
       <div class="w-px h-12 bg-white/20"></div>
       <div class="text-center">
         <div class="text-3xl lg:text-4xl font-bold text-white"><span class="counter" data-target={settings.activeMembers}>0</span></div>
-        <div class="text-xs sm:text-sm text-white/50 mt-1 uppercase tracking-wider" data-i18n="hero.stat2">{t('hero.stat2', lang)}</div>
+        <div class="text-xs sm:text-sm text-white/50 mt-1 uppercase tracking-wider">{t('hero.stat2', lang)}</div>
       </div>
       <div class="w-px h-12 bg-white/20"></div>
       <div class="text-center">
         <div class="text-3xl lg:text-4xl font-bold text-white"><span class="counter" data-target={settings.projectsDelivered}>0</span><span class="text-jci-teal">+</span></div>
-        <div class="text-xs sm:text-sm text-white/50 mt-1 uppercase tracking-wider" data-i18n="hero.stat3">{t('hero.stat3', lang)}</div>
+        <div class="text-xs sm:text-sm text-white/50 mt-1 uppercase tracking-wider">{t('hero.stat3', lang)}</div>
       </div>
     </div>
   </div>
 
   <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-    <span class="text-white/50 text-xs uppercase tracking-widest" data-i18n="hero.scroll">{t('hero.scroll', lang)}</span>
+    <span class="text-white/50 text-xs uppercase tracking-widest">{t('hero.scroll', lang)}</span>
     <Icon name="fa-chevron-down" class="text-white/60" />
   </div>
 </section>

@@ -17,7 +17,9 @@ JCI El Alia Site/
 - **Frontend:** Astro 6 + Tailwind CSS v4 (via PostCSS). Fully static — content
   is fetched from Sanity at build time. Free, fast, no server.
 - **CMS / Dashboard:** Sanity (free plan: 20 editors, 100 GB assets + bandwidth).
-- **Content model:** every text field is trilingual `{ en, fr, ar }`.
+- **Content model:** every text field is trilingual `{ en, fr, ar }`. Each
+  language gets its own pages: English at `/`, French at `/fr/`, Arabic at
+  `/ar/` (routes live in `web/src/pages/[...lang]/`).
 - **Publishing:** a Sanity webhook triggers a rebuild on publish, so edits go
   live in ~1 minute; a nightly rebuild catches anything missed. See
   `DEPLOYMENT.md` for the live pipeline (GitHub Actions → Cloudflare Pages).

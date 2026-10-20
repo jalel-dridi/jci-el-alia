@@ -24,7 +24,7 @@ updates automatically.
 |------|--------|
 | Frontend (`web/`) | ✅ Live — homepage, `/events`, album pages, 404 |
 | Dashboard (`studio/`) | ✅ Live, real content (10 events, 9 presidents, 14 board members) |
-| Languages | ✅ EN/FR/AR incl. events, roles, categories, dates; RTL |
+| Languages | ✅ Separate pages per language: `/` (EN), `/fr/`, `/ar/` (RTL), with hreflang + sitemap; switcher remembers the choice |
 | Upcoming events | ✅ "Coming Up" section + `.ics` / Google Calendar links |
 | SEO | ✅ Meta, Open Graph (event covers on album pages), JSON-LD Organization + Event, sitemap |
 | Performance | ✅ Inline SVG icons (no icon font), sized/lazy images, cache headers |

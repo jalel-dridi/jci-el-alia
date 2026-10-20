@@ -25,8 +25,8 @@ const accents = [
   <section id="team" class="py-24 lg:py-32 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16 reveal">
-        <p class="text-jci-blue font-semibold text-sm uppercase tracking-wider mb-4" data-i18n="team.label">{t('team.label', lang)}</p>
-        <h2 class="text-3xl lg:text-4xl font-light text-jci-black" data-i18n="team.title">{t('team.title', lang)}</h2>
+        <p class="text-jci-blue font-semibold text-sm uppercase tracking-wider mb-4">{t('team.label', lang)}</p>
+        <h2 class="text-3xl lg:text-4xl font-light text-jci-black">{t('team.title', lang)}</h2>
       </div>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
         {current.map((m, i) => {
@@ -42,7 +42,7 @@ const accents = [
                 </div>
               )}
               <h3 class="font-semibold text-jci-black">{m.name}</h3>
-              <p class="text-sm text-jci-black/50 mt-1" data-i18n={`board.${m.year}.${m.name}.role`}>{pick(m.role, lang)}</p>
+              <p class="text-sm text-jci-black/50 mt-1">{pick(m.role, lang)}</p>
             </div>
           )
         })}

@@ -1,21 +1,23 @@
 ---
 /**
  * Base layout — <head>, fonts, global CSS, full SEO, and the page shell.
- * `lang` / `dir` are set per-page; default English LTR.
+ * `lang` sets language + direction. `path` is the page's language-free path
+ * ("/events/"); when given, hreflang alternates for EN/FR/AR are emitted and
+ * returning visitors who picked FR/AR are sent to their language.
  */
 import '../styles/global.css'
+import {t, dirFor, localePath} from '../i18n/utils.js'
+import {languages} from '../i18n/ui.js'
 
-const {
-  title = 'JCI El Alia | Developing Leaders for a Changing World',
-  description = 'JCI El Alia - Developing Leaders for a Changing World in El Alia, Tunisia. Join our community of young active citizens aged 18-40.',
-  lang = 'en',
-  dir = 'ltr',
-  image = '/images/logo.png',
-} = Astro.props
+const {lang = 'en', path, image = '/images/logo.png'} = Astro.props
+const {title = t('meta.title', lang), description = t('meta.desc', lang)} = Astro.props
+const dir = dirFor(lang)
 
 // Canonical + absolute OG image URL (falls back gracefully if `site` unset)
-const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://jci-el-alia.pages.dev').href
-const ogImage = new URL(image, Astro.site ?? 'https://jci-el-alia.pages.dev').href
+const base = Astro.site ?? 'https://jci-el-alia.pages.dev'
+const canonical = new URL(Astro.url.pathname, base).href
+const ogImage = new URL(image, base).href
+const alternates = path ? languages.map((l) => ({l, href: new URL(localePath(l, path), base).href})) : []
 
 // Organization structured data for richer search results.
 const jsonLd = {
@@ -47,27 +49,22 @@ const jsonLd = {
 <html lang={lang} dir={dir}>
   <head>
     <meta charset="UTF-8" />
-    <!-- Apply a saved FR/AR choice before first paint (direction + font), and
-         hide the page until SiteScripts swaps the text, so returning visitors
-         don't see an English, left-to-right flash. Fails open after 1.5s. -->
-    <script is:inline>
-      (function () {
+    {path && lang === 'en' && (
+      <!-- Returning visitors who chose FR/AR (saved by the language switcher)
+           go straight to their language, before anything renders. -->
+      <script is:inline>
         try {
           var l = localStorage.getItem('jci-lang')
-          if (l !== 'fr' && l !== 'ar') return
-          var h = document.documentElement
-          h.lang = l
-          if (l === 'ar') h.dir = 'rtl'
-          h.classList.add('i18n-pending')
-          setTimeout(function () { h.classList.remove('i18n-pending') }, 1500)
+          if (l === 'fr' || l === 'ar') location.replace('/' + l + location.pathname + location.search + location.hash)
         } catch (e) {}
-      })()
-    </script>
-    <style is:inline>.i18n-pending body { visibility: hidden }</style>
+      </script>
+    )}
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0097D7" />
     <link rel="canonical" href={canonical} />
+    {alternates.map(({l, href}) => <link rel="alternate" hreflang={l} href={href} />)}
+    {alternates.length > 0 && <link rel="alternate" hreflang="x-default" href={alternates[0].href} />}
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
@@ -100,7 +97,7 @@ const jsonLd = {
   </head>
   <body class="bg-white text-jci-black antialiased">
     <a href="#home" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-jci-blue focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
-      Skip to content
+      {t('a11y.skip', lang)}
     </a>
     <slot />
   </body>

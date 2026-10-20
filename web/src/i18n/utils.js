@@ -1,4 +1,4 @@
-import {ui, rtlLanguages} from './ui.js'
+import {ui, rtlLanguages, languages} from './ui.js'
 
 /** Translate a UI key for a given language, falling back to English. */
 export function t(key, lang = 'en') {
@@ -15,6 +15,18 @@ export function formatDate(date, lang = 'en', opts = {year: 'numeric', month: 'l
   if (!date) return ''
   return new Date(date).toLocaleDateString(dateLocales[lang] || 'en-GB', {...opts, timeZone: 'UTC'})
 }
+
+/**
+ * URL of a page in a language. English lives at the root ("/events/"), the
+ * others under a prefix ("/fr/events/", "/ar/events/").
+ */
+export function localePath(lang, path = '/') {
+  return lang === 'en' ? path : `/${lang}${path}`
+}
+
+/** getStaticPaths entries for a [...lang] route: en -> /, fr -> /fr/, ar -> /ar/. */
+export const langPaths = () =>
+  languages.map((l) => ({params: {lang: l === 'en' ? undefined : l}, props: {lang: l}}))
 
 /** Direction for a language. */
 export function dirFor(lang) {

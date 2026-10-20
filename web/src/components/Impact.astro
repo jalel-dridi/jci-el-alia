@@ -4,7 +4,7 @@
  * present, else the cover of its latest edition in the events (matched by
  * title, e.g. "Orient'Up" -> "Orient'Up 4"), else a branded gradient + icon.
  */
-import {t} from '../i18n/utils.js'
+import {t, localePath} from '../i18n/utils.js'
 import {pick, urlFor, eventCover} from '../lib/sanity.js'
 import Icon from './Icon.astro'
 
@@ -43,8 +43,8 @@ const badges = [
 <section id="impact" class="py-24 lg:py-32">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16 reveal">
-      <p class="text-jci-blue font-semibold text-sm uppercase tracking-wider mb-4" data-i18n="impact.label">{t('impact.label', lang)}</p>
-      <h2 class="text-3xl lg:text-4xl font-light text-jci-black" data-i18n="impact.title">{t('impact.title', lang)}</h2>
+      <p class="text-jci-blue font-semibold text-sm uppercase tracking-wider mb-4">{t('impact.label', lang)}</p>
+      <h2 class="text-3xl lg:text-4xl font-light text-jci-black">{t('impact.title', lang)}</h2>
     </div>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
       {projects.map((p, i) => {
@@ -62,16 +62,16 @@ const badges = [
               </div>
             )}
             <div class="p-6">
-              <span class={`inline-block text-xs font-semibold px-3 py-1 rounded-full mb-3 ${badges[i % badges.length]}`} data-i18n={`proj.${i}.cat`}>{pick(p.category, lang)}</span>
-              <h3 class="text-lg font-semibold text-jci-black mb-2" data-i18n={`proj.${i}.title`}>{pick(p.title, lang)}</h3>
-              <p class="text-sm text-jci-black/60 leading-relaxed mb-4" data-i18n={`proj.${i}.desc`}>{pick(p.description, lang)}</p>
+              <span class={`inline-block text-xs font-semibold px-3 py-1 rounded-full mb-3 ${badges[i % badges.length]}`}>{pick(p.category, lang)}</span>
+              <h3 class="text-lg font-semibold text-jci-black mb-2">{pick(p.title, lang)}</h3>
+              <p class="text-sm text-jci-black/60 leading-relaxed mb-4">{pick(p.description, lang)}</p>
               <div class="flex items-center gap-2 text-jci-teal">
                 <Icon name="fa-chart-line" class="text-sm" />
-                <span class="text-sm font-medium" data-i18n={`proj.${i}.metric`}>{pick(p.metric, lang)}</span>
+                <span class="text-sm font-medium">{pick(p.metric, lang)}</span>
               </div>
               {ev && (
-                <a href={`/events/${ev.slug}`} class="mt-4 inline-flex items-center gap-2 text-jci-blue text-sm font-semibold hover:text-jci-navy transition-colors">
-                  <span><span data-i18n="impact.latest">{t('impact.latest', lang)}</span>: <span data-i18n={`ev.${ev.slug}.title`}>{pick(ev.title, lang)}</span></span>
+                <a href={localePath(lang, `/events/${ev.slug}/`)} class="mt-4 inline-flex items-center gap-2 text-jci-blue text-sm font-semibold hover:text-jci-navy transition-colors">
+                  <span>{t('impact.latest', lang)}: {pick(ev.title, lang)}</span>
                   <Icon name="fa-arrow-right" class="text-xs rtl:rotate-180" />
                 </a>
               )}

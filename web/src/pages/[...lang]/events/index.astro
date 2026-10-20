@@ -1,0 +1,65 @@
+---
+/**
+ * Events archive — a standalone page listing every event grouped by year,
+ * with links to each album, once per language (/events/, /fr/events/, ...).
+ */
+import Base from '../../../layouts/Base.astro'
+import Navbar from '../../../components/Navbar.astro'
+import Footer from '../../../components/Footer.astro'
+import SiteScripts from '../../../components/SiteScripts.astro'
+import EventCard from '../../../components/EventCard.astro'
+import {getEvents, getSiteSettings} from '../../../lib/queries.js'
+import * as seed from '../../../data/seed.js'
+import {events as seedEvents} from '../../../data/events.js'
+import {t, langPaths} from '../../../i18n/utils.js'
+import Icon from '../../../components/Icon.astro'
+
+export function getStaticPaths() {
+  return langPaths()
+}
+
+const {lang} = Astro.props
+const events = await getEvents(seedEvents)
+const settings = await getSiteSettings(seed.siteSettings)
+
+const byYear = {}
+for (const ev of events) {
+  const y = ev.year || (ev.date ? new Date(ev.date).getFullYear() : 0)
+  ;(byYear[y] ||= []).push(ev)
+}
+const years = Object.keys(byYear).map(Number).sort((a, b) => b - a)
+---
+
+<Base lang={lang} path="/events/" title={`${t('work.label', lang)} | JCI El Alia`}>
+  <Navbar lang={lang} path="/events/" />
+  <main class="pt-28 lg:pt-36 pb-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <p class="text-jci-blue font-semibold text-sm uppercase tracking-wider mb-4">{t('work.label', lang)}</p>
+        <h1 class="text-4xl lg:text-5xl font-light text-jci-black mb-4">{t('work.title', lang)}</h1>
+        <p class="text-jci-black/50 max-w-2xl mx-auto">{t('work.intro', lang)}</p>
+      </div>
+
+      {events.length === 0 ? (
+        <div class="text-center py-16 border-2 border-dashed border-gray-200 rounded-3xl">
+          <Icon name="fa-images" class="text-gray-300 text-5xl mb-4" />
+          <p class="text-jci-black/40">Events and photo albums will appear here once added in the dashboard.</p>
+        </div>
+      ) : (
+        years.map((year) => (
+          <div class="mb-16">
+            <div class="flex items-center gap-4 mb-8">
+              <span class="text-2xl font-bold text-jci-blue">{year}</span>
+              <div class="flex-1 h-px bg-gray-200"></div>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {byYear[year].map((ev) => <EventCard ev={ev} lang={lang} />)}
+            </div>
+          </div>
+        ))
+      )}
+    </div>
+  </main>
+  <Footer settings={settings} lang={lang} />
+  <SiteScripts />
+</Base>
