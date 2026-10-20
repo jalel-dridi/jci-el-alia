@@ -6,6 +6,8 @@ name: Deploy
 #   - repository_dispatch "sanity-publish" (content published in the dashboard,
 #     fired by a Sanity webhook -> GitHub dispatch)
 #   - manual run (workflow_dispatch button in the Actions tab)
+#   - nightly safety-net rebuild, so dashboard edits go live within a day even
+#     if the Sanity webhook is missing or its GitHub token has expired
 
 on:
   push:
@@ -13,6 +15,8 @@ on:
   repository_dispatch:
     types: [sanity-publish]
   workflow_dispatch:
+  schedule:
+    - cron: '0 2 * * *' # 02:00 UTC = 03:00 Tunis
 
 concurrency:
   group: deploy-pages

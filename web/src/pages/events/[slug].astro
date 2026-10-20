@@ -9,8 +9,6 @@ import Footer from '../../components/Footer.astro'
 import SiteScripts from '../../components/SiteScripts.astro'
 import {getEvents, getSiteSettings, getPresidents, getProjects, getPillars} from '../../lib/queries.js'
 import * as seed from '../../data/seed.js'
-import {buildTranslations} from '../../i18n/build.js'
-import * as seed from '../../data/seed.js'
 import {events as seedEvents} from '../../data/events.js'
 import {buildTranslations} from '../../i18n/build.js'
 import {pick, eventCover, eventGallery} from '../../lib/sanity.js'
@@ -30,11 +28,19 @@ const translations = buildTranslations({settings, presidents, projects, pillars,
 const lang = 'en'
 
 const cover = eventCover(event, 1600, 900)
+// 1200x630 is the size Facebook/WhatsApp/LinkedIn expect for link previews.
+const shareImage = eventCover(event, 1200, 630) || undefined
 const gallery = eventGallery(event)
 const dateStr = event.date ? new Date(event.date).toLocaleDateString('en-GB', {year: 'numeric', month: 'long', day: 'numeric'}) : ''
 ---
 
-<Base lang={lang} dir="ltr" title={`${pick(event.title, lang)} | JCI El Alia`}>
+<Base
+  lang={lang}
+  dir="ltr"
+  title={`${pick(event.title, lang)} | JCI El Alia`}
+  description={pick(event.summary, lang) || undefined}
+  image={shareImage}
+>
   <Navbar lang={lang} />
   <main class="pt-16 lg:pt-20">
     <!-- Hero / cover -->

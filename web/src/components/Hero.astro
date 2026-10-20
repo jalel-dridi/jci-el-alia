@@ -5,7 +5,7 @@
  * when available, otherwise the brand gradient.
  */
 import {t} from '../i18n/utils.js'
-import {urlFor} from '../lib/sanity.js'
+import {urlFor, pick} from '../lib/sanity.js'
 
 const {settings, lang = 'en'} = Astro.props
 // Use the Sanity hero image if set, else the curated local photo.
@@ -37,15 +37,15 @@ const bgUrl = settings.heroBackground
     <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-5 py-2.5 mb-8 backdrop-blur-sm">
       <span class="w-2 h-2 bg-jci-teal rounded-full animate-pulse"></span>
       <span class="text-white/90 text-sm font-medium">
-        <span data-i18n="site.theme">{t('site.theme', lang)}</span> · {settings.year}
+        <span data-i18n="site.theme">{pick(settings.theme, lang)}</span> · {settings.year}
       </span>
     </div>
 
     <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-white leading-[1.2] mb-6" data-i18n="hero.title">
-      {t('hero.title', lang)}
+      {pick(settings.heroTitle, lang)}
     </h1>
     <p class="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto mb-10 font-light leading-[1.7]" data-i18n="hero.subtitle">
-      {t('hero.subtitle', lang)}
+      {pick(settings.heroSubtitle, lang)}
     </p>
 
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
