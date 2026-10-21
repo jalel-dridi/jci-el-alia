@@ -20,19 +20,19 @@ const langLinks = languages.map((l) => ({l, href: localePath(l, path), active: l
 
 <nav class="fixed top-0 left-0 right-0 z-50 nav-blur bg-white/80 border-b border-gray-100">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16 lg:h-20">
-      <a href={`${home}#home`} class="flex items-center">
+    <div class="flex items-center justify-between gap-6 h-16 lg:h-20">
+      <a href={`${home}#home`} class="flex items-center shrink-0">
         <img src="/images/logo.png" alt="JCI El Alia" class="h-12 lg:h-14 w-auto" />
       </a>
 
       <!-- Desktop links -->
-      <div class="hidden xl:flex items-center gap-6 whitespace-nowrap">
+      <div class="hidden xl:flex items-center gap-4 whitespace-nowrap">
         {sections.map(([id, key]) => (
           <a href={`${home}#${id}`} class="nav-link text-sm font-medium text-jci-black/70 hover:text-jci-blue transition-colors">{t(key, lang)}</a>
         ))}
       </div>
 
-      <div class="hidden xl:flex items-center gap-4 whitespace-nowrap">
+      <div class="hidden xl:flex items-center gap-3 whitespace-nowrap shrink-0">
         <div class="lang-switch flex items-center gap-1 bg-gray-100 rounded-full p-1">
           {langLinks.map(({l, href, active}) => (
             <a href={href} hreflang={l} lang={l} data-lang={l} aria-current={active ? 'true' : undefined} class:list={['lang-btn px-3 py-1 text-xs font-semibold rounded-full transition-all duration-300 uppercase', active ? 'bg-white text-jci-black shadow-sm' : 'text-jci-black/60 hover:text-jci-black']}>{l}</a>
