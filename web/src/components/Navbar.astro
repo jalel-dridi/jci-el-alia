@@ -3,13 +3,15 @@
  * Sticky navbar with blur, section links, language switcher, and a polished
  * mobile menu. Each language has its own pages (/, /fr/, /ar/), so the
  * switcher links to the same page in the other language (`path` is the
- * current page's language-free path, e.g. "/events/").
+ * current page's language-free path, e.g. "/events/"). With `overlay`, the
+ * bar starts see-through with the white logo over a dark page hero and turns
+ * solid on scroll (styles in global.css, toggled in SiteScripts).
  */
 import {t, localePath} from '../i18n/utils.js'
 import {languages} from '../i18n/ui.js'
 import Icon from './Icon.astro'
 
-const {lang = 'en', path = '/'} = Astro.props
+const {lang = 'en', path = '/', overlay = false} = Astro.props
 const home = localePath(lang, '/')
 const sections = [
   ['home', 'nav.home'], ['about', 'nav.about'], ['legacy', 'nav.legacy'], ['impact', 'nav.impact'],
@@ -18,11 +20,12 @@ const sections = [
 const langLinks = languages.map((l) => ({l, href: localePath(l, path), active: l === lang}))
 ---
 
-<nav class="fixed top-0 left-0 right-0 z-50 nav-blur bg-white/80 border-b border-gray-100">
+<nav class:list={['site-nav fixed top-0 left-0 right-0 z-50 nav-blur bg-white/80 border-b border-gray-100', overlay && 'is-overlay']} data-overlay={overlay ? '' : undefined}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between gap-6 h-16 lg:h-20">
       <a href={`${home}#home`} class="flex items-center shrink-0">
-        <img src="/images/logo.png" alt="JCI El Alia" class="h-12 lg:h-14 w-auto" />
+        <img src="/images/logo-nav.png" alt="JCI El Alia" width="240" height="112" class="logo-dark h-10 lg:h-11 w-auto" />
+        <img src="/images/logo-nav-white.png" alt="JCI El Alia" width="240" height="112" class="logo-light h-10 lg:h-11 w-auto" />
       </a>
 
       <!-- Desktop links -->

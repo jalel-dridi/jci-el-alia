@@ -48,7 +48,7 @@ const boardYear = board.length ? Math.max(...board.map((m) => m.year || 0)) : se
 ---
 
 <Base lang={lang} path="/">
-  <Navbar lang={lang} path="/" />
+  <Navbar lang={lang} path="/" overlay />
   <main>
     <Hero settings={settings} lang={lang} />
     <Upcoming events={events} lang={lang} />

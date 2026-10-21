@@ -63,28 +63,136 @@ section[id] {
   color: #0097d7;
 }
 
-/* Scroll reveal animations */
-.reveal {
+/*
+ * Starting states for GSAP entrance animations (src/scripts/motion.js).
+ * Only applied under html.motion, which Base.astro sets when JS runs and the
+ * visitor hasn't asked for reduced motion — otherwise everything is visible.
+ */
+html.motion .reveal {
   opacity: 0;
+  visibility: hidden;
   transform: translateY(30px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
 }
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
+html.motion [data-hero-item],
+html.motion [data-hero-title] {
+  visibility: hidden;
 }
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
 
-/* Page load fade-in */
-@keyframes page-fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+/*
+ * Navbar: see-through over dark page heroes (home, album pages), solid
+ * white once scrolled or when the mobile menu is open; slides away while
+ * scrolling down and comes back on scroll up. States are toggled in
+ * SiteScripts.astro.
+ */
+.site-nav {
+  transition: background-color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
 }
-body.page-loaded {
-  animation: page-fade-in 0.6s ease;
+.site-nav.is-scrolled {
+  box-shadow: 0 6px 24px -12px rgb(19 15 45 / 0.18);
+}
+.site-nav.is-hidden {
+  transform: translateY(-100%);
+}
+.site-nav .logo-light {
+  display: none;
+}
+.site-nav.is-overlay:not(.menu-open) {
+  background-color: transparent;
+  border-color: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.site-nav.is-overlay:not(.menu-open) #mobile-menu {
+  border-top-width: 0;
+}
+.site-nav.is-overlay:not(.menu-open) .logo-dark {
+  display: none;
+}
+.site-nav.is-overlay:not(.menu-open) .logo-light {
+  display: block;
+}
+.site-nav.is-overlay:not(.menu-open) .nav-link,
+.site-nav.is-overlay:not(.menu-open) #mobile-menu-btn {
+  color: rgb(255 255 255 / 0.85);
+}
+.site-nav.is-overlay:not(.menu-open) .nav-link:hover,
+.site-nav.is-overlay:not(.menu-open) #mobile-menu-btn:hover {
+  color: #fff;
+  background-color: transparent;
+}
+.site-nav.is-overlay:not(.menu-open) #mobile-menu-btn .icon {
+  color: inherit;
+}
+.site-nav.is-overlay:not(.menu-open) .lang-switch {
+  background-color: rgb(255 255 255 / 0.12);
+}
+.site-nav.is-overlay:not(.menu-open) .lang-btn:not([aria-current]) {
+  color: rgb(255 255 255 / 0.7);
+}
+
+/* Nav link underline that grows from the reading-start side on hover */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: -6px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+[dir='rtl'] .nav-link::after {
+  transform-origin: right;
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+}
+
+/* Tactile press feedback on pill buttons */
+@media (prefers-reduced-motion: no-preference) {
+  a.rounded-full,
+  button.rounded-full {
+    transition-property: color, background-color, border-color, box-shadow, transform;
+  }
+  a.rounded-full:active,
+  button.rounded-full:active {
+    transform: scale(0.97);
+  }
+}
+
+/*
+ * Page transitions between pages (native View Transitions; browsers without
+ * support just navigate normally). The navbar stays put, and an event's
+ * cover photo morphs from its card into the album page header.
+ */
+@view-transition {
+  navigation: auto;
+}
+.site-nav {
+  view-transition-name: site-nav;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.35s;
+}
+::view-transition-group(*) {
+  animation-duration: 0.45s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Lightbox photo eases in */
+@keyframes lightbox-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+#lightbox.flex #lightbox-img {
+  animation: lightbox-in 0.3s ease;
 }
 
 /* Back to top */
@@ -119,18 +227,19 @@ body.page-loaded {
  * (The counter script also checks this and jumps straight to final values.)
  */
 @media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
   html {
     scroll-behavior: auto;
   }
   .reveal {
     opacity: 1 !important;
+    visibility: visible !important;
     transform: none !important;
     transition: none !important;
   }
   .partners-track {
-    animation: none !important;
-  }
-  body.page-loaded {
     animation: none !important;
   }
   *,

@@ -28,6 +28,7 @@ updates automatically.
 | Upcoming events | ✅ "Coming Up" section + `.ics` / Google Calendar links |
 | SEO | ✅ Meta, Open Graph (event covers on album pages), JSON-LD Organization + Event, sitemap |
 | Performance | ✅ Inline SVG icons (no icon font), sized/lazy images, cache headers |
+| Motion & UI | ✅ GSAP (hero intro, scroll reveals, timeline draw), see-through navbar with brand white logo, native page transitions; all off for reduced-motion users |
 | CI | ✅ Builds web + studio, i18n completeness check |
 
 ## Open items

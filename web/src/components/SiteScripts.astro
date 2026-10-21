@@ -3,10 +3,11 @@
  * All client-side behavior in one place:
  *  - remembering the chosen language (pages are per-language: /, /fr/, /ar/)
  *  - animated stat counters on scroll into view
- *  - scroll reveal animations
+ *  - navbar states: see-through over the hero, solid once scrolled, hidden
+ *    while scrolling down (see .site-nav in global.css)
  *  - active nav link highlighting + back-to-top
  *  - polished mobile menu (animated max-height)
- *  - page-load fade-in
+ * Entrance/scroll animations live in src/scripts/motion.js (GSAP).
  */
 ---
 
@@ -22,11 +23,13 @@
     // ---- Mobile menu (animated) ----
     const menuBtn = document.getElementById('mobile-menu-btn')
     const mobileMenu = document.getElementById('mobile-menu')
+    const nav = document.querySelector('.site-nav')
     function closeMenu() {
       mobileMenu.style.maxHeight = '0px'
       setMenuIcon(false)
     }
     function setMenuIcon(open) {
+      nav.classList.toggle('menu-open', open)
       menuBtn.setAttribute('aria-expanded', String(open))
       menuBtn.querySelector('.menu-open').classList.toggle('hidden', open)
       menuBtn.querySelector('.menu-close').classList.toggle('hidden', !open)
@@ -42,12 +45,6 @@
       })
       mobileMenu.querySelectorAll('a[href*="#"]').forEach((l) => l.addEventListener('click', closeMenu))
     }
-
-    // ---- Scroll reveal ----
-    const revealObs = new IntersectionObserver((entries) => {
-      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target) } })
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' })
-    document.querySelectorAll('.reveal').forEach((el) => revealObs.observe(el))
 
     // ---- Counters ----
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -73,14 +70,25 @@
     const navLks = document.querySelectorAll('.nav-link')
     const backTop = document.getElementById('back-to-top')
     if (backTop) backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }))
+    const overlay = nav.hasAttribute('data-overlay')
+    let lastY = window.scrollY
+    function updateNav() {
+      const y = window.scrollY
+      nav.classList.toggle('is-scrolled', y > 40)
+      if (overlay) nav.classList.toggle('is-overlay', y <= 40)
+      // Slide away while reading down; come back on any upward scroll.
+      const menuOpen = nav.classList.contains('menu-open')
+      if (y > 400 && y > lastY + 4 && !menuOpen) nav.classList.add('is-hidden')
+      else if (y < lastY - 4 || y <= 400) nav.classList.remove('is-hidden')
+      lastY = y
+    }
+    updateNav()
     window.addEventListener('scroll', () => {
+      updateNav()
       let cur = ''
       sects.forEach((s) => { if (window.scrollY >= s.offsetTop - 100) cur = s.id })
       navLks.forEach((l) => l.classList.toggle('active', l.getAttribute('href').endsWith('#' + cur)))
       if (backTop) backTop.classList.toggle('visible', window.scrollY > 600)
     })
-
-    // ---- Page load fade-in ----
-    document.body.classList.add('page-loaded')
   })()
 </script>

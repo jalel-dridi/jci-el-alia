@@ -59,6 +59,17 @@ const jsonLd = {
         } catch (e) {}
       </script>
     )}
+    <!-- Turn on entrance animations (src/scripts/motion.js) unless the visitor
+         prefers reduced motion. If the script hasn't run within 4s, drop the
+         class so nothing stays hidden. -->
+    <script is:inline>
+      try {
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.documentElement.classList.add('motion')
+          setTimeout(function () { if (!window.__motionReady) document.documentElement.classList.remove('motion') }, 4000)
+        }
+      } catch (e) {}
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0097D7" />
@@ -100,5 +111,8 @@ const jsonLd = {
       {t('a11y.skip', lang)}
     </a>
     <slot />
+    <script>
+      import '../scripts/motion.js'
+    </script>
   </body>
 </html>

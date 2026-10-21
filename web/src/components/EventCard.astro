@@ -16,7 +16,7 @@ const catKey = `cat.${ev.category}`
 
 <a href={localePath(lang, `/events/${ev.slug}/`)} class="card-hover group bg-white rounded-2xl overflow-hidden border border-gray-100 block">
   <div class="h-52 overflow-hidden bg-gray-100 relative">
-    {cover && <img src={cover} alt={pick(ev.title, lang)} width="800" height="500" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />}
+    {cover && <img src={cover} alt={pick(ev.title, lang)} width="800" height="500" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" style={`view-transition-name: ev-${ev.slug}`} />}
     {count > 0 && (
       <span class="absolute top-3 right-3 rtl:right-auto rtl:left-3 bg-jci-black/70 text-white text-xs font-medium px-2.5 py-1 rounded-full backdrop-blur-sm">
         <Icon name="fa-camera" class="me-1" />{count} <span>{t('work.photos', lang)}</span>

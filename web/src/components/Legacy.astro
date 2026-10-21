@@ -28,7 +28,7 @@ const ordered = [...presidents].sort((a, b) => a.year - b.year)
 
     <div class="relative">
       <!-- vertical line -->
-      <div class="absolute left-4 sm:left-1/2 sm:-translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-jci-teal/60 via-jci-blue/40 to-jci-yellow/60"></div>
+      <div class="absolute left-4 sm:left-1/2 sm:-translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-jci-teal/60 via-jci-blue/40 to-jci-yellow/60" data-timeline-line></div>
 
       <div class="space-y-8">
         {ordered.map((p, i) => {
@@ -38,7 +38,7 @@ const ordered = [...presidents].sort((a, b) => a.year - b.year)
           return (
             <div class={`relative flex items-center gap-6 pl-12 sm:pl-0 reveal ${side ? 'sm:flex-row' : 'sm:flex-row-reverse'}`}>
               <!-- node -->
-              <div class={`absolute left-4 sm:left-1/2 sm:-translate-x-1/2 w-4 h-4 rounded-full border-2 ${isCurrent ? 'bg-jci-yellow border-jci-yellow shadow-lg shadow-jci-yellow/40' : 'bg-jci-black border-jci-teal'}`}></div>
+              <div data-timeline-node class={`absolute left-4 sm:left-1/2 sm:-translate-x-1/2 w-4 h-4 rounded-full border-2 ${isCurrent ? 'bg-jci-yellow border-jci-yellow shadow-lg shadow-jci-yellow/40' : 'bg-jci-black border-jci-teal'}`}></div>
               <!-- card -->
               <div class="sm:w-1/2 w-full">
                 <div class={`rounded-2xl p-5 border ${isCurrent ? 'bg-gradient-to-br from-jci-blue/20 to-jci-teal/10 border-jci-yellow/40' : 'bg-white/[0.04] border-white/10'} ${side ? 'sm:mr-8' : 'sm:ml-8'}`}>
