@@ -1,4 +1,6 @@
 import {defineType, defineField} from 'sanity'
+import {LIMITS} from '../../quality/rules'
+import {photoQuality} from '../../quality/validation'
 
 /**
  * PRESIDENT — one entry per year for the "Honor The Legacy" timeline.
@@ -32,6 +34,10 @@ export const president = defineType({
       title: 'Photo',
       type: 'image',
       options: {hotspot: true},
+      validation: (rule) => [
+        rule.required().warning('Add a photo for the timeline'),
+        rule.custom(photoQuality(LIMITS.headshotWidth)).warning(),
+      ],
     }),
     defineField({
       name: 'current',

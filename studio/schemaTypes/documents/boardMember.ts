@@ -1,4 +1,6 @@
 import {defineType, defineField} from 'sanity'
+import {LIMITS} from '../../quality/rules'
+import {photoQuality} from '../../quality/validation'
 
 /**
  * BOARD MEMBER — optional "Our Team" entries, grouped by year.
@@ -19,6 +21,7 @@ export const boardMember = defineType({
       title: 'Role',
       type: 'localeString',
       description: 'e.g., President, Secretary General, VPPRE.',
+      validation: (rule) => rule.required().warning('Add the role'),
     }),
     defineField({
       name: 'year',
@@ -30,7 +33,12 @@ export const boardMember = defineType({
       name: 'photo',
       title: 'Headshot',
       type: 'image',
+      description: 'A clear, well-lit face photo, ideally square. Without one the site shows initials.',
       options: {hotspot: true},
+      validation: (rule) => [
+        rule.required().warning('Add a headshot'),
+        rule.custom(photoQuality(LIMITS.headshotWidth)).warning(),
+      ],
     }),
     defineField({
       name: 'order',

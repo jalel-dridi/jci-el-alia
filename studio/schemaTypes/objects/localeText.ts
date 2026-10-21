@@ -1,4 +1,5 @@
 import {defineType, defineField} from 'sanity'
+import {needsTranslation} from '../../quality/validation'
 
 /**
  * Trilingual multi-line text: { en, fr, ar }.
@@ -19,7 +20,21 @@ export const localeText = defineType({
       fieldset: 'translations',
       validation: (rule) => rule.required().warning('English is the fallback language'),
     }),
-    defineField({name: 'fr', title: 'Français', type: 'text', rows: 3, fieldset: 'translations'}),
-    defineField({name: 'ar', title: 'العربية', type: 'text', rows: 3, fieldset: 'translations'}),
+    defineField({
+      name: 'fr',
+      title: 'Français',
+      type: 'text',
+      rows: 3,
+      fieldset: 'translations',
+      validation: (rule) => rule.custom(needsTranslation('French')).warning(),
+    }),
+    defineField({
+      name: 'ar',
+      title: 'العربية',
+      type: 'text',
+      rows: 3,
+      fieldset: 'translations',
+      validation: (rule) => rule.custom(needsTranslation('Arabic')).warning(),
+    }),
   ],
 })

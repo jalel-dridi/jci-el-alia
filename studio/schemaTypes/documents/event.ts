@@ -1,10 +1,14 @@
 import {defineType, defineField} from 'sanity'
+import {LIMITS} from '../../quality/rules'
+import {maxChars, minChars, photoQuality} from '../../quality/validation'
 
 /**
  * EVENT — the centerpiece content type.
  * Drives the yearly "Our Work" showcase and individual photo-album pages.
  * Editors add a title, date, category, descriptions, a cover image, and a
- * full photo gallery — no code required.
+ * full photo gallery — no code required. Yellow warnings (quality/rules.ts)
+ * point out what's missing for a complete album page; they never block
+ * publishing.
  */
 export const event = defineType({
   name: 'event',
@@ -62,25 +66,36 @@ export const event = defineType({
       name: 'summary',
       title: 'Short summary',
       type: 'localeString',
-      description: 'One-line teaser shown on cards.',
+      description: `One-line teaser shown on cards and in Google results (under ${LIMITS.summaryMax} characters).`,
+      validation: (rule) => [
+        rule.required().warning('Add a one-line summary for the event cards'),
+        rule.custom(maxChars(LIMITS.summaryMax)).warning(),
+      ],
     }),
     defineField({
       name: 'description',
       title: 'Full description',
       type: 'localeText',
+      description: '2–3 short paragraphs for the album page: what happened, who took part, and one number (attendees, prizes, kids reached).',
+      validation: (rule) => [
+        rule.required().warning('Add a description; the album page and Google rely on it'),
+        rule.custom(minChars(LIMITS.descriptionMin)).warning(),
+      ],
     }),
     defineField({
       name: 'location',
       title: 'Location',
       type: 'string',
-      description: 'Optional venue, e.g., Maison des Jeunes El Alia.',
+      description: 'Venue, e.g., Maison des Jeunes El Alia.',
+      validation: (rule) => rule.required().warning('Add where it took place'),
     }),
     defineField({
       name: 'coverImage',
       title: 'Cover image',
       type: 'image',
+      description: `A landscape photo at least ${LIMITS.coverWidth}px wide, without text or logos on it.`,
       options: {hotspot: true},
-      validation: (rule) => rule.required(),
+      validation: (rule) => [rule.required(), rule.custom(photoQuality(LIMITS.coverWidth, {landscape: true})).warning()],
     }),
     defineField({
       name: 'gallery',
@@ -92,11 +107,31 @@ export const event = defineType({
           options: {hotspot: true},
           fields: [
             {name: 'caption', title: 'Caption', type: 'localeString'},
-            {name: 'alt', title: 'Alt text (accessibility)', type: 'string'},
+            {
+              name: 'alt',
+              title: 'Alt text (accessibility)',
+              type: 'string',
+              description: 'A few words on what the photo shows, read aloud to blind visitors and used by Google.',
+              validation: (rule) => rule.required().warning('Describe the photo, e.g. "Students at a career workshop"'),
+            },
           ],
         },
       ],
+      description: `The best ${LIMITS.galleryMin}–12 photos. Click a photo to add its description (alt text).`,
       options: {layout: 'grid'},
+      validation: (rule) => [
+        rule.min(LIMITS.galleryMin).warning(`Add at least ${LIMITS.galleryMin} photos so the album feels complete`),
+        rule.max(LIMITS.galleryMax).warning(`Keep the best ${LIMITS.galleryMax} or fewer; long albums are slow on phones`),
+      ],
+    }),
+    defineField({
+      name: 'photosApproved',
+      title: 'Photo permissions checked',
+      type: 'boolean',
+      description: 'Tick once everyone pictured agreed to appear online, with written parental consent for anyone under 18.',
+      initialValue: false,
+      validation: (rule) =>
+        rule.custom((v) => v === true || 'Confirm the people in these photos agreed to be online').warning(),
     }),
     defineField({
       name: 'featured',

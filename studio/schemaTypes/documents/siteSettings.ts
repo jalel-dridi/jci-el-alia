@@ -1,4 +1,6 @@
 import {defineType, defineField} from 'sanity'
+import {LIMITS} from '../../quality/rules'
+import {photoQuality} from '../../quality/validation'
 
 /**
  * SITE SETTINGS — a single document (singleton).
@@ -41,7 +43,9 @@ export const siteSettings = defineType({
       title: 'Hero background image',
       type: 'image',
       group: 'hero',
+      description: `A landscape photo at least ${LIMITS.coverWidth}px wide.`,
       options: {hotspot: true},
+      validation: (rule) => rule.custom(photoQuality(LIMITS.coverWidth, {landscape: true})).warning(),
     }),
     // Stat counters (animated on the homepage)
     defineField({

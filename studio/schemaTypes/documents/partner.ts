@@ -18,7 +18,9 @@ export const partner = defineType({
       name: 'logo',
       title: 'Logo',
       type: 'image',
+      description: 'Ideally a PNG or SVG with a transparent background.',
       options: {hotspot: true},
+      validation: (rule) => rule.required().warning('Upload the logo; otherwise a generic icon is shown'),
     }),
     defineField({
       name: 'icon',
@@ -26,7 +28,13 @@ export const partner = defineType({
       type: 'string',
       description: 'Used if no logo image is uploaded, e.g., "fa-landmark".',
     }),
-    defineField({name: 'url', title: 'Website', type: 'url'}),
+    defineField({
+      name: 'url',
+      title: 'Website',
+      type: 'url',
+      description: 'Their website or Facebook page.',
+      validation: (rule) => rule.required().warning('Add a link so visitors can find them'),
+    }),
     defineField({name: 'order', title: 'Display order', type: 'number', initialValue: 0}),
   ],
   orderings: [

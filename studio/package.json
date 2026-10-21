@@ -9,10 +9,13 @@
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",
-    "deploy-graphql": "sanity graphql deploy"
+    "deploy-graphql": "sanity graphql deploy",
+    "health": "sanity exec scripts/content-health.ts"
   },
   "dependencies": {
+    "@sanity/icons": "^3.7.4",
     "@sanity/image-url": "^1.1.0",
+    "@sanity/ui": "^3.2.0",
     "@sanity/vision": "^5.28.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

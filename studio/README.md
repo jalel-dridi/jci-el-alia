@@ -23,6 +23,25 @@ members, partners, and the homepage settings. No coding required.
 5. Click **Publish**. The website updates automatically within ~1 minute
    (and in any case overnight).
 
+## Quality checks
+
+- **Yellow warnings** appear next to fields that are missing or could be
+  better: a missing French/Arabic translation, no description, a summary over
+  160 characters, a photo that's too small, album photos without a
+  description (alt text), fewer than 6 album photos, no headshot or logo.
+  They are suggestions only; you can always publish.
+- **Photo permissions checked** (on each event): tick it once everyone
+  pictured agreed to appear online, with written parental consent for anyone
+  under 18.
+- **Content health** (tab at the top of the dashboard) lists everything
+  published that still needs work, most important sections first, with an
+  **Open** button for each item. Fix, publish, then press **Refresh**.
+  Developers can print the same report with `npm run health`.
+- **Before publishing an event**, check: title and summary in EN/FR/AR, a 2–3
+  paragraph description (what happened, who took part, one number), date,
+  location, category, a landscape cover photo with no text on it, the best
+  6–12 photos each with a short description, and photo permissions.
+
 ## Tips
 
 - **Images:** upload the original full-size photo. The site automatically
@@ -47,7 +66,12 @@ members, partners, and the homepage settings. No coding required.
 npm install
 npm run dev      # local studio at http://localhost:3333
 npm run deploy   # publish to https://jcielalia.sanity.studio
+npm run health   # content health report in the terminal
 ```
+
+Copy `.env.example` to `.env` and set `SANITY_STUDIO_PROJECT_ID=3fwebql8`
+first. Quality thresholds and wording live in `quality/rules.ts`, shared by
+the field warnings and the Content health tab.
 
 Schema lives in `schemaTypes/`. Reusable trilingual field types are
 `objects/localeString` and `objects/localeText`. Seed data lives in

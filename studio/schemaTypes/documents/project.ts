@@ -1,4 +1,6 @@
 import {defineType, defineField} from 'sanity'
+import {LIMITS} from '../../quality/rules'
+import {photoQuality} from '../../quality/validation'
 
 /**
  * PROJECT — the "Our Impact" flagship cards.
@@ -21,12 +23,18 @@ export const project = defineType({
       type: 'localeString',
       description: 'e.g., Education, Entrepreneurship, Innovation.',
     }),
-    defineField({name: 'description', title: 'Description', type: 'localeText'}),
+    defineField({
+      name: 'description',
+      title: 'Description',
+      type: 'localeText',
+      validation: (rule) => rule.required().warning('Add a short description of the project'),
+    }),
     defineField({
       name: 'metric',
       title: 'Impact metric',
       type: 'localeString',
-      description: 'Short highlight, e.g., "240+ participants", "2 editions".',
+      description: 'Short highlight with a real number, e.g., "240+ participants", "2 editions".',
+      validation: (rule) => rule.required().warning('Add one real number that shows the impact'),
     }),
     defineField({
       name: 'icon',
@@ -38,7 +46,12 @@ export const project = defineType({
       name: 'image',
       title: 'Photo',
       type: 'image',
+      description: `Without one, the site borrows the cover of the latest matching event. At least ${LIMITS.photoWidth}px wide.`,
       options: {hotspot: true},
+      validation: (rule) => [
+        rule.required().warning('Add a photo of this project'),
+        rule.custom(photoQuality(LIMITS.photoWidth)).warning(),
+      ],
     }),
     defineField({
       name: 'order',

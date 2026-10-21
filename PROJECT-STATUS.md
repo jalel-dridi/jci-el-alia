@@ -29,6 +29,7 @@ updates automatically.
 | SEO | ✅ Meta, Open Graph (event covers on album pages), JSON-LD Organization + Event, sitemap |
 | Performance | ✅ Inline SVG icons (no icon font), sized/lazy images, cache headers |
 | Motion & UI | ✅ Branded intro screen (first page of a visit), GSAP (hero intro, scroll reveals, timeline draw), see-through navbar with brand white logo, slide-over page transitions (reversed on Back) with hover prefetch; all off for reduced-motion users |
+| Content quality | ✅ Yellow field warnings in the dashboard (translations, descriptions, photo size, alt text, album size, photo permissions) + Content health tab listing what still needs work (`studio/quality/`) |
 | CI | ✅ Builds web + studio, i18n completeness check |
 
 ## Open items
