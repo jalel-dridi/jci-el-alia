@@ -286,19 +286,29 @@ html:active-view-transition-type(back)::view-transition-new(root) {
   pointer-events: auto;
 }
 
-/* Partners marquee */
-@keyframes scroll-left {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+/*
+ * Partners marquee (components/Partners.astro). The track holds four copies
+ * of the list and slides by half its width (two copies), so it loops without
+ * a jump. Edges fade out; hovering pauses it. In Arabic it runs the other way.
+ */
+@keyframes partners-scroll {
+  to { transform: translateX(-50%); }
+}
+@keyframes partners-scroll-rtl {
+  to { transform: translateX(50%); }
+}
+.partners-viewport {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
 .partners-track {
-  animation: scroll-left 30s linear infinite;
+  animation: partners-scroll 60s linear infinite;
+}
+[dir='rtl'] .partners-track {
+  animation-name: partners-scroll-rtl;
 }
 .partners-track:hover {
   animation-play-state: paused;
-}
-[dir='rtl'] .partners-track {
-  animation-direction: reverse;
 }
 
 /*
@@ -319,8 +329,23 @@ html:active-view-transition-type(back)::view-transition-new(root) {
     transform: none !important;
     transition: none !important;
   }
+  /* Marquee becomes one still, centered row that wraps as needed. */
+  .partners-viewport {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
   .partners-track {
     animation: none !important;
+    width: auto;
+    justify-content: center;
+  }
+  .partners-group {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 1.5rem;
+  }
+  .partners-group[aria-hidden] {
+    display: none;
   }
   *,
   *::before,

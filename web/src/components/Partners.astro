@@ -1,7 +1,10 @@
 ---
 /**
  * Partners marquee — infinite scroll. Uses a logo image when present,
- * otherwise a branded icon chip. The track is duplicated for a seamless loop.
+ * otherwise a branded icon chip. The list is repeated four times and the
+ * track slides by half its width, so the loop is seamless even on very wide
+ * screens. Visitors who prefer reduced motion get one centered, wrapped row
+ * instead (see .partners-track in global.css).
  */
 import {t} from '../i18n/utils.js'
 import {urlFor} from '../lib/sanity.js'
@@ -15,22 +18,31 @@ const iconColors = ['text-jci-navy', 'text-jci-blue', 'text-jci-teal', 'text-jci
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <p class="text-center text-sm font-semibold text-jci-black/40 uppercase tracking-wider mb-10 reveal">{t('partners.label', lang)}</p>
   </div>
-  <div class="relative">
-    <div class="flex partners-track whitespace-nowrap">
-      {[0, 1].map(() => (
-        <div class="flex items-center gap-12 px-6">
+  <div class="partners-viewport">
+    <div class="partners-track flex w-max">
+      {[0, 1, 2, 3].map((copy) => (
+        <ul class="partners-group flex items-start gap-8 px-4" aria-hidden={copy > 0 ? 'true' : undefined}>
           {partners.map((p, i) => {
-            const logo = p.logo ? urlFor(p.logo).height(56).url() : null
+            const logo = p.logo ? urlFor(p.logo).height(80).url() : null
+            const chip = (
+              <>
+                <span class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover:-translate-y-1">
+                  {logo ? <img src={logo} alt="" class="w-10 h-10 object-contain" loading="lazy" /> : <Icon name={p.icon || 'fa-handshake'} class={`${iconColors[i % 4]} text-xl`} />}
+                </span>
+                <span class="text-xs text-jci-black/50 text-center leading-snug">{p.name}</span>
+              </>
+            )
             return (
-              <div class="flex flex-col items-center gap-2 min-w-[140px]">
-                <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center overflow-hidden">
-                  {logo ? <img src={logo} alt={p.name} class="w-10 h-10 object-contain" /> : <Icon name={p.icon || 'fa-handshake'} class={`${iconColors[i % 4]} text-xl`} />}
-                </div>
-                <span class="text-xs text-jci-black/50 text-center whitespace-normal">{p.name}</span>
-              </div>
+              <li class="w-[140px] shrink-0">
+                {p.url ? (
+                  <a href={p.url} target="_blank" rel="noopener" tabindex={copy > 0 ? -1 : undefined} class="group flex flex-col items-center gap-2">{chip}</a>
+                ) : (
+                  <div class="group flex flex-col items-center gap-2">{chip}</div>
+                )}
+              </li>
             )
           })}
-        </div>
+        </ul>
       ))}
     </div>
   </div>
