@@ -64,8 +64,7 @@ const action = FORMSPREE_ID ? `https://formspree.io/f/${FORMSPREE_ID}` : `mailto
       // No Formspree ID yet: hand the application to the visitor's email app.
       if (form.action.startsWith('mailto:')) {
         const d = new FormData(form)
-        const body = ['Name: ' + d.get('name'), 'Email: ' + d.get('email'), 'Phone: ' + (d.get('phone') || '-'), '', d.get('message') || ''].join('
-')
+        const body = ['Name: ' + d.get('name'), 'Email: ' + d.get('email'), 'Phone: ' + (d.get('phone') || '-'), '', d.get('message') || ''].join('\n')
         location.href = form.action + '?subject=' + encodeURIComponent('Membership application - ' + d.get('name')) + '&body=' + encodeURIComponent(body)
         document.getElementById('join-mailto').classList.remove('hidden')
         return

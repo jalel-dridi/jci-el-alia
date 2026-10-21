@@ -8,6 +8,7 @@
  * a timeout), every element is simply visible.
  *
  * Hooks used in the markup:
+ *   #intro [data-intro-logo] [data-intro-bar]   first-visit intro (Base.astro)
  *   [data-hero-bg] [data-hero-content] [data-hero-item] [data-hero-title]
  *   .reveal                       fade-up when scrolled into view (batched)
  *   [data-timeline-line] [data-timeline-node]   legacy timeline
@@ -18,13 +19,48 @@ import {SplitText} from 'gsap/SplitText'
 
 window.__motionReady = true
 const root = document.documentElement
+const wait = (ms) => new Promise((r) => setTimeout(r, ms))
 
 if (root.classList.contains('motion')) {
   gsap.registerPlugin(ScrollTrigger, SplitText)
   gsap.defaults({ease: 'power3.out', duration: 0.9})
-  hero()
-  reveals()
-  timeline()
+  intro().then(() => {
+    hero()
+    reveals()
+    timeline()
+  })
+}
+
+function intro() {
+  const el = document.getElementById('intro')
+  if (!el || !root.classList.contains('intro')) return Promise.resolve()
+  try { sessionStorage.setItem('jci-intro', '1') } catch (e) {}
+
+  // Stay at least a beat so it reads as intentional, at most 2.2s.
+  const img = document.querySelector('[data-hero-bg]')
+  const ready = Promise.all([
+    document.fonts?.ready,
+    img?.decode?.().catch(() => {}),
+    wait(900),
+  ])
+  return Promise.race([ready, wait(2200)]).then(() => new Promise((resolve) => {
+    // Take the bar over from its CSS animation and finish it.
+    const bar = el.querySelector('[data-intro-bar]')
+    const t = getComputedStyle(bar).transform
+    const progress = t === 'none' ? 0 : new DOMMatrix(t).a
+    bar.style.animation = 'none'
+    gsap.timeline({
+      onComplete: () => {
+        root.classList.remove('intro')
+        el.remove()
+      },
+    })
+      .fromTo(bar, {scaleX: progress}, {scaleX: 1, duration: 0.35, ease: 'power2.out'})
+      .to(el.querySelector('[data-intro-logo]'), {y: -24, autoAlpha: 0, duration: 0.45, ease: 'power3.in'})
+      .to(el, {yPercent: -100, duration: 0.9, ease: 'power4.inOut'}, '-=0.2')
+      // The hero starts building while the curtain is still lifting.
+      .add(resolve, '-=0.5')
+  }))
 }
 
 function hero() {

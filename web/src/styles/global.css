@@ -167,9 +167,63 @@ html.motion [data-hero-title] {
 }
 
 /*
+ * Intro screen on the first page of a visit (markup in Base.astro). The bar
+ * fills to 80% on its own; motion.js finishes it once the fonts and hero
+ * photo are ready, then lifts the whole panel away like a curtain.
+ */
+#intro {
+  display: none;
+}
+html.intro {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+html.intro #intro {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  background: radial-gradient(120% 70% at 50% 115%, rgb(0 151 215 / 0.35), transparent 65%), #130f2d;
+}
+#intro [data-intro-logo] {
+  width: min(260px, 60vw);
+  height: auto;
+  animation: intro-logo 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+#intro .intro-track {
+  width: 140px;
+  height: 2px;
+  border-radius: 2px;
+  overflow: hidden;
+  background: rgb(255 255 255 / 0.15);
+}
+#intro [data-intro-bar] {
+  height: 100%;
+  background: #0097d7;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: intro-load 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+}
+[dir='rtl'] #intro [data-intro-bar] {
+  transform-origin: right;
+}
+@keyframes intro-logo {
+  from { opacity: 0; transform: translateY(14px); }
+}
+@keyframes intro-load {
+  to { transform: scaleX(0.8); }
+}
+
+/*
  * Page transitions between pages (native View Transitions; browsers without
- * support just navigate normally). The navbar stays put, and an event's
- * cover photo morphs from its card into the album page header.
+ * support just navigate normally). The next page slides up over the current
+ * one, which drifts back into the dark; going back in history runs it in
+ * reverse. The navbar stays put, and an event's cover photo morphs from its
+ * card into the album page header.
  */
 @view-transition {
   navigation: auto;
@@ -177,13 +231,39 @@ html.motion [data-hero-title] {
 .site-nav {
   view-transition-name: site-nav;
 }
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: 0.35s;
+::view-transition {
+  background-color: #130f2d;
 }
 ::view-transition-group(*) {
-  animation-duration: 0.45s;
-  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-duration: 0.7s;
+  animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+}
+::view-transition-old(root) {
+  animation: vt-recede 0.7s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+::view-transition-new(root) {
+  animation: vt-cover 0.7s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+html:active-view-transition-type(back)::view-transition-old(root) {
+  z-index: 1;
+  animation-name: vt-uncover;
+}
+html:active-view-transition-type(back)::view-transition-new(root) {
+  animation-name: vt-return;
+}
+@keyframes vt-recede {
+  to { transform: translateY(-6%); opacity: 0.35; }
+}
+@keyframes vt-cover {
+  from { clip-path: inset(100% 0 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes vt-uncover {
+  from { clip-path: inset(0 0 0 0); }
+  to { clip-path: inset(100% 0 0 0); }
+}
+@keyframes vt-return {
+  from { transform: translateY(-6%); opacity: 0.35; }
 }
 
 /* Lightbox photo eases in */
