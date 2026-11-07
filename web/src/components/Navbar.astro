@@ -14,8 +14,8 @@ import Icon from './Icon.astro'
 const {lang = 'en', path = '/', overlay = false} = Astro.props
 const home = localePath(lang, '/')
 const sections = [
-  ['home', 'nav.home'], ['about', 'nav.about'], ['legacy', 'nav.legacy'], ['impact', 'nav.impact'],
-  ['work', 'nav.work'], ['team', 'nav.team'], ['join', 'nav.join'],
+  ['home', 'nav.home'], ['about', 'nav.about'], ['impact', 'nav.impact'], ['work', 'nav.work'],
+  ['legacy', 'nav.legacy'], ['team', 'nav.team'], ['join', 'nav.join'],
 ]
 const langLinks = languages.map((l) => ({l, href: localePath(l, path), active: l === lang}))
 ---

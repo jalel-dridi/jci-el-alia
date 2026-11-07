@@ -53,12 +53,13 @@ const boardYear = board.length ? Math.max(...board.map((m) => m.year || 0)) : se
     <Hero settings={settings} lang={lang} />
     <Upcoming events={events} lang={lang} />
     <About settings={settings} presidents={presidents} lang={lang} />
-    <Legacy presidents={presidents} lang={lang} />
     <Pillars pillars={pillars} lang={lang} />
     <Impact projects={projects} events={events} lang={lang} />
     <Achievements achievements={seed.achievements} lang={lang} />
-    <Testimonial testimonial={testimonial} presidents={presidents} lang={lang} />
     <Work events={pastEvents(events)} lang={lang} />
+    <!-- What we do comes first; the history and the president's quote follow. -->
+    <Legacy presidents={presidents} lang={lang} />
+    <Testimonial testimonial={testimonial} presidents={presidents} lang={lang} />
     <Team board={board} year={boardYear} lang={lang} />
     <Join settings={settings} lang={lang} />
     <Partners partners={partners} lang={lang} />

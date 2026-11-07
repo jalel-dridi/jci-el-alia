@@ -20,7 +20,7 @@ const accents = [
 ---
 
 {current.length > 0 && (
-  <section id="team" class="py-24 lg:py-32 bg-gray-50">
+  <section id="team" class="py-24 lg:py-32">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16 reveal">
         <p class="text-jci-blue-ink font-semibold text-sm uppercase tracking-wider mb-4">{t('team.label', lang)}</p>
@@ -31,7 +31,7 @@ const accents = [
           const photo = m.photo ? urlFor(m.photo).width(400).height(400).fit('crop').url() : null
           const accent = accents[i % accents.length]
           return (
-            <div class="w-[calc(50%-0.75rem)] sm:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1.125rem)] bg-white rounded-2xl p-6 border border-gray-100 text-center reveal">
+            <div class="w-[calc(50%-0.75rem)] sm:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1.125rem)] bg-gray-50 rounded-2xl p-6 border border-gray-100 text-center reveal">
               {photo ? (
                 <img src={photo} alt={m.name} width="400" height="400" loading="lazy" class="w-24 h-24 rounded-full object-cover mx-auto mb-4" />
               ) : (
