@@ -12,8 +12,14 @@
   --color-jci-teal: #57bcbc;
   --color-jci-yellow: #efc40f;
 
+  /* Same hues, deep enough to read as text (and under white text) on light
+     backgrounds. The brand colors above stay for dark backgrounds and accents. */
+  --color-jci-blue-ink: #0075a8;
+  --color-jci-teal-ink: #1f7a7a;
+  --color-jci-yellow-ink: #8a6a00;
+
   --font-jakarta: 'Plus Jakarta Sans', sans-serif;
-  --font-arabic: 'Noto Sans Arabic', sans-serif;
+  --font-arabic: 'Noto Sans Arabic', 'Plus Jakarta Sans', sans-serif;
   --font-arvo: 'Arvo', serif;
 }
 
@@ -25,6 +31,18 @@ body {
 }
 [dir='rtl'] body {
   font-family: var(--font-arabic);
+}
+/* Arvo has no Arabic letters, and Arabic isn't set in italics. */
+[dir='rtl'] .font-arvo {
+  font-family: var(--font-arabic);
+  font-style: normal;
+}
+
+/* One clear keyboard focus ring, visible on light and dark sections */
+:focus-visible {
+  outline: 2px solid var(--color-jci-blue-ink);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px #fff;
 }
 
 /* Inline SVG icons (components/Icon.astro): sized like the old icon font.
@@ -60,7 +78,35 @@ section[id] {
 
 /* Active nav link */
 .nav-link.active {
-  color: #0097d7;
+  color: var(--color-jci-blue-ink);
+}
+
+/* Long card lists swipe sideways on phones instead of stacking; the next card
+   peeks in so it's obvious there's more. */
+@media (max-width: 767px) {
+  .swipe-row {
+    --gutter: 1rem;
+    display: flex;
+    gap: 1rem;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    scroll-padding-inline: var(--gutter);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .swipe-row::-webkit-scrollbar {
+    display: none;
+  }
+  .swipe-row > * {
+    flex: 0 0 min(85%, 320px);
+    scroll-snap-align: start;
+  }
+}
+@media (min-width: 640px) and (max-width: 767px) {
+  .swipe-row {
+    --gutter: 1.5rem;
+  }
 }
 
 /*

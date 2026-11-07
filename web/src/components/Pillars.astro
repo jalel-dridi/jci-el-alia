@@ -10,23 +10,22 @@ const {pillars, lang = 'en'} = Astro.props
 
 // Map brand color -> tailwind classes for icon chip
 const chip = {
-  'jci-blue': 'bg-jci-blue/10 text-jci-blue',
-  'jci-teal': 'bg-jci-teal/10 text-jci-teal',
+  'jci-blue': 'bg-jci-blue/10 text-jci-blue-ink',
+  'jci-teal': 'bg-jci-teal/10 text-jci-teal-ink',
   'jci-navy': 'bg-jci-navy/10 text-jci-navy',
-  'jci-yellow': 'bg-jci-yellow/10 text-jci-yellow',
+  'jci-yellow': 'bg-jci-yellow/10 text-jci-yellow-ink',
 }
-const delays = ['reveal-delay-1', 'reveal-delay-2', 'reveal-delay-3', 'reveal-delay-4']
 ---
 
 <section class="py-24 lg:py-32 bg-gray-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16 reveal">
-      <p class="text-jci-blue font-semibold text-sm uppercase tracking-wider mb-4">{t('pillars.label', lang)}</p>
+      <p class="text-jci-blue-ink font-semibold text-sm uppercase tracking-wider mb-4">{t('pillars.label', lang)}</p>
       <h2 class="text-3xl lg:text-4xl font-light text-jci-black">{t('pillars.title', lang)}</h2>
     </div>
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      {pillars.map((p, i) => (
-        <div class={`card-hover bg-white rounded-2xl p-8 border border-gray-100 reveal ${delays[i % 4]}`}>
+      {pillars.map((p) => (
+        <div class="bg-white rounded-2xl p-8 border border-gray-100 reveal">
           <div class={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 ${chip[p.color] || chip['jci-blue']}`}>
             <Icon name={p.icon || 'fa-star'} class="text-lg" />
           </div>

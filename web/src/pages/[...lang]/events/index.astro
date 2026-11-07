@@ -35,21 +35,21 @@ const years = Object.keys(byYear).map(Number).sort((a, b) => b - a)
   <main class="pt-28 lg:pt-36 pb-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
-        <p class="text-jci-blue font-semibold text-sm uppercase tracking-wider mb-4">{t('work.label', lang)}</p>
+        <p class="text-jci-blue-ink font-semibold text-sm uppercase tracking-wider mb-4">{t('work.label', lang)}</p>
         <h1 class="text-4xl lg:text-5xl font-light text-jci-black mb-4">{t('work.title', lang)}</h1>
-        <p class="text-jci-black/50 max-w-2xl mx-auto">{t('work.intro', lang)}</p>
+        <p class="text-jci-black/60 max-w-2xl mx-auto">{t('work.intro', lang)}</p>
       </div>
 
       {events.length === 0 ? (
         <div class="text-center py-16 border-2 border-dashed border-gray-200 rounded-3xl">
           <Icon name="fa-images" class="text-gray-300 text-5xl mb-4" />
-          <p class="text-jci-black/40">Events and photo albums will appear here once added in the dashboard.</p>
+          <p class="text-jci-black/60">Events and photo albums will appear here once added in the dashboard.</p>
         </div>
       ) : (
         years.map((year) => (
           <div class="mb-16">
             <div class="flex items-center gap-4 mb-8">
-              <span class="text-2xl font-bold text-jci-blue">{year}</span>
+              <span class="text-2xl font-bold text-jci-blue-ink">{year}</span>
               <div class="flex-1 h-px bg-gray-200"></div>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

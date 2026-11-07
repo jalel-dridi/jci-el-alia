@@ -10,6 +10,9 @@ import Icon from './Icon.astro'
 
 const FORMSPREE_ID = ''
 const {settings = {}, lang = 'en'} = Astro.props
+const labelClass = 'block text-white/80 text-sm mb-1.5'
+// 16px on phones: iOS zooms the page into anything smaller.
+const fieldClass = 'w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white text-base sm:text-sm focus:outline-none focus:border-jci-teal transition-colors'
 const action = FORMSPREE_ID ? `https://formspree.io/f/${FORMSPREE_ID}` : `mailto:${settings.email || 'jcielalia@gmail.com'}`
 ---
 
@@ -23,7 +26,7 @@ const action = FORMSPREE_ID ? `https://formspree.io/f/${FORMSPREE_ID}` : `mailto
       <div class="reveal">
         <p class="text-jci-teal font-semibold text-sm uppercase tracking-wider mb-4">{t('join.label', lang)}</p>
         <h2 class="text-3xl lg:text-4xl font-light text-white leading-[1.3] mb-6">{t('join.title', lang)}</h2>
-        <p class="text-base text-white/60 leading-[1.8] mb-8">{t('join.desc', lang)}</p>
+        <p class="text-base text-white/80 leading-[1.8] mb-8">{t('join.desc', lang)}</p>
         <ul class="space-y-4 mb-8">
           {['join.b1', 'join.b2', 'join.b3', 'join.b4'].map((k) => (
             <li class="flex items-center gap-3">
@@ -33,15 +36,27 @@ const action = FORMSPREE_ID ? `https://formspree.io/f/${FORMSPREE_ID}` : `mailto
           ))}
         </ul>
       </div>
-      <div class="reveal reveal-delay-2">
+      <div class="reveal">
         <div class="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20">
           <h3 class="text-xl font-semibold text-white mb-6">{t('join.formtitle', lang)}</h3>
           <form id="join-form" action={action} method="POST" class="space-y-4">
-            <input type="text" name="name" required placeholder={t('join.ph1', lang)} class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/40 text-sm focus:outline-none focus:border-jci-teal transition-colors" />
-            <input type="email" name="email" required placeholder={t('join.ph2', lang)} class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/40 text-sm focus:outline-none focus:border-jci-teal transition-colors" />
-            <input type="tel" name="phone" placeholder={t('join.ph3', lang)} class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/40 text-sm focus:outline-none focus:border-jci-teal transition-colors" />
-            <textarea name="message" rows="3" placeholder={t('join.ph4', lang)} class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/40 text-sm focus:outline-none focus:border-jci-teal transition-colors resize-none"></textarea>
-            <button type="submit" class="w-full bg-jci-teal hover:bg-jci-blue text-white py-3.5 rounded-xl font-semibold text-sm transition-colors disabled:opacity-60">{t('join.submit', lang)}</button>
+            <label class="block">
+              <span class={labelClass}>{t('join.ph1', lang)}</span>
+              <input type="text" name="name" required autocomplete="name" class={fieldClass} />
+            </label>
+            <label class="block">
+              <span class={labelClass}>{t('join.ph2', lang)}</span>
+              <input type="email" name="email" required autocomplete="email" dir="ltr" class={fieldClass} />
+            </label>
+            <label class="block">
+              <span class={labelClass}>{t('join.ph3', lang)}</span>
+              <input type="tel" name="phone" autocomplete="tel" dir="ltr" class={fieldClass} />
+            </label>
+            <label class="block">
+              <span class={labelClass}>{t('join.ph4', lang)}</span>
+              <textarea name="message" rows="3" class={`${fieldClass} resize-none`}></textarea>
+            </label>
+            <button type="submit" class="w-full bg-white hover:bg-jci-teal text-jci-navy hover:text-jci-black py-3.5 rounded-xl font-semibold text-sm transition-colors disabled:opacity-60">{t('join.submit', lang)}</button>
             <p id="join-success" class="hidden text-jci-teal text-sm text-center">{t('join.success', lang)}</p>
             <p id="join-mailto" class="hidden text-jci-teal text-sm text-center">{t('join.mailto', lang)}</p>
             <p id="join-error" class="hidden text-red-300 text-sm text-center">{t('join.error', lang)}</p>

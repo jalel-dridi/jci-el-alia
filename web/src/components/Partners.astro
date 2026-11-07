@@ -11,12 +11,12 @@ import {urlFor} from '../lib/sanity.js'
 import Icon from './Icon.astro'
 
 const {partners, lang = 'en'} = Astro.props
-const iconColors = ['text-jci-navy', 'text-jci-blue', 'text-jci-teal', 'text-jci-yellow']
+const iconColors = ['text-jci-navy', 'text-jci-blue-ink', 'text-jci-teal-ink', 'text-jci-yellow-ink']
 ---
 
 <section class="py-16 bg-gray-50 overflow-hidden">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <p class="text-center text-sm font-semibold text-jci-black/40 uppercase tracking-wider mb-10 reveal">{t('partners.label', lang)}</p>
+    <p class="text-center text-sm font-semibold text-jci-black/60 uppercase tracking-wider mb-10 reveal">{t('partners.label', lang)}</p>
   </div>
   <div class="partners-viewport">
     <div class="partners-track flex w-max">
@@ -29,7 +29,7 @@ const iconColors = ['text-jci-navy', 'text-jci-blue', 'text-jci-teal', 'text-jci
                 <span class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover:-translate-y-1">
                   {logo ? <img src={logo} alt="" class="w-10 h-10 object-contain" loading="lazy" /> : <Icon name={p.icon || 'fa-handshake'} class={`${iconColors[i % 4]} text-xl`} />}
                 </span>
-                <span class="text-xs text-jci-black/50 text-center leading-snug">{p.name}</span>
+                <span class="text-xs text-jci-black/60 text-center leading-snug">{p.name}</span>
               </>
             )
             return (

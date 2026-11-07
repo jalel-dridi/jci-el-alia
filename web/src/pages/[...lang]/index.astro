@@ -57,7 +57,7 @@ const boardYear = board.length ? Math.max(...board.map((m) => m.year || 0)) : se
     <Pillars pillars={pillars} lang={lang} />
     <Impact projects={projects} events={events} lang={lang} />
     <Achievements achievements={seed.achievements} lang={lang} />
-    <Testimonial testimonial={testimonial} lang={lang} />
+    <Testimonial testimonial={testimonial} presidents={presidents} lang={lang} />
     <Work events={pastEvents(events)} lang={lang} />
     <Team board={board} year={boardYear} lang={lang} />
     <Join settings={settings} lang={lang} />

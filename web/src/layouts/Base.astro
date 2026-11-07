@@ -9,7 +9,7 @@ import '../styles/global.css'
 import {t, dirFor, localePath} from '../i18n/utils.js'
 import {languages} from '../i18n/ui.js'
 
-const {lang = 'en', path, image = '/images/logo.png'} = Astro.props
+const {lang = 'en', path, image = '/images/og-default.jpg'} = Astro.props
 const {title = t('meta.title', lang), description = t('meta.desc', lang)} = Astro.props
 const dir = dirFor(lang)
 
@@ -26,7 +26,7 @@ const jsonLd = {
   name: 'JCI El Alia',
   alternateName: 'Jeune Chambre Internationale El Alia',
   url: Astro.site?.href ?? 'https://jci-el-alia.pages.dev',
-  logo: ogImage,
+  logo: new URL('/images/logo.png', base).href,
   foundingDate: '1989',
   email: 'jcielalia@gmail.com',
   telephone: '+216 20 382 274',
@@ -83,7 +83,7 @@ const jsonLd = {
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#0097D7" />
+    <meta name="theme-color" content="#130F2D" />
     <link rel="canonical" href={canonical} />
     {alternates.map(({l, href}) => <link rel="alternate" hreflang={l} href={href} />)}
     {alternates.length > 0 && <link rel="alternate" hreflang="x-default" href={alternates[0].href} />}
@@ -98,6 +98,8 @@ const jsonLd = {
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : lang === 'ar' ? 'ar_TN' : 'en_US'} />
 
     <!-- Twitter -->
@@ -111,7 +113,7 @@ const jsonLd = {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Arvo:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Arvo:ital@0;1&display=swap"
       rel="stylesheet"
     />
 
@@ -123,7 +125,7 @@ const jsonLd = {
       <img src="/images/logo-intro.png" alt="" width="260" height="121" data-intro-logo />
       <div class="intro-track"><div data-intro-bar></div></div>
     </div>
-    <a href="#home" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-jci-blue focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
+    <a href="#home" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-jci-blue-ink focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
       {t('a11y.skip', lang)}
     </a>
     <slot />

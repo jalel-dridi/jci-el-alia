@@ -8,7 +8,6 @@ import {pick} from '../lib/sanity.js'
 import Icon from './Icon.astro'
 
 const {achievements, lang = 'en'} = Astro.props
-const delays = ['reveal-delay-1', 'reveal-delay-2', 'reveal-delay-3', 'reveal-delay-4']
 ---
 
 <section class="py-24 lg:py-32 bg-jci-navy relative overflow-hidden">
@@ -21,9 +20,9 @@ const delays = ['reveal-delay-1', 'reveal-delay-2', 'reveal-delay-3', 'reveal-de
       <p class="text-jci-teal font-semibold text-sm uppercase tracking-wider mb-4">{t('ach.label', lang)}</p>
       <h2 class="text-3xl lg:text-4xl font-light text-white">{t('ach.title', lang)}</h2>
     </div>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      {achievements.map((a, i) => (
-        <div class={`bg-white/[0.06] border border-white/10 rounded-2xl p-6 reveal ${delays[i % 4]}`}>
+    <div class="swipe-row grid sm:grid-cols-2 lg:grid-cols-4 gap-6" tabindex="0">
+      {achievements.map((a) => (
+        <div class="bg-white/[0.06] border border-white/10 rounded-2xl p-6 reveal">
           <div class="w-12 h-12 bg-jci-yellow/15 rounded-xl flex items-center justify-center mb-4">
             <Icon name={a.icon} class="text-jci-yellow text-lg" />
           </div>

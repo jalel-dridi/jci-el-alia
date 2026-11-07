@@ -31,7 +31,7 @@ const langLinks = languages.map((l) => ({l, href: localePath(l, path), active: l
       <!-- Desktop links -->
       <div class="hidden xl:flex items-center gap-4 whitespace-nowrap">
         {sections.map(([id, key]) => (
-          <a href={`${home}#${id}`} class="nav-link text-sm font-medium text-jci-black/70 hover:text-jci-blue transition-colors">{t(key, lang)}</a>
+          <a href={`${home}#${id}`} class="nav-link text-sm font-medium text-jci-black/70 hover:text-jci-blue-ink transition-colors">{t(key, lang)}</a>
         ))}
       </div>
 
@@ -41,10 +41,10 @@ const langLinks = languages.map((l) => ({l, href: localePath(l, path), active: l
             <a href={href} hreflang={l} lang={l} data-lang={l} aria-current={active ? 'true' : undefined} class:list={['lang-btn px-3 py-1 text-xs font-semibold rounded-full transition-all duration-300 uppercase', active ? 'bg-white text-jci-black shadow-sm' : 'text-jci-black/60 hover:text-jci-black']}>{l}</a>
           ))}
         </div>
-        <a href={`${home}#join`} class="bg-jci-blue text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-jci-navy transition-colors">{t('nav.cta', lang)}</a>
+        <a href={`${home}#join`} class="bg-jci-blue-ink text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-jci-navy transition-colors">{t('nav.cta', lang)}</a>
       </div>
 
-      <button id="mobile-menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu" class="xl:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
+      <button id="mobile-menu-btn" aria-label={t('a11y.menu', lang)} aria-expanded="false" aria-controls="mobile-menu" class="xl:hidden w-11 h-11 -me-2 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors">
         <Icon name="fa-bars" class="menu-open text-xl text-jci-black" />
         <Icon name="fa-times" class="menu-close hidden text-xl text-jci-black" />
       </button>
@@ -55,14 +55,14 @@ const langLinks = languages.map((l) => ({l, href: localePath(l, path), active: l
   <div id="mobile-menu" class="xl:hidden overflow-hidden max-h-0 transition-[max-height] duration-500 ease-in-out bg-white border-t border-gray-100">
     <div class="px-4 py-4 space-y-1">
       {sections.map(([id, key]) => (
-        <a href={`${home}#${id}`} class="block py-2.5 text-sm font-medium text-jci-black/70 hover:text-jci-blue transition-colors">{t(key, lang)}</a>
+        <a href={`${home}#${id}`} class="block py-2.5 text-sm font-medium text-jci-black/70 hover:text-jci-blue-ink transition-colors">{t(key, lang)}</a>
       ))}
       <div class="lang-switch flex items-center gap-2 pt-3">
         {langLinks.map(({l, href, active}) => (
-          <a href={href} hreflang={l} lang={l} data-lang={l} aria-current={active ? 'true' : undefined} class:list={['lang-btn px-3 py-1.5 text-xs font-semibold rounded-full transition-all duration-300 uppercase', active ? 'bg-jci-blue/10 text-jci-blue' : 'text-jci-black/60']}>{l}</a>
+          <a href={href} hreflang={l} lang={l} data-lang={l} aria-current={active ? 'true' : undefined} class:list={['lang-btn px-4 py-2.5 text-xs font-semibold rounded-full transition-all duration-300 uppercase', active ? 'bg-jci-blue/10 text-jci-blue-ink' : 'text-jci-black/60']}>{l}</a>
         ))}
       </div>
-      <a href={`${home}#join`} class="block bg-jci-blue text-white text-center px-5 py-2.5 rounded-full text-sm font-semibold mt-3">{t('nav.cta', lang)}</a>
+      <a href={`${home}#join`} class="block bg-jci-blue-ink text-white text-center px-5 py-2.5 rounded-full text-sm font-semibold mt-3">{t('nav.cta', lang)}</a>
     </div>
   </div>
 </nav>

@@ -10,16 +10,19 @@ import Icon from './Icon.astro'
 
 const {settings, lang = 'en'} = Astro.props
 // Use the Sanity hero image if set, else the curated local photo.
-const bgUrl = settings.heroBackground
-  ? urlFor(settings.heroBackground).width(1920).quality(70).url()
-  : '/images/hero-bg.jpg'
+const heroSize = (w) => urlFor(settings.heroBackground).width(w).quality(70).url()
+const bgUrl = settings.heroBackground ? heroSize(1920) : '/images/hero-bg.jpg'
+// Phones get a smaller file; the photo is cropped to fill, so portrait screens
+// need it a little wider than the viewport.
+const bgSrcset = settings.heroBackground ? [800, 1280, 1920].map((w) => `${heroSize(w)} ${w}w`).join(', ') : undefined
 ---
 
-<section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+<section id="home" class="relative min-h-svh flex items-center justify-center overflow-hidden">
   {bgUrl ? (
     <>
-      <img src={bgUrl} alt="" fetchpriority="high" data-hero-bg class="absolute inset-0 w-full h-full object-cover" />
+      <img src={bgUrl} srcset={bgSrcset} sizes="(orientation: portrait) 150vw, 100vw" alt="" fetchpriority="high" data-hero-bg class="absolute inset-0 w-full h-full object-cover" />
       <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(19,15,45,0.88) 0%, rgba(31,71,137,0.75) 50%, rgba(0,151,215,0.6) 100%);"></div>
+      <div class="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-jci-black via-jci-black/70 to-transparent"></div>
     </>
   ) : (
     <div class="absolute inset-0 bg-gradient-to-br from-jci-black via-jci-navy to-jci-blue"></div>
@@ -45,12 +48,12 @@ const bgUrl = settings.heroBackground
     <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-white leading-[1.2] mb-6" data-hero-title>
       {pick(settings.heroTitle, lang)}
     </h1>
-    <p class="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto mb-10 font-light leading-[1.7]" data-hero-item>
+    <p class="text-lg sm:text-xl text-white/85 max-w-2xl mx-auto mb-10 font-light leading-[1.7]" data-hero-item>
       {pick(settings.heroSubtitle, lang)}
     </p>
 
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4" data-hero-item>
-      <a href="#join" class="bg-jci-blue hover:bg-white hover:text-jci-blue text-white px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 shadow-lg shadow-jci-blue/30">{t('hero.cta1', lang)}</a>
+      <a href="#join" class="bg-jci-blue-ink hover:bg-white hover:text-jci-blue-ink text-white px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 shadow-lg shadow-jci-blue/30">{t('hero.cta1', lang)}</a>
       <a href="#about" class="bg-white/10 border border-white/30 hover:bg-white/20 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 backdrop-blur-sm">{t('hero.cta2', lang)}</a>
     </div>
 
@@ -58,23 +61,23 @@ const bgUrl = settings.heroBackground
     <div class="mt-16 lg:mt-20 flex items-center justify-center gap-8 sm:gap-12 lg:gap-16" data-hero-item>
       <div class="text-center">
         <div class="text-3xl lg:text-4xl font-bold text-white"><span class="counter" data-target={settings.yearsOfImpact}>0</span><span class="text-jci-teal">+</span></div>
-        <div class="text-xs sm:text-sm text-white/50 mt-1 uppercase tracking-wider">{t('hero.stat1', lang)}</div>
+        <div class="text-xs sm:text-sm text-white/80 mt-1 uppercase tracking-wider">{t('hero.stat1', lang)}</div>
       </div>
       <div class="w-px h-12 bg-white/20"></div>
       <div class="text-center">
         <div class="text-3xl lg:text-4xl font-bold text-white"><span class="counter" data-target={settings.activeMembers}>0</span></div>
-        <div class="text-xs sm:text-sm text-white/50 mt-1 uppercase tracking-wider">{t('hero.stat2', lang)}</div>
+        <div class="text-xs sm:text-sm text-white/80 mt-1 uppercase tracking-wider">{t('hero.stat2', lang)}</div>
       </div>
       <div class="w-px h-12 bg-white/20"></div>
       <div class="text-center">
         <div class="text-3xl lg:text-4xl font-bold text-white"><span class="counter" data-target={settings.projectsDelivered}>0</span><span class="text-jci-teal">+</span></div>
-        <div class="text-xs sm:text-sm text-white/50 mt-1 uppercase tracking-wider">{t('hero.stat3', lang)}</div>
+        <div class="text-xs sm:text-sm text-white/80 mt-1 uppercase tracking-wider">{t('hero.stat3', lang)}</div>
       </div>
     </div>
   </div>
 
   <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce [@media(max-height:820px)]:hidden">
-    <span class="text-white/50 text-xs uppercase tracking-widest">{t('hero.scroll', lang)}</span>
+    <span class="text-white/70 text-xs uppercase tracking-widest">{t('hero.scroll', lang)}</span>
     <Icon name="fa-chevron-down" class="text-white/60" />
   </div>
 </section>

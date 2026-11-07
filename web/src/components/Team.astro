@@ -5,19 +5,17 @@
  */
 import {t} from '../i18n/utils.js'
 import {pick, urlFor} from '../lib/sanity.js'
+import {initials} from '../lib/people.js'
 
 const {board = [], year, lang = 'en'} = Astro.props
 const current = board.filter((m) => !year || m.year === year).sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
 
-function initials(name) {
-  return name.split(/\s+/).slice(0, 2).map((w) => w[0] || '').join('').toUpperCase()
-}
 // Full class strings (Tailwind can't see dynamically built names).
 const accents = [
-  'text-jci-blue bg-jci-blue/10',
-  'text-jci-teal bg-jci-teal/10',
+  'text-jci-blue-ink bg-jci-blue/10',
+  'text-jci-teal-ink bg-jci-teal/10',
   'text-jci-navy bg-jci-navy/10',
-  'text-jci-yellow bg-jci-yellow/10',
+  'text-jci-yellow-ink bg-jci-yellow/10',
 ]
 ---
 
@@ -25,15 +23,15 @@ const accents = [
   <section id="team" class="py-24 lg:py-32 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16 reveal">
-        <p class="text-jci-blue font-semibold text-sm uppercase tracking-wider mb-4">{t('team.label', lang)}</p>
+        <p class="text-jci-blue-ink font-semibold text-sm uppercase tracking-wider mb-4">{t('team.label', lang)}</p>
         <h2 class="text-3xl lg:text-4xl font-light text-jci-black">{t('team.title', lang)}</h2>
       </div>
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div class="flex flex-wrap justify-center gap-6">
         {current.map((m, i) => {
           const photo = m.photo ? urlFor(m.photo).width(400).height(400).fit('crop').url() : null
           const accent = accents[i % accents.length]
           return (
-            <div class="card-hover bg-white rounded-2xl p-6 border border-gray-100 text-center reveal">
+            <div class="w-[calc(50%-0.75rem)] sm:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1.125rem)] bg-white rounded-2xl p-6 border border-gray-100 text-center reveal">
               {photo ? (
                 <img src={photo} alt={m.name} width="400" height="400" loading="lazy" class="w-24 h-24 rounded-full object-cover mx-auto mb-4" />
               ) : (
@@ -42,7 +40,7 @@ const accents = [
                 </div>
               )}
               <h3 class="font-semibold text-jci-black">{m.name}</h3>
-              <p class="text-sm text-jci-black/50 mt-1">{pick(m.role, lang)}</p>
+              <p class="text-sm text-jci-black/60 mt-1">{pick(m.role, lang)}</p>
             </div>
           )
         })}
