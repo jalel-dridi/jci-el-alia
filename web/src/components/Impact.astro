@@ -5,7 +5,7 @@
  * title, e.g. "Orient'Up" -> "Orient'Up 4"), else a branded gradient + icon.
  */
 import {t, localePath} from '../i18n/utils.js'
-import {pick, urlFor, eventCover} from '../lib/sanity.js'
+import {pick, urlFor, srcsetFor, eventCover, eventCoverSrcset} from '../lib/sanity.js'
 import Icon from './Icon.astro'
 
 const {projects, events = [], lang = 'en'} = Astro.props
@@ -19,6 +19,10 @@ function latestEdition(p) {
 function projectImage(p, ev) {
   if (p.image) return urlFor(p.image).width(800).height(450).fit('crop').quality(70).url()
   return ev ? eventCover(ev, 800, 450) : null
+}
+function projectSrcset(p, ev) {
+  if (p.image) return srcsetFor(p.image, [400, 800], 9 / 16)
+  return ev ? eventCoverSrcset(ev, [400, 800], 9 / 16) : undefined
 }
 
 // Rotating gradient + badge palette for placeholder cards
@@ -54,7 +58,7 @@ const badges = [
           <div class:list={['group relative bg-white rounded-2xl overflow-hidden border border-gray-100 reveal', ev && 'card-hover']}>
             {img ? (
               <div class="h-48 overflow-hidden bg-gray-100">
-                <img src={img} alt={pick(p.title, lang)} width="800" height="450" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <img src={img} srcset={projectSrcset(p, ev)} sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 85vw" alt={pick(p.title, lang)} width="800" height="450" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
               </div>
             ) : (
               <div class={`h-48 bg-gradient-to-br ${gradients[i % gradients.length]} flex items-center justify-center`}>

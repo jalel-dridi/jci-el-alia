@@ -12,7 +12,7 @@ import SiteScripts from '../../../components/SiteScripts.astro'
 import {getEvents, getSiteSettings} from '../../../lib/queries.js'
 import * as seed from '../../../data/seed.js'
 import {events as seedEvents} from '../../../data/events.js'
-import {pick, eventCover, eventGallery} from '../../../lib/sanity.js'
+import {pick, eventCover, eventCoverSrcset, shareCover, eventGallery} from '../../../lib/sanity.js'
 import {t, formatDate, localePath, langPaths} from '../../../i18n/utils.js'
 import Icon from '../../../components/Icon.astro'
 
@@ -32,14 +32,26 @@ const path = `/events/${event.slug}/`
 const settings = await getSiteSettings(seed.siteSettings)
 
 const cover = eventCover(event, 1600, 900)
+const coverSrcset = eventCoverSrcset(event, [800, 1600], 9 / 16)
 // 1200x630 is the size Facebook/WhatsApp/LinkedIn expect for link previews.
-const shareImage = eventCover(event, 1200, 630) || undefined
+const shareImage = shareCover(event) || undefined
 const gallery = eventGallery(event)
 const dateStr = formatDate(event.date, lang)
 
 const pageUrl = new URL(localePath(lang, path), Astro.site ?? 'https://jci-el-alia.pages.dev').href
 const shareText = encodeURIComponent(`${pick(event.title, lang)} ${pageUrl}`)
 const shareClass = 'inline-flex items-center gap-2 h-11 px-5 rounded-full border border-gray-200 text-sm font-medium text-jci-black/70 hover:border-jci-blue-ink hover:text-jci-blue-ink transition-colors'
+const site = Astro.site ?? 'https://jci-el-alia.pages.dev'
+// Home > Our Work > this album, shown by Google above the result.
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {name: 'JCI El Alia', path: localePath(lang, '/')},
+    {name: t('work.label', lang), path: localePath(lang, '/events/')},
+    {name: pick(event.title, lang), path: localePath(lang, path)},
+  ].map(({name, path: p}, i) => ({'@type': 'ListItem', position: i + 1, name, item: new URL(p, site).href})),
+}
 const neighbours = [
   older && {ev: older, label: t('event.prev', lang), icon: 'fa-arrow-left', side: '', align: ''},
   newer && {ev: newer, label: t('event.next', lang), icon: 'fa-arrow-right', side: 'sm:col-start-2 sm:flex-row-reverse sm:text-end', align: 'sm:justify-end'},
@@ -72,11 +84,12 @@ const eventLd = event.date && {
   image={shareImage}
 >
   {eventLd && <script type="application/ld+json" set:html={JSON.stringify(eventLd)} is:inline />}
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} is:inline />
   <Navbar lang={lang} path={path} overlay />
-  <main>
+  <main id="main">
     <!-- Hero / cover -->
     <div class="relative h-[60vh] min-h-[420px] bg-jci-black overflow-hidden" data-page-hero>
-      {cover && <img src={cover} alt={pick(event.title, lang)} data-hero-bg class="absolute inset-0 w-full h-full object-cover opacity-70" style={`view-transition-name: ev-${event.slug}`} />}
+      {cover && <img src={cover} srcset={coverSrcset} sizes="100vw" alt={pick(event.title, lang)} data-hero-bg class="absolute inset-0 w-full h-full object-cover opacity-70" style={`view-transition-name: ev-${event.slug}`} />}
       <div class="absolute inset-0 bg-gradient-to-t from-jci-black via-jci-black/40 to-transparent"></div>
       <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-end pb-10">
         <a href={`${localePath(lang, '/')}#work`} class="text-white/70 hover:text-white text-sm mb-4 inline-flex items-center gap-2 w-fit">
@@ -102,7 +115,7 @@ const eventLd = event.date && {
         <div class="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
           {gallery.map((img, i) => (
             <button class="gallery-item block w-full break-inside-avoid rounded-xl overflow-hidden group" data-full={img.full} aria-label={`${t('a11y.photo', lang)} ${i + 1} / ${gallery.length}: ${pick(event.title, lang)}`}>
-              <img src={img.thumb} alt={img.alt || pick(event.title, lang)} loading="lazy" class="w-full group-hover:scale-105 transition-transform duration-500" />
+              <img src={img.thumb} srcset={img.thumbSrcset} sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw" alt={img.alt || pick(event.title, lang)} loading="lazy" class="w-full group-hover:scale-105 transition-transform duration-500" />
             </button>
           ))}
         </div>

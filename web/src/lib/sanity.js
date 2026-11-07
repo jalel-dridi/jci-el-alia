@@ -15,9 +15,23 @@ export const sanityClient = createClient({
 
 const builder = createImageUrlBuilder(sanityClient)
 
-/** Build an optimized, CDN-served image URL from a Sanity image reference. */
+/**
+ * Build an optimized, CDN-served image URL from a Sanity image reference.
+ * auto('format') lets the CDN send WebP/AVIF to browsers that take them
+ * (about a quarter smaller than JPEG) and JPEG to everything else.
+ */
 export function urlFor(source) {
-  return builder.image(source)
+  return builder.image(source).auto('format')
+}
+
+/** `srcset` for a Sanity image at several widths, keeping one aspect ratio. */
+export function srcsetFor(source, widths, ratio) {
+  return widths
+    .map((w) => {
+      const img = urlFor(source).width(w).quality(70)
+      return `${(ratio ? img.height(Math.round(w * ratio)).fit('crop') : img).url()} ${w}w`
+    })
+    .join(', ')
 }
 
 /**
@@ -39,6 +53,20 @@ export function eventCover(ev, width = 800, height = 500) {
   return null
 }
 
+/** Several sizes of an event cover for `srcset` (Sanity covers only). */
+export function eventCoverSrcset(ev, widths, ratio) {
+  return ev.coverImage ? srcsetFor(ev.coverImage, widths, ratio) : undefined
+}
+
+/**
+ * 1200x630 JPEG for link previews. Always JPEG: Facebook and WhatsApp
+ * crawlers don't reliably read WebP/AVIF.
+ */
+export function shareCover(ev) {
+  if (ev.coverImage) return builder.image(ev.coverImage).width(1200).height(630).fit('crop').format('jpg').quality(80).url()
+  return ev.coverUrl || null
+}
+
 /**
  * Resolve an event's gallery to an array of { thumb, full, alt } objects,
  * supporting Sanity image arrays (gallery) and local seed paths (galleryUrls).
@@ -47,6 +75,7 @@ export function eventGallery(ev) {
   if (Array.isArray(ev.gallery) && ev.gallery.length && ev.gallery[0]?.asset) {
     return ev.gallery.map((img) => ({
       thumb: urlFor(img).width(600).quality(70).url(),
+      thumbSrcset: srcsetFor(img, [300, 600]),
       full: urlFor(img).width(1600).quality(80).url(),
       alt: img.alt || '',
     }))

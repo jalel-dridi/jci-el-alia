@@ -1,13 +1,19 @@
 name: CI
 
 # Build the site (and studio) on every push / PR so broken builds are caught
-# before Cloudflare Pages deploys. Uses placeholder Sanity env -> seed fallback.
+# before Cloudflare Pages deploys (the website build uses placeholder Sanity env
+# -> seed fallback). The quality job checks the real site for broken links and
+# accessibility problems, also weekly.
 
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
+  # Weekly, so problems introduced through the dashboard (not code) show up too
+  schedule:
+    - cron: '0 6 * * 1' # Mondays 07:00 Tunis
+  workflow_dispatch:
 
 jobs:
   build-web:
@@ -29,6 +35,29 @@ jobs:
         env:
           PUBLIC_SANITY_PROJECT_ID: placeholder
           PUBLIC_SANITY_DATASET: production
+
+  quality:
+    name: Links and accessibility
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      # Real content from Sanity, so the check sees what visitors see
+      - run: npm run build
+        env:
+          PUBLIC_SANITY_PROJECT_ID: ${{ secrets.PUBLIC_SANITY_PROJECT_ID }}
+          PUBLIC_SANITY_DATASET: production
+      - run: npm run check:links
+      - run: npx playwright install --with-deps chromium
+      - run: npm run check:a11y
 
   build-studio:
     name: Build admin dashboard

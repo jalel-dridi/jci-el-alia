@@ -17,9 +17,11 @@
   --color-jci-blue-ink: #0075a8;
   --color-jci-teal-ink: #1f7a7a;
   --color-jci-yellow-ink: #8a6a00;
+  /* Teal light enough for small text on the mid-blue sections */
+  --color-jci-teal-light: #8ad4d4;
 
-  --font-jakarta: 'Plus Jakarta Sans', sans-serif;
-  --font-arabic: 'Noto Sans Arabic', 'Plus Jakarta Sans', sans-serif;
+  --font-jakarta: 'Plus Jakarta Sans Variable', sans-serif;
+  --font-arabic: 'Noto Sans Arabic Variable', 'Plus Jakarta Sans Variable', sans-serif;
   --font-arvo: 'Arvo', serif;
 }
 

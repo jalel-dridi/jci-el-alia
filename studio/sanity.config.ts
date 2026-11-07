@@ -5,6 +5,7 @@ import {schemaTypes} from './schemaTypes'
 import {deskStructure} from './deskStructure'
 import {ActivityIcon} from '@sanity/icons'
 import {ContentHealthTool} from './quality/ContentHealthTool'
+import {OpenOnWebsite} from './actions/openOnWebsite'
 
 const projectId = process.env.SANITY_STUDIO_PROJECT_ID || 'REPLACE_WITH_PROJECT_ID'
 const dataset = process.env.SANITY_STUDIO_DATASET || 'production'
@@ -30,5 +31,9 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
+  },
+
+  document: {
+    actions: (prev) => [...prev, OpenOnWebsite],
   },
 })

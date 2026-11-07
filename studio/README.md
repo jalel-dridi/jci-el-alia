@@ -37,6 +37,8 @@ members, partners, and the homepage settings. No coding required.
   published that still needs work, most important sections first, with an
   **Open** button for each item. Fix, publish, then press **Refresh**.
   Developers can print the same report with `npm run health`.
+- **Open on website** (in the menu next to Publish) opens the live page for
+  an event, or its homepage section for anything else.
 - **Before publishing an event**, check: title and summary in EN/FR/AR, a 2–3
   paragraph description (what happened, who took part, one number), date,
   location, category, a landscape cover photo with no text on it, the best

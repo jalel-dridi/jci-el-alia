@@ -30,6 +30,7 @@ updates automatically.
 | Performance | ✅ Inline SVG icons (no icon font), sized/lazy images, cache headers |
 | Motion & UI | ✅ Branded intro screen (first page of a visit), GSAP (hero intro, scroll reveals, timeline draw), see-through navbar with brand white logo, slide-over page transitions (reversed on Back) with hover prefetch; all off for reduced-motion users |
 | Design pass | ✅ Readable "ink" brand shades for text on light backgrounds, keyboard focus ring, swipeable card rows on phones, translated 404 and screen-reader labels, album share links and next/previous events |
+| Speed & checks | ✅ Sanity photos as AVIF/WebP with phone sizes, self-hosted fonts (no Google requests), weekly + per-push link and accessibility checks in CI (`npm run check:links`, `npm run check:a11y`) |
 | Content quality | ✅ Yellow field warnings in the dashboard (translations, descriptions, photo size, alt text, album size, photo permissions) + Content health tab listing what still needs work (`studio/quality/`) |
 | CI | ✅ Builds web + studio, i18n completeness check |
 

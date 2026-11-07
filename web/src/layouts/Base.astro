@@ -3,13 +3,23 @@
  * Base layout — <head>, fonts, global CSS, full SEO, and the page shell.
  * `lang` sets language + direction. `path` is the page's language-free path
  * ("/events/"); when given, hreflang alternates for EN/FR/AR are emitted and
- * returning visitors who picked FR/AR are sent to their language.
+ * returning visitors who picked FR/AR are sent to their language. `noindex`
+ * keeps a page (the 404) out of search results.
  */
+// Fonts are served from this site (no request to Google): variable fonts
+// cover every weight in one file, split by alphabet so a page only downloads
+// the letters it uses.
+import '@fontsource-variable/plus-jakarta-sans/wght.css'
+import '@fontsource-variable/noto-sans-arabic/wght.css'
+import '@fontsource/arvo/400.css'
+import '@fontsource/arvo/400-italic.css'
+import jakartaLatin from '@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2?url'
+import arabicFont from '@fontsource-variable/noto-sans-arabic/files/noto-sans-arabic-arabic-wght-normal.woff2?url'
 import '../styles/global.css'
 import {t, dirFor, localePath} from '../i18n/utils.js'
 import {languages} from '../i18n/ui.js'
 
-const {lang = 'en', path, image = '/images/og-default.jpg'} = Astro.props
+const {lang = 'en', path, image = '/images/og-default.jpg', noindex = false} = Astro.props
 const {title = t('meta.title', lang), description = t('meta.desc', lang)} = Astro.props
 const dir = dirFor(lang)
 
@@ -83,6 +93,7 @@ const jsonLd = {
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#130F2D" />
     <link rel="canonical" href={canonical} />
     {alternates.map(({l, href}) => <link rel="alternate" hreflang={l} href={href} />)}
@@ -110,12 +121,8 @@ const jsonLd = {
 
     <title>{title}</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Arvo:ital@0;1&display=swap"
-      rel="stylesheet"
-    />
+    <!-- The main text font, fetched before the CSS asks for it -->
+    <link rel="preload" href={lang === 'ar' ? arabicFont : jakartaLatin} as="font" type="font/woff2" crossorigin />
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
   </head>
@@ -125,7 +132,7 @@ const jsonLd = {
       <img src="/images/logo-intro.png" alt="" width="260" height="121" data-intro-logo />
       <div class="intro-track"><div data-intro-bar></div></div>
     </div>
-    <a href="#home" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-jci-blue-ink focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-jci-blue-ink focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
       {t('a11y.skip', lang)}
     </a>
     <slot />

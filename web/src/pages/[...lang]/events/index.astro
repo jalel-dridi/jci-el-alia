@@ -2,6 +2,8 @@
 /**
  * Events archive — a standalone page listing every event grouped by year,
  * with links to each album, once per language (/events/, /fr/events/, ...).
+ * Category buttons filter the cards (?category=education keeps the choice in
+ * the address); without JavaScript every event is simply listed.
  */
 import Base from '../../../layouts/Base.astro'
 import Navbar from '../../../components/Navbar.astro'
@@ -28,13 +30,16 @@ for (const ev of events) {
   ;(byYear[y] ||= []).push(ev)
 }
 const years = Object.keys(byYear).map(Number).sort((a, b) => b - a)
+const categories = [...new Set(events.map((e) => e.category).filter(Boolean))].sort()
+const countOf = (c) => events.filter((e) => e.category === c).length
+const chip = 'h-10 px-4 rounded-full border border-gray-200 text-sm font-medium text-jci-black/70 hover:border-jci-blue-ink transition-colors aria-pressed:bg-jci-blue-ink aria-pressed:border-jci-blue-ink aria-pressed:text-white'
 ---
 
-<Base lang={lang} path="/events/" title={`${t('work.label', lang)} | JCI El Alia`}>
+<Base lang={lang} path="/events/" title={`${t('work.label', lang)} | JCI El Alia`} description={t('events.desc', lang)}>
   <Navbar lang={lang} path="/events/" />
-  <main class="pt-28 lg:pt-36 pb-24">
+  <main id="main" class="pt-28 lg:pt-36 pb-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
+      <div class="text-center mb-10">
         <p class="text-jci-blue-ink font-semibold text-sm uppercase tracking-wider mb-4">{t('work.label', lang)}</p>
         <h1 class="text-4xl lg:text-5xl font-light text-jci-black mb-4">{t('work.title', lang)}</h1>
         <p class="text-jci-black/60 max-w-2xl mx-auto">{t('work.intro', lang)}</p>
@@ -46,14 +51,28 @@ const years = Object.keys(byYear).map(Number).sort((a, b) => b - a)
           <p class="text-jci-black/60">Events and photo albums will appear here once added in the dashboard.</p>
         </div>
       ) : (
+        <>
+          <div data-filters hidden class="flex flex-wrap justify-center gap-2 mb-6" role="group" aria-label={t('events.filter', lang)}>
+            <button type="button" data-cat="" aria-pressed="true" class={chip}>{t('events.all', lang)} <span class="font-normal">{events.length}</span></button>
+            {categories.map((c) => (
+              <button type="button" data-cat={c} aria-pressed="false" class={chip}>{t(`cat.${c}`, lang)} <span class="font-normal">{countOf(c)}</span></button>
+            ))}
+          </div>
+          <nav class="flex flex-wrap justify-center gap-x-5 gap-y-2 mb-14 text-sm" aria-label={t('events.years', lang)}>
+            {years.map((year) => <a href={`#y${year}`} data-year-link={year} class="text-jci-blue-ink font-semibold hover:text-jci-navy py-1">{year}</a>)}
+          </nav>
+        </>
+      )}
+
+      {events.length > 0 && (
         years.map((year) => (
-          <div class="mb-16">
+          <div id={`y${year}`} data-year-group class="mb-16 scroll-mt-28">
             <div class="flex items-center gap-4 mb-8">
               <span class="text-2xl font-bold text-jci-blue-ink">{year}</span>
               <div class="flex-1 h-px bg-gray-200"></div>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {byYear[year].map((ev) => <EventCard ev={ev} lang={lang} />)}
+              {byYear[year].map((ev) => <div data-cat={ev.category} class="grid"><EventCard ev={ev} lang={lang} /></div>)}
             </div>
           </div>
         ))
@@ -62,4 +81,35 @@ const years = Object.keys(byYear).map(Number).sort((a, b) => b - a)
   </main>
   <Footer settings={settings} lang={lang} />
   <SiteScripts />
+
+  <script is:inline>
+    (function () {
+      const bar = document.querySelector('[data-filters]')
+      if (!bar) return
+      bar.hidden = false
+      const buttons = [...bar.querySelectorAll('button')]
+      const groups = [...document.querySelectorAll('[data-year-group]')]
+      function apply(cat) {
+        if (!buttons.some((b) => b.dataset.cat === cat)) cat = ''
+        buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.cat === cat)))
+        groups.forEach((g) => {
+          let shown = 0
+          g.querySelectorAll('[data-cat]').forEach((c) => {
+            const on = !cat || c.dataset.cat === cat
+            c.hidden = !on
+            shown += on
+          })
+          g.hidden = !shown
+          const link = document.querySelector('[data-year-link="' + g.id.slice(1) + '"]')
+          if (link) link.hidden = !shown
+        })
+        const url = new URL(location.href)
+        if (cat) url.searchParams.set('category', cat)
+        else url.searchParams.delete('category')
+        history.replaceState(null, '', url)
+      }
+      buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.cat)))
+      apply(new URLSearchParams(location.search).get('category') || '')
+    })()
+  </script>
 </Base>

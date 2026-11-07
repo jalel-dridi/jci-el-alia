@@ -10,10 +10,15 @@
     "preview": "astro preview",
     "check:i18n": "node scripts/check-i18n.mjs",
     "deploy": "astro build && wrangler pages deploy dist --project-name jci-el-alia --branch main --commit-dirty=true",
-    "astro": "astro"
+    "astro": "astro",
+    "check:links": "node scripts/check-links.mjs",
+    "check:a11y": "node scripts/check-a11y.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
+    "@fontsource-variable/noto-sans-arabic": "^5.3.0",
+    "@fontsource-variable/plus-jakarta-sans": "^5.3.0",
+    "@fontsource/arvo": "^5.3.0",
     "@sanity/client": "^7.22.1",
     "@sanity/image-url": "^2.1.1",
     "@tailwindcss/postcss": "^4.3.0",
@@ -26,8 +31,10 @@
     "vite": "^7"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
     "@iconify-json/fa6-brands": "^1.2.6",
     "@iconify-json/fa6-solid": "^1.2.4",
+    "playwright": "^1.65.0",
     "wrangler": "^4.96.0"
   }
 }
