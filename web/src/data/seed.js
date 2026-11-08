@@ -246,4 +246,13 @@ export const achievements = [
       ar: 'نما العدد إلى 47 عضواً بمعدل عمر 22.85 سنة، مع إنجاز مشاريع رائدة في المحاور الأربعة.',
     },
   },
+  {
+    year: 2026,
+    icon: 'fa-medal',
+    text: {
+      en: "Intalqa 2.0, Bac'Up and our training programme won JCI Tunisia awards and were selected for the 2026 JCI World Congress Awards.",
+      fr: "Intalqa 2.0, Bac'Up et notre programme de formation, primés par la JCI Tunisie, ont été sélectionnés pour les JCI World Congress Awards 2026.",
+      ar: "تتويج إنطلاقة 2.0 وBac'Up وبرنامجنا التدريبي بجوائز الغرفة الفتية الاقتصادية التونسية، واختيارها للتنافس في جوائز المؤتمر العالمي 2026.",
+    },
+  },
 ]

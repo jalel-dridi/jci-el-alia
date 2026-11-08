@@ -8,6 +8,8 @@ import {pick} from '../lib/sanity.js'
 import Icon from './Icon.astro'
 
 const {achievements, lang = 'en'} = Astro.props
+// The four most recent milestones fill one row.
+const recent = achievements.slice(-4)
 ---
 
 <section class="py-24 lg:py-32 bg-jci-navy relative overflow-hidden">
@@ -21,7 +23,7 @@ const {achievements, lang = 'en'} = Astro.props
       <h2 class="text-3xl lg:text-4xl font-light text-white">{t('ach.title', lang)}</h2>
     </div>
     <div class="swipe-row grid sm:grid-cols-2 lg:grid-cols-4 gap-6" tabindex="0">
-      {achievements.map((a) => (
+      {recent.map((a) => (
         <div class="bg-white/[0.06] border border-white/10 rounded-2xl p-6 reveal">
           <div class="w-12 h-12 bg-jci-yellow/15 rounded-xl flex items-center justify-center mb-4">
             <Icon name={a.icon} class="text-jci-yellow text-lg" />
