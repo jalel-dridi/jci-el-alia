@@ -40,6 +40,10 @@ export const getPartners = (fallback) =>
 export const getBoardMembers = (fallback) =>
   safeFetch(`*[_type == "boardMember"] | order(year desc, order asc)`, fallback)
 
+/** The latest Member of the Month, or null. */
+export const getMemberOfMonth = () =>
+  safeFetch(`*[_type == "memberOfMonth"] | order(month desc)[0]`, null)
+
 export const getEvents = (fallback) =>
   safeFetch(
     `*[_type == "event"] | order(date desc){

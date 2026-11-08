@@ -10,6 +10,7 @@ import {project} from './documents/project'
 import {boardMember} from './documents/boardMember'
 import {partner} from './documents/partner'
 import {pillar} from './documents/pillar'
+import {memberOfMonth} from './documents/memberOfMonth'
 
 export const schemaTypes = [
   // objects
@@ -23,4 +24,5 @@ export const schemaTypes = [
   boardMember,
   partner,
   pillar,
+  memberOfMonth,
 ]

@@ -19,6 +19,7 @@ export const deskStructure: StructureResolver = (S) =>
       S.documentTypeListItem('project').title('Projects'),
       S.documentTypeListItem('president').title('Legacy Timeline'),
       S.documentTypeListItem('boardMember').title('Board Members'),
+      S.documentTypeListItem('memberOfMonth').title('Member of the Month'),
       S.documentTypeListItem('partner').title('Partners'),
       S.documentTypeListItem('pillar').title('Pillars'),
     ])

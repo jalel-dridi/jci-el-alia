@@ -50,12 +50,12 @@ const badges = [
       <p class="text-jci-blue-ink font-semibold text-sm uppercase tracking-wider mb-4">{t('impact.label', lang)}</p>
       <h2 class="text-3xl lg:text-4xl font-light text-jci-black">{t('impact.title', lang)}</h2>
     </div>
-    <div class="swipe-row grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="swipe-row md:flex md:flex-wrap md:justify-center gap-8">
       {projects.map((p, i) => {
         const ev = latestEdition(p)
         const img = projectImage(p, ev)
         return (
-          <div class:list={['group relative bg-white rounded-2xl overflow-hidden border border-gray-100 reveal', ev && 'card-hover']}>
+          <div class:list={['group relative bg-white rounded-2xl overflow-hidden border border-gray-100 reveal md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)]', ev && 'card-hover']}>
             {img ? (
               <div class="h-48 overflow-hidden bg-gray-100">
                 <img src={img} srcset={projectSrcset(p, ev)} sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, min(85vw, 320px)" alt={pick(p.title, lang)} width="800" height="450" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />

@@ -105,6 +105,10 @@ export function issuesFor(doc: Doc): string[] {
       if (!doc.photo) issues.push('No photo')
       add(imageProblem(doc.photo, LIMITS.headshotWidth))
       break
+    case 'memberOfMonth':
+      if (!doc.photo) issues.push('No photo')
+      translations(issues, 'Why they were chosen', doc.note)
+      break
     case 'partner':
       if (!doc.logo) issues.push('No logo (the site shows a generic icon)')
       if (!doc.url) issues.push('No website or Facebook link')
@@ -126,6 +130,7 @@ export const HEALTH_QUERY = `{
   "event": *[_type == "event" && ${published}] | order(date desc) {_id, _type, title, summary, description, location, coverImage, gallery[]{alt}, photosApproved},
   "boardMember": *[_type == "boardMember" && ${published}] | order(year desc, order asc) {_id, _type, name, role, photo},
   "project": *[_type == "project" && ${published}] | order(order asc) {_id, _type, title, description, metric, image},
+  "memberOfMonth": *[_type == "memberOfMonth" && ${published}] | order(month desc) [0...1] {_id, _type, name, photo, note},
   "partner": *[_type == "partner" && ${published}] | order(order asc) {_id, _type, name, logo, url},
   "president": *[_type == "president" && ${published}] | order(year desc) {_id, _type, name, year, slogan, photo},
   "siteSettings": *[_id == "siteSettings"] {_id, _type, theme, heroTitle, heroSubtitle, heroBackground}
@@ -135,6 +140,7 @@ export const SECTIONS: {type: string; title: string}[] = [
   {type: 'event', title: 'Events / News'},
   {type: 'boardMember', title: 'Board Members'},
   {type: 'project', title: 'Projects'},
+  {type: 'memberOfMonth', title: 'Member of the Month (latest)'},
   {type: 'partner', title: 'Partners'},
   {type: 'president', title: 'Legacy Timeline'},
   {type: 'siteSettings', title: 'Site Settings'},

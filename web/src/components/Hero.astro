@@ -9,6 +9,10 @@ import {urlFor, pick} from '../lib/sanity.js'
 import Icon from './Icon.astro'
 
 const {settings, lang = 'en'} = Astro.props
+// Counted from the chapter's founding, so it moves on by itself every January
+// (the site rebuilds nightly).
+const FOUNDED = 1989
+const yearsOfImpact = new Date().getFullYear() - FOUNDED
 // Use the Sanity hero image if set, else the curated local photo.
 const heroSize = (w) => urlFor(settings.heroBackground).width(w).quality(70).url()
 const bgUrl = settings.heroBackground ? heroSize(1920) : '/images/hero-bg.jpg'
@@ -60,7 +64,7 @@ const bgSrcset = settings.heroBackground ? [800, 1280, 1920].map((w) => `${heroS
     <!-- Animated counters -->
     <div class="mt-16 lg:mt-20 flex items-center justify-center gap-8 sm:gap-12 lg:gap-16" data-hero-item>
       <div class="text-center">
-        <div class="text-3xl lg:text-4xl font-bold text-white"><span class="counter" data-target={settings.yearsOfImpact}>0</span><span class="text-jci-teal">+</span></div>
+        <div class="text-3xl lg:text-4xl font-bold text-white"><span class="counter" data-target={yearsOfImpact}>0</span><span class="text-jci-teal">+</span></div>
         <div class="text-xs sm:text-sm text-white/80 mt-1 uppercase tracking-wider">{t('hero.stat1', lang)}</div>
       </div>
       <div class="w-px h-12 bg-white/20"></div>

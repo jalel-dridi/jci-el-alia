@@ -16,13 +16,14 @@ import Achievements from '../../components/Achievements.astro'
 import Testimonial from '../../components/Testimonial.astro'
 import Work from '../../components/Work.astro'
 import Team from '../../components/Team.astro'
+import MemberOfMonth from '../../components/MemberOfMonth.astro'
 import Join from '../../components/Join.astro'
 import Partners from '../../components/Partners.astro'
 import Footer from '../../components/Footer.astro'
 import SiteScripts from '../../components/SiteScripts.astro'
 
 import {
-  getSiteSettings, getPresidents, getProjects, getPillars, getPartners, getEvents, getBoardMembers,
+  getSiteSettings, getPresidents, getProjects, getPillars, getPartners, getEvents, getBoardMembers, getMemberOfMonth,
 } from '../../lib/queries.js'
 import * as seed from '../../data/seed.js'
 import {events as seedEvents} from '../../data/events.js'
@@ -41,6 +42,7 @@ const pillars = await getPillars(seed.pillars)
 const partners = await getPartners(seed.partners)
 const events = await getEvents(seedEvents)
 const board = await getBoardMembers(seed.board)
+const memberOfMonth = await getMemberOfMonth()
 const testimonial = seed.testimonial
 
 // Show the most recent board year that actually has members.
@@ -60,6 +62,7 @@ const boardYear = board.length ? Math.max(...board.map((m) => m.year || 0)) : se
     <!-- What we do comes first; the history and the president's quote follow. -->
     <Legacy presidents={presidents} lang={lang} />
     <Testimonial testimonial={testimonial} presidents={presidents} lang={lang} />
+    <MemberOfMonth member={memberOfMonth} lang={lang} />
     <Team board={board} year={boardYear} lang={lang} />
     <Join settings={settings} lang={lang} />
     <Partners partners={partners} lang={lang} />

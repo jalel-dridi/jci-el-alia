@@ -53,7 +53,8 @@ export const siteSettings = defineType({
       title: 'Years of impact',
       type: 'number',
       group: 'stats',
-      initialValue: 36,
+      // The website now counts this from 1989 automatically.
+      hidden: true,
     }),
     defineField({
       name: 'activeMembers',
