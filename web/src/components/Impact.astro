@@ -58,7 +58,7 @@ const badges = [
           <div class:list={['group relative bg-white rounded-2xl overflow-hidden border border-gray-100 reveal', ev && 'card-hover']}>
             {img ? (
               <div class="h-48 overflow-hidden bg-gray-100">
-                <img src={img} srcset={projectSrcset(p, ev)} sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 85vw" alt={pick(p.title, lang)} width="800" height="450" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <img src={img} srcset={projectSrcset(p, ev)} sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, min(85vw, 320px)" alt={pick(p.title, lang)} width="800" height="450" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
               </div>
             ) : (
               <div class={`h-48 bg-gradient-to-br ${gradients[i % gradients.length]} flex items-center justify-center`}>

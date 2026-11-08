@@ -115,7 +115,7 @@ const eventLd = event.date && {
         <div class="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
           {gallery.map((img, i) => (
             <button class="gallery-item block w-full break-inside-avoid rounded-xl overflow-hidden group" data-full={img.full} aria-label={`${t('a11y.photo', lang)} ${i + 1} / ${gallery.length}: ${pick(event.title, lang)}`}>
-              <img src={img.thumb} srcset={img.thumbSrcset} sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw" alt={img.alt || pick(event.title, lang)} loading="lazy" class="w-full group-hover:scale-105 transition-transform duration-500" />
+              <img src={img.thumb} srcset={img.thumbSrcset} width={img.width} height={img.height} sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw" alt={img.alt || pick(event.title, lang)} loading="lazy" class="w-full group-hover:scale-105 transition-transform duration-500" />
             </button>
           ))}
         </div>

@@ -13,7 +13,8 @@ const {settings = {}, lang = 'en'} = Astro.props
 const labelClass = 'block text-white/80 text-sm mb-1.5'
 // 16px on phones: iOS zooms the page into anything smaller.
 const fieldClass = 'w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white text-base sm:text-sm focus:outline-none focus:border-jci-teal transition-colors'
-const action = FORMSPREE_ID ? `https://formspree.io/f/${FORMSPREE_ID}` : `mailto:${settings.email || 'jcielalia@gmail.com'}`
+const action = FORMSPREE_ID ? `https://formspree.io/f/${FORMSPREE_ID}` : undefined
+const mailto = `mailto:${settings.email || 'jcielalia@gmail.com'}`
 ---
 
 <section id="join" class="py-24 lg:py-32 bg-gradient-to-br from-jci-black via-jci-navy to-jci-blue relative overflow-hidden">
@@ -39,7 +40,7 @@ const action = FORMSPREE_ID ? `https://formspree.io/f/${FORMSPREE_ID}` : `mailto
       <div class="reveal">
         <div class="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20">
           <h3 class="text-xl font-semibold text-white mb-6">{t('join.formtitle', lang)}</h3>
-          <form id="join-form" action={action} method="POST" class="space-y-4">
+          <form id="join-form" action={action} data-mailto={action ? undefined : mailto} method="POST" class="space-y-4">
             <label class="block">
               <span class={labelClass}>{t('join.ph1', lang)}</span>
               <input type="text" name="name" required autocomplete="name" class={fieldClass} />
@@ -77,10 +78,10 @@ const action = FORMSPREE_ID ? `https://formspree.io/f/${FORMSPREE_ID}` : `mailto
     form.addEventListener('submit', async (e) => {
       e.preventDefault()
       // No Formspree ID yet: hand the application to the visitor's email app.
-      if (form.action.startsWith('mailto:')) {
+      if (form.dataset.mailto) {
         const d = new FormData(form)
         const body = ['Name: ' + d.get('name'), 'Email: ' + d.get('email'), 'Phone: ' + (d.get('phone') || '-'), '', d.get('message') || ''].join('\n')
-        location.href = form.action + '?subject=' + encodeURIComponent('Membership application - ' + d.get('name')) + '&body=' + encodeURIComponent(body)
+        location.href = form.dataset.mailto + '?subject=' + encodeURIComponent('Membership application - ' + d.get('name')) + '&body=' + encodeURIComponent(body)
         document.getElementById('join-mailto').classList.remove('hidden')
         return
       }

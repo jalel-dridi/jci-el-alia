@@ -36,14 +36,14 @@ function intro() {
   if (!el || !root.classList.contains('intro')) return Promise.resolve()
   try { sessionStorage.setItem('jci-intro', '1') } catch (e) {}
 
-  // Stay at least a beat so it reads as intentional, at most 2.2s.
+  // Stay at least a beat so it reads as intentional, at most 1.8s.
   const img = document.querySelector('[data-hero-bg]')
   const ready = Promise.all([
     document.fonts?.ready,
     img?.decode?.().catch(() => {}),
-    wait(900),
+    wait(700),
   ])
-  return Promise.race([ready, wait(2200)]).then(() => new Promise((resolve) => {
+  return Promise.race([ready, wait(1800)]).then(() => new Promise((resolve) => {
     // Take the bar over from its CSS animation and finish it.
     const bar = el.querySelector('[data-intro-bar]')
     const t = getComputedStyle(bar).transform
@@ -57,7 +57,7 @@ function intro() {
     })
       .fromTo(bar, {scaleX: progress}, {scaleX: 1, duration: 0.35, ease: 'power2.out'})
       .to(el.querySelector('[data-intro-logo]'), {y: -24, autoAlpha: 0, duration: 0.45, ease: 'power3.in'})
-      .to(el, {yPercent: -100, duration: 0.9, ease: 'power4.inOut'}, '-=0.2')
+      .to(el, {yPercent: -100, duration: 0.8, ease: 'power4.inOut'}, '-=0.2')
       // The hero starts building while the curtain is still lifting.
       .add(resolve, '-=0.5')
   }))

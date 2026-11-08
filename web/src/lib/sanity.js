@@ -67,6 +67,12 @@ export function shareCover(ev) {
   return ev.coverUrl || null
 }
 
+/** 600px-wide display size of a Sanity image, from the dimensions in its asset id. */
+function thumbSize(img) {
+  const m = img.asset?._ref?.match(/-(\d+)x(\d+)-\w+$/)
+  return m ? {width: 600, height: Math.round((600 * m[2]) / m[1])} : {}
+}
+
 /**
  * Resolve an event's gallery to an array of { thumb, full, alt } objects,
  * supporting Sanity image arrays (gallery) and local seed paths (galleryUrls).
@@ -75,7 +81,8 @@ export function eventGallery(ev) {
   if (Array.isArray(ev.gallery) && ev.gallery.length && ev.gallery[0]?.asset) {
     return ev.gallery.map((img) => ({
       thumb: urlFor(img).width(600).quality(70).url(),
-      thumbSrcset: srcsetFor(img, [300, 600]),
+      thumbSrcset: srcsetFor(img, [300, 450, 600]),
+      ...thumbSize(img),
       full: urlFor(img).width(1600).quality(80).url(),
       alt: img.alt || '',
     }))
