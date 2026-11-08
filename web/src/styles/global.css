@@ -215,7 +215,7 @@ html.motion [data-hero-title] {
 }
 
 /*
- * Intro screen on the first page of a visit (markup in Base.astro). The bar
+ * Intro screen when a visit starts on the homepage (markup in Base.astro). The bar
  * fills to 80% on its own; motion.js finishes it once the fonts and hero
  * photo are ready, then lifts the whole panel away like a curtain.
  */

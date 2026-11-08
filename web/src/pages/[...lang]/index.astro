@@ -47,7 +47,7 @@ const testimonial = seed.testimonial
 const boardYear = board.length ? Math.max(...board.map((m) => m.year || 0)) : settings.year
 ---
 
-<Base lang={lang} path="/">
+<Base lang={lang} path="/" intro>
   <Navbar lang={lang} path="/" overlay />
   <main id="main">
     <Hero settings={settings} lang={lang} />

@@ -4,7 +4,8 @@
  * `lang` sets language + direction. `path` is the page's language-free path
  * ("/events/"); when given, hreflang alternates for EN/FR/AR are emitted and
  * returning visitors who picked FR/AR are sent to their language. `noindex`
- * keeps a page (the 404) out of search results.
+ * keeps a page (the 404) out of search results; `intro` enables the branded
+ * intro screen (homepage only).
  */
 // Fonts are served from this site (no request to Google): variable fonts
 // cover every weight in one file, split by alphabet so a page only downloads
@@ -19,7 +20,7 @@ import '../styles/global.css'
 import {t, dirFor, localePath} from '../i18n/utils.js'
 import {languages} from '../i18n/ui.js'
 
-const {lang = 'en', path, image = '/images/og-default.jpg', noindex = false} = Astro.props
+const {lang = 'en', path, image = '/images/og-default.jpg', noindex = false, intro = false} = Astro.props
 const {title = t('meta.title', lang), description = t('meta.desc', lang)} = Astro.props
 const dir = dirFor(lang)
 
@@ -56,7 +57,7 @@ const jsonLd = {
 ---
 
 <!DOCTYPE html>
-<html lang={lang} dir={dir}>
+<html lang={lang} dir={dir} data-intro={intro ? '' : undefined}>
   <head>
     <meta charset="UTF-8" />
     {path && lang === 'en' && (
@@ -70,8 +71,9 @@ const jsonLd = {
       </script>
     )}
     <!-- Turn on entrance animations (src/scripts/motion.js) unless the visitor
-         prefers reduced motion, plus the branded intro screen on the first
-         page of a visit. If the script hasn't run within 4s, drop both classes
+         prefers reduced motion, plus the branded intro screen when a visit
+         starts on the homepage (pages opened from shared links skip it, and
+         so does the rest of that visit). If the script hasn't run within 4s, drop both classes
          so nothing stays hidden. Going back through history plays the page
          transition in reverse (see ::view-transition rules in global.css). -->
     <script is:inline>
@@ -79,7 +81,11 @@ const jsonLd = {
         if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
           var root = document.documentElement
           root.classList.add('motion')
-          try { if (!sessionStorage.getItem('jci-intro')) root.classList.add('intro') } catch (e) {}
+          try {
+            if (sessionStorage.getItem('jci-intro')) {}
+            else if (root.hasAttribute('data-intro')) root.classList.add('intro')
+            else sessionStorage.setItem('jci-intro', '1')
+          } catch (e) {}
           setTimeout(function () { if (!window.__motionReady) root.classList.remove('motion', 'intro') }, 4000)
           setTimeout(function () { root.classList.remove('intro') }, 7000)
           addEventListener('pagereveal', function (e) {
@@ -127,11 +133,13 @@ const jsonLd = {
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
   </head>
   <body class="bg-white text-jci-black antialiased">
-    <!-- Intro screen, first page of a visit only (html.intro); lifted by motion.js -->
-    <div id="intro" aria-hidden="true">
-      <img src="/images/logo-intro.png" alt="" width="260" height="121" loading="lazy" fetchpriority="high" data-intro-logo />
-      <div class="intro-track"><div data-intro-bar></div></div>
-    </div>
+    {intro && (
+      <!-- Intro screen when the visit starts here (html.intro); lifted by motion.js -->
+      <div id="intro" aria-hidden="true">
+        <img src="/images/logo-intro.png" alt="" width="260" height="121" loading="lazy" fetchpriority="high" data-intro-logo />
+        <div class="intro-track"><div data-intro-bar></div></div>
+      </div>
+    )}
     <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-jci-blue-ink focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
       {t('a11y.skip', lang)}
     </a>
